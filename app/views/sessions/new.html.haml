@@ -1,0 +1,14 @@
+%h1.text-secondary ログイン
+.row
+  .col-md-3
+  .col-md-6.form-group
+    = form_with scope: :session, url: login_path do |f|
+
+      = f.label :email, 'メールアドレス'
+      = f.email_field :email, class: 'form-control'
+
+      = f.label :password, 'パスワード'
+      = f.password_field :password, class: 'form-control'
+
+      .submit
+        = f.submit 'ログイン', class: 'btn btn-primary'

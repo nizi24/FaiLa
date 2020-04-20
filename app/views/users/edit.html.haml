@@ -1,0 +1,20 @@
+%h1.text-secondary 登録情報の変更
+.row
+  .col-md-3
+  .col-md-6.form-group
+    = form_with model: @user do |f|
+      = render 'shared/error_messages'
+      = f.label :name
+      = f.text_field :name, class: 'form-control'
+
+      = f.label :email
+      = f.email_field :email, class: 'form-control'
+
+      = f.label :password
+      = f.password_field :password, class: 'form-control'
+
+      = f.label :password_confirmation, 'パスワードの確認'
+      = f.password_field :password_confirmation, class: 'form-control'
+
+      .submit
+        = f.submit '変更', class: 'btn btn-primary'

@@ -1,0 +1,5 @@
+.row
+  .col-md-3
+    =image_tag 'default_icon.jpeg', size: '80x80', id: 'user-show'
+    %h3#user-name= @user.name
+    =link_to 'ユーザー情報を編集する', edit_user_path(@user), id: 'to-edit-from-show'

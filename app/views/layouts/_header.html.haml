@@ -1,0 +1,17 @@
+.fixed-top
+  %nav.navbar.navbar-expand-sm.bg-info.text-secondary.header
+    .container
+      = link_to 'Failearn', root_path, id: "logo"
+      %ul.navbar-nav.navbar-right
+        -if !logged_in?
+          %li.nav-item.fix-margin= link_to 'ヘルプ', '#'
+          %li.nav-item.fix-margin= link_to '概要', '#'
+          %li.nav-item.fix-margin= link_to 'ログイン', login_path
+          %li.nav-item.fix-margin= link_to '新規登録', new_user_path
+        -else
+          %li.nav-item.dropdown
+            %a#dropdown.nav-link.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true", "data-toggle": "dropdown", href: "#"} アカウント
+            %ul.dropdown-menu{"aria-labelledby": "dropdown"}
+              %li.dropdown-item= link_to 'プロフィール', current_user, class: 'fix-hover'
+              %li.dropdown-item= link_to '設定', '#', class: 'fix-hover'
+              %li.dropdown-item= button_to 'ログアウト', logout_path, method: :delete, class: 'fix-hover'

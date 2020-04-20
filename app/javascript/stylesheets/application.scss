@@ -1,0 +1,148 @@
+@import '~bootstrap/scss/bootstrap';
+
+body {
+  padding-top: 120px;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+}
+
+.center h1 {
+  margin-bottom: 10px;
+}
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: #777;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+/* header */
+nav.header {
+  :hover{
+    text-decoration: none;
+  }
+  #logo {
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+  }
+  a {
+      color: #444444;
+      padding: 10px;
+      transition: background-color .2s;
+      :hover {
+      background-color: #25c3d4;
+      }
+    }
+     .fix-margin {
+      margin-top: 10px;  /* ドロップダウンボタンとのずれを修正 */
+    }
+     .fix-hover {
+      padding: 4px 24px;
+      :hover {
+      background-color: inherit;
+      }
+    }
+    li:active {
+      background-color: inherit;
+    }
+  input.fix-hover {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+  }
+}
+
+/* home */
+.home {
+  padding: 50px;
+}
+a.signup {
+  margin-top: 30px;
+}
+
+
+/* footer */
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  color: #777;
+}
+
+footer a {
+  color: #555;
+}
+
+footer a:hover {
+  color: #222;
+}
+
+footer small {
+  float: left;
+}
+
+footer ul {
+  float: right;
+  list-style: none;
+}
+
+footer ul li {
+  float: left;
+  margin-left: 15px;
+}
+
+/*sign up */
+.submit {
+  text-align: center;
+  margin: 15px;
+} .btn {
+  padding: 15px 50px;
+}
+
+/* show */
+img#user-show {
+  display: block;
+  margin:auto;
+}
+
+a#to-edit-from-show {
+  color: #555;
+}
+
+h3#user-name {
+  text-align: center;
+}
