@@ -10,6 +10,15 @@ RSpec.describe "Users", type: :request do
     end
   end
 
-  describe '#edit'
-    
+  describe '#update' do
+    context '認可されたユーザーの時' do
+      let(:user) { FactoryBot.create(:user) }
+
+      it '編集に成功すること' do
+        log_in_as user
+        patch :update, params: { id: user.id, user: { name: 'Tester'} }
+        expect(user.reload.name).to eq 'Tester'
+      end
+    end
+  end
 end
