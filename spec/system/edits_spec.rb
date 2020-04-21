@@ -24,8 +24,8 @@ RSpec.describe "Edits", type: :system do
 
     expect(current_path).to eq user_path(user)
     expect(page).to have_css 'div.alert-success'
-    expect(page).to have_content '変更に成功しました'
+    expect(page).to have_content '更新に成功しました'
     expect(page).to have_content 'Bar'
-    expect(user.email).to eq 'update@example.com'
+    expect(user.reload.email).to eq 'update@example.com'
   end
 end
