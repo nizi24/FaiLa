@@ -1,11 +1,19 @@
 module LoginSupport
-  def log_in_as(user)
-    visit root_path
-    click_link 'ログイン'
-    fill_in 'session[email]', with: user.email
-    fill_in 'session[password]', with: user.password
-    click_button 'ログイン'
+
+  def log_in(user)
+    post login_path, params: { session: { email: user.email, password: user.password } }
+    current_user = user
   end
+
+  def log_out
+    delete logout_path
+    current_user = nil
+  end
+
+  def is_logged_in?
+    !current_user.nil?
+  end
+
 end
 
 RSpec.configure do |config|

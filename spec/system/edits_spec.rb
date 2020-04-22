@@ -1,11 +1,12 @@
 require 'rails_helper'
+include LoginSupportWithCapybara
 
 RSpec.describe "Edits", type: :system do
   before do
     driven_by(:rack_test)
   end
 
-  it 'ユーザーは編集に成功する',focus: true do
+  it 'ユーザーは編集に成功する' do
     user = FactoryBot.create(:user,
           name: 'Foo',
           email: 'tester@example.com')

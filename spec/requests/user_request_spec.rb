@@ -1,7 +1,8 @@
 require 'rails_helper'
-include SessionsHelper
+
 
 RSpec.describe "Users", type: :request do
+
   describe '#new' do
     context 'ゲストとして' do
       it '200レスポンスを返すこと' do
@@ -16,8 +17,8 @@ RSpec.describe "Users", type: :request do
       let(:user) { FactoryBot.create(:user) }
 
       it '編集に成功すること' do
-        log_in user
         user_params = FactoryBot.attributes_for(:user, name: 'Tester')
+        log_in user
         patch user_path(user), params: { id: user.id, user: user_params }
         expect(user.reload.name).to eq 'Tester'
       end

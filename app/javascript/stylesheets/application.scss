@@ -133,6 +133,18 @@ footer ul li {
   padding: 15px 50px;
 }
 
+label.signup {
+  margin-top: 5px;
+}
+
+.checkbox {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  span {
+    font-weight: normal;
+  }
+}
+
 /* show */
 img#user-show {
   display: block;
