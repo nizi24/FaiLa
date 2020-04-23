@@ -10,6 +10,7 @@ module SessionsHelper
     cookies.permanent[:remember_token] = user.remember_token
   end
 
+  #ログアウト時にクッキーを消去
   def forget(user)
     user.forget
     cookies.delete(:user_id)

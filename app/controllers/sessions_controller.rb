@@ -17,9 +17,10 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    log_out if logged_in?
+    log_out if logged_in? #二重ログアウトによるエラーを防止
     flash[:info] = 'ログアウトしました'
     redirect_to login_path
   end
-  
+
+
 end

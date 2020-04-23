@@ -33,19 +33,21 @@ RSpec.describe "Sessions", type: :request do
           delete logout_path
           expect(response.cookies['remember_token']).to eq nil
         end
+      end
 
-        it "logs in with valid information followed by logout" do
-          log_in(user)     # spec/support/utilities.rbに定義
+      context '二つのウィンドウでログアウトをクリックしたとき' do
+        let(:user) { FactoryBot.create(:user) }
+        
+        it "ログイン中のみログアウトすること" do
+          log_in(user)
           expect(response).to redirect_to user_path(user)
 
-          # ログアウトする
           delete logout_path
-          expect(response).to redirect_to root_path
+          expect(response).to redirect_to login_path
           expect(session[:user_id]).to eq nil
 
-          # 2番目のウィンドウでログアウトする
           delete logout_path
-          expect(response).to redirect_to root_path
+          expect(response).to redirect_to login_path
           expect(session[:user_id]).to eq nil
         end
       end

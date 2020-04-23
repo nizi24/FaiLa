@@ -37,12 +37,17 @@ RSpec.describe User, type: :model do
   it { is_expected.to have_secure_password }
 
   it { is_expected.to validate_length_of :password }
-  # モックとスタブを使って書きたい
 
   context 'パスワードが空の時' do
     it '無効な状態であること' do
       user = FactoryBot.build(:user, password: nil)
       expect(user).to_not be_valid
+    end
+  end
+
+  context 'remember_digestがnilのとき' do
+    it 'authenticated? は false を返すこと' do
+      expect(user.authenticated?('')).to eq false
     end
   end
 

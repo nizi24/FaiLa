@@ -3,7 +3,10 @@ require 'rails_helper'
 
 RSpec.describe "Users", type: :request do
 
+  let(:user) { FactoryBot.create(:user) }
+
   describe '#new' do
+
     context 'ゲストとして' do
       it '200レスポンスを返すこと' do
         get new_user_path
@@ -12,10 +15,46 @@ RSpec.describe "Users", type: :request do
     end
   end
 
-  describe '#update' do
-    context '認可されたユーザーの時' do
-      let(:user) { FactoryBot.create(:user) }
+  describe '#show' do
 
+    context 'ゲストとして' do
+      it '200レスポンスを返すこと' do
+        get user_path(user)
+        expect(response).to have_http_status(200)
+      end
+    end
+  end
+
+  describe '#edit' do
+
+    context '認可されたユーザーの時' do
+      it '200レスポンスを返すこと' do
+        log_in user
+        get edit_user_path(user)
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context '認可されていないユーザーの時' do
+      it 'トップページにリダイレクトすること' do
+        other_user = FactoryBot.create(:user)
+        log_in other_user
+        get edit_user_path(user)
+        expect(response).to redirect_to root_url
+      end
+    end
+
+    context 'ゲストとして' do
+      it 'ログインページにリダイレクトすること' do
+        get edit_user_path(user)
+        expect(response).to redirect_to login_url
+      end
+    end
+  end
+
+  describe '#update' do
+
+    context '認可されたユーザーの時' do
       it '編集に成功すること' do
         user_params = FactoryBot.attributes_for(:user, name: 'Tester')
         log_in user
@@ -24,9 +63,17 @@ RSpec.describe "Users", type: :request do
       end
     end
 
-    context 'ゲストとして' do
-      let(:user) { FactoryBot.create(:user) }
+    context '認可されていないユーザーの時' do
+      it 'トップページにリダイレクトすること' do
+        user_params = FactoryBot.attributes_for(:user, name: 'Tester')
+        other_user = FactoryBot.create(:user)
+        log_in other_user
+        patch user_path(user), params: { id: user.id, user: user_params }
+        expect(response).to redirect_to root_url
+      end
+    end
 
+    context 'ゲストとして' do
       it 'ログインページにリダイレクトすること' do
         user_params = FactoryBot.attributes_for(:user, name: 'Tester')
         patch user_path(user), params: { id: user.id, user: user_params }
