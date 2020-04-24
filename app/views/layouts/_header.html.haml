@@ -9,6 +9,8 @@
           %li.nav-item.fix-margin= link_to 'ログイン', login_path
           %li.nav-item.fix-margin= link_to '新規登録', new_user_path
         -else
+          %li.nav-item.fix-margin= link_to '投稿一覧', articles_path
+          %li.nav-item.fix-margin= link_to '投稿する', new_article_path
           %li.nav-item.dropdown
             %a#dropdown.nav-link.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true", "data-toggle": "dropdown", href: "#"} アカウント
             %ul.dropdown-menu{"aria-labelledby": "dropdown"}

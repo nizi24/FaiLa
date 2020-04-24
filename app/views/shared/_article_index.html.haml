@@ -1,0 +1,10 @@
+- @articles.each  do |article|
+  .article-item
+    .article-item-body
+      = link_to article.title, article, class: 'article-title'
+    .article-item-meta
+      %span.by by
+      = link_to article.user.name, article.user, class: 'article-author'
+      %span.timestamp #{ time_ago_in_words(article.created_at)}前
+    -if current_user == article.user
+      =button_to '削除', article, method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'h6 form-inline'

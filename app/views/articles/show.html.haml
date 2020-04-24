@@ -1,0 +1,9 @@
+.article-detail
+  .article-header
+    .article-title
+      = @article.title
+    %span.by by
+    = link_to @article.user.name, @article.user, class: 'article-author'
+    %hr
+  .article-content
+    = markdown("#{@article.content}")

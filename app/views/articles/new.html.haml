@@ -1,0 +1,27 @@
+.d-flex.align-items-center
+  %h1 投稿
+.col-md-6.form-group
+  = form_with model: @article do |f|
+    = render 'shared/error_messages', object: f.object
+    = f.label :title
+    = f.text_field :title, class: 'form-control'
+
+    #editor
+      = f.label :content
+      = f.text_area :content, class: 'form-control', rows:10, "v-model" => "input", name: "article[content]"
+      .border.preview{"v-html" => "input | marked"}
+
+    = f.submit '投稿', class: 'btn btn-info btn-block'
+
+:javascript
+  window.onload = function() {
+    new Vue({
+      el: '#editor',
+      data: {
+        input: '',
+      },
+      filters: {
+        marked: marked,
+      },
+    });
+  };

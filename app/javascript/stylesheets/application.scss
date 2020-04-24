@@ -8,9 +8,6 @@ section {
   overflow: auto;
 }
 
-textarea {
-  resize: vertical;
-}
 
 .center {
   text-align: center;
@@ -125,11 +122,11 @@ footer ul li {
   margin-left: 15px;
 }
 
-/*sign up */
+/*sign up(user#new) */
 .submit {
   text-align: center;
   margin: 15px;
-} .btn {
+} .btn-primary {
   padding: 15px 50px;
 }
 
@@ -145,16 +142,92 @@ label.signup {
   }
 }
 
-/* show */
+/* user#show */
 img#user-show {
   display: block;
   margin:auto;
 }
 
-a#to-edit-from-show {
-  color: #555;
+a#edit-user-info {
+  padding: 0.25rem 0.5rem;
 }
 
 h3#user-name {
   text-align: center;
+}
+
+.user-info {
+  padding: 20px;
+}
+
+input.h6 {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  margin-top: 8px;
+  color: #FF3333;
+}
+
+.edit-user-info {
+  display: block;
+  margin:auto;
+}
+
+/* articles#new */
+textarea {
+  resize: none;
+}
+
+.btn-info {
+  margin-top: 10px;
+}
+.preview {
+}
+/* articles#index */
+
+.article-item {
+  display: flex;
+  width: 100%;
+  font-size: 1.4rem;
+  border-bottom: 1px solid #e8e8e8;
+  padding: 16px;
+  text-align: center;
+}
+
+.article-title {
+  display: inline-block;
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 4px;
+  color: inherit;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+span.by {
+  margin-left: 20px;
+  font-size: 0.9em;
+}
+
+.article-author {
+  font-size: 0.9em;
+  color: inherit;
+}
+
+.timestamp {
+  margin-right: 0;
+  font-size: 0.6em;
+  color: 	#BBBBBB;
+}
+
+.ago {
+  font-size: 0.6em;
+  color: 	#BBBBBB;
+}
+/* articles#show */
+
+.article-header {
+  padding-bottom: 20px;
 }

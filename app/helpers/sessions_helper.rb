@@ -38,4 +38,9 @@ module SessionsHelper
   def logged_in?
     !current_user.nil?
   end
+
+  def identification
+    current_user == User.find(params[:id])
+  end
+
 end

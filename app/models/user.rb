@@ -10,6 +10,7 @@ validates :email, presence: true,
           format: { with: VALID_EMAIL_REGEX }
 validates :password, length: { minimum: 6 }, allow_nil: true
 has_secure_password
+has_many :articles
 
   #remember_tokenを発行して、データベースにハッシュ化されたremember_digestを保存
   def remember

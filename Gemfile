@@ -41,6 +41,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'nokogiri', '~> 1.11.0.rc1'
 gem 'bcrypt'
 gem 'rails-i18n'
+gem 'redcarpet'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

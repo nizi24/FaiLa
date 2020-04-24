@@ -3,7 +3,7 @@
   .col-md-3
   .col-md-6.form-group
     = form_with model: @user do |f|
-      = render 'shared/error_messages'
+      = render 'shared/error_messages', object: f.object
       = f.label :name
       = f.text_field :name, class: 'form-control'
 
