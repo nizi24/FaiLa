@@ -16,20 +16,21 @@ section {
 .center h1 {
   margin-bottom: 10px;
 }
+
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
 }
 
-h1 {
+h1.h1 {
   font-size: 3em;
   letter-spacing: -2px;
   margin-bottom: 30px;
   text-align: center;
 }
 
-h2 {
+h2.h2 {
   font-size: 1.2em;
   letter-spacing: -1px;
   margin-bottom: 30px;
@@ -41,6 +42,13 @@ h2 {
 p {
   font-size: 1.1em;
   line-height: 1.7em;
+}
+
+.field_with_errors {
+  display: contents;
+  input {
+    @extend .is-invalid;
+  }
 }
 
 /* header */
@@ -123,6 +131,7 @@ footer ul li {
 }
 
 /*sign up(user#new) */
+
 .submit {
   text-align: center;
   margin: 15px;
@@ -143,6 +152,7 @@ label.signup {
 }
 
 /* user#show */
+
 img#user-show {
   display: block;
   margin:auto;
@@ -158,6 +168,7 @@ h3#user-name {
 
 .user-info {
   padding: 20px;
+  height: 300px;
 }
 
 input.h6 {
@@ -172,19 +183,61 @@ input.h6 {
 
 .edit-user-info {
   display: block;
-  margin:auto;
+  margin: auto;
+}
+
+.paginate {
+  margin-top: 20px;
 }
 
 /* articles#new */
-textarea {
+
+#editor {
+  height: 600px;
+  width: 100%;
+  display: flex;
+}
+
+.form_content {
+  width: 50%;
+  display: inline-block;
+}
+
+label#form-content {
+  float: left;
+}
+
+.textarea {
+  width: 100%;
+  height: 85%;
   resize: none;
+  margin-top: 7px;
+}
+
+.preview {
+  width: 50%;
+  height: 100%;
+  display: inline-block;
+}
+
+span#preview {
+  float: left;
+  margin-bottom: 0.5rem;
+}
+
+.preview-form {
+  width: 100%;
+  height: 85%;
+  display: inline-block;
+  overflow-y: scroll;
+  overflow-wrap: break-word;
+  margin-top: 7px;
 }
 
 .btn-info {
   margin-top: 10px;
 }
-.preview {
-}
+
 /* articles#index */
 
 .article-item {

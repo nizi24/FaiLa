@@ -1,15 +1,18 @@
 .d-flex.align-items-center
-  %h1 投稿
-.col-md-6.form-group
+  %h1.h1 投稿
+.form-group
   = form_with model: @article do |f|
     = render 'shared/error_messages', object: f.object
     = f.label :title
-    = f.text_field :title, class: 'form-control'
+    = f.text_field :title, class: 'form-control col-md-6'
 
     #editor
-      = f.label :content
-      = f.text_area :content, class: 'form-control', rows:10, "v-model" => "input", name: "article[content]"
-      .border.preview{"v-html" => "input | marked"}
+      .form_content
+        = f.label :content, id: 'form-content'
+        = f.text_area :content, class: 'textarea rounded', rows:10, "v-model" => "input", name: "article[content]"
+      .preview
+        %span#preview プレビュー
+        .border.preview-form.rounded{"v-html" => "input | marked"}
 
     = f.submit '投稿', class: 'btn btn-info btn-block'
 

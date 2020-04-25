@@ -7,4 +7,11 @@
       = link_to article.user.name, article.user, class: 'article-author'
       %span.timestamp #{ time_ago_in_words(article.created_at)}前
     -if current_user == article.user
-      =button_to '削除', article, method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'h6 form-inline'
+      =button_to '削除', article, method: :delete,
+        data: { confirm: '本当に削除しますか？' },
+        class: 'h6 form-inline'
+
+= will_paginate @articles,
+  previous_label: '←  前', next_label: '次 →', inner_window: 1, outer_window: 0,
+  renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer,
+  class: 'paginate'
