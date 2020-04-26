@@ -273,14 +273,14 @@ DEPENDENCIES
   bootstrap-will_paginate
   byebug
   capybara (~> 2.13)
-  coffee-rails (~> 4.2)
+  coffee-rails
   factory_bot_rails
   haml-rails
-  jbuilder (~> 2.5)
+  jbuilder
   jquery-rails
   launchy
   nokogiri (~> 1.11.0.rc1)
-  puma (~> 3.7)
+  puma
   rails (~> 6.0)
   rails-i18n
   redcarpet
@@ -290,7 +290,7 @@ DEPENDENCIES
   selenium-webdriver
   shoulda-matchers!
   sqlite3
-  turbolinks (~> 5)
+  turbolinks
   tzinfo-data
   uglifier
   web-console (>= 3.3.0)

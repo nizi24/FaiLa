@@ -1,0 +1,13 @@
+.comment-item-wrapper
+  - @comments.each do |comment|
+    .comment-item
+      .comment-item-header
+        =link_to comment.user.name, comment.user, class: 'comment-user-name'
+      .comment-item-body
+        %p.comment-content=comment.content
+      .comment-item-footer
+        %span.timestamp #{ time_ago_in_words(comment.created_at)}前
+        -if current_user == comment.user
+          =button_to '削除', comment, method: :delete,
+            data: { confirm: '本当に削除しますか？' },
+            class: 'h6 destroy-comment'

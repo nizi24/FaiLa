@@ -8,6 +8,9 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
+    @comment = current_user.comments.build(article_id: params[:id]) if logged_in?
+    @comments = @article.comments
+    @likes_article = Article.where(article_id: params[:id])
   end
 
   def new
@@ -41,8 +44,9 @@ private
   def correct_user
     @article = Article.find(params[:id])
     unless current_user == @article.user
-      redirect_to root_url
       flash[:danger] = '許可されていないリクエストです'
+      redirect_to root_url
     end
   end
+
 end

@@ -2,6 +2,7 @@
   "name": "Failearn",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.0",
     "@rails/webpacker": "5.0.1",
     "bootstrap": "^4.4.1",
     "jquery": "^3.5.0",

@@ -11,6 +11,16 @@ validates :email, presence: true,
 validates :password, length: { minimum: 6 }, allow_nil: true
 has_secure_password
 has_many :articles
+has_many :comments
+has_many :likes
+
+  def already_liked?(article: nil, comment: nil)
+    if article
+      self.likes.exists?(article_id: article.id)
+    elsif comment
+      self.likes.exists?(comment_id: comment.id)
+    end
+  end
 
   #remember_tokenを発行して、データベースにハッシュ化されたremember_digestを保存
   def remember

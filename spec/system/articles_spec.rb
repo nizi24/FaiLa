@@ -23,10 +23,26 @@ RSpec.describe "Articles", js: true, type: :system do
     end
   end
 
-  context 'ログインしたユーザーが自分の記事を削除するとき' do
+  context 'ログインしたユーザーが記事を削除するとき' do
     let(:user) { FactoryBot.create(:user) }
 
-    it '削除に成功すること' do
+    it '他のユーザーの記事に削除ボタンがないこと' do
+      other_user = FactoryBot.create(:user)
+
+      log_in_as other_user
+      post_article 'other article'
+      log_out_as other_user
+
+      log_in_as user
+      visit articles_path
+      expect(page).to have_content 'other article'
+      expect(page).to_not have_button '削除'
+
+      visit user_path(other_user)
+      expect(page).to_not have_button '削除'
+    end
+
+    it '自分の記事は削除できること' do
       log_in_as user
       post_article 'Test article'
 
@@ -38,14 +54,8 @@ RSpec.describe "Articles", js: true, type: :system do
       }.to change(user.articles, :count).by(-1)
 
       expect(page).to have_content '削除しました'
+      expect(page).to_not have_content 'Test article'
       expect(current_path).to eq articles_path
     end
-  end
-
-  def post_article(name)
-    click_link '投稿する'
-    fill_in 'article[title]', with: 'Test article'
-    fill_in 'article[content]', with: 'This is a test article'
-    click_button '投稿'
   end
 end

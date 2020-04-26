@@ -1,6 +1,8 @@
 import 'bootstrap';
 import '../stylesheets/application';
+import '@fortawesome/fontawesome-free/js/all'
 import Rails from '@rails/ujs';
+
 Rails.start();
 require("@rails/ujs").start()
 require("turbolinks").start()
