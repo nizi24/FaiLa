@@ -8,7 +8,7 @@ RSpec.describe "Comments", type: :system do
   let(:user) { FactoryBot.create(:user) }
   let(:article) { FactoryBot.create(:article) }
 
-  context 'ログインしたユーザーがコメントを投稿するとき', :focus do
+  context 'ログインしたユーザーがコメントを投稿するとき' do
     it '投稿に成功すること' do
       article = FactoryBot.create(:article, title: 'Test article')
 

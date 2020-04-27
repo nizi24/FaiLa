@@ -3,6 +3,6 @@ class Article < ApplicationRecord
   validates :content, presence: true, length: { minimum: 20 }
   belongs_to :user
   has_many :comments
-  has_many :likes
+  has_many :likes, as: :likeable
 
 end

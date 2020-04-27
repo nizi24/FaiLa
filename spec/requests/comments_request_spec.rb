@@ -60,7 +60,7 @@ let(:article) { FactoryBot.create(:article) }
         log_in user
         expect {
           delete comment_path(comment), params: { id: comment.id }
-        }.to_not change(user.comments, :count)
+        }.to_not change(Comment, :count)
       end
 
       it 'ダッシュボードにリダイレクトすること' do

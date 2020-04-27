@@ -11,14 +11,8 @@
 
     .article-footer
       %span.timestamp #{ time_ago_in_words(@article.created_at)}前
-      .article-likes
-        %span.to-like Likes
-        - if current_user.already_liked?
-          = button_to article_like_path(@article), method: :delete do
-            %i.fas.fa-heart.fa-2x.article-like-icon
-        - else
-          = button_to article_likes_path(@article) do
-            %i.far.fa-heart.fa-2x.article-like-icon
+      = render 'likes/article_likes'
+
   %hr
   .comments
     = render 'comments/comment_form'

@@ -3,11 +3,18 @@
     .comment-item
       .comment-item-header
         =link_to comment.user.name, comment.user, class: 'comment-user-name'
-      .comment-item-body
-        %p.comment-content=comment.content
-      .comment-item-footer
-        %span.timestamp #{ time_ago_in_words(comment.created_at)}前
         -if current_user == comment.user
           =button_to '削除', comment, method: :delete,
             data: { confirm: '本当に削除しますか？' },
             class: 'h6 destroy-comment'
+      .comment-item-body
+        %p.comment-content=comment.content
+      .comment-item-footer
+        %span.timestamp #{ time_ago_in_words(comment.created_at)}前
+        .comment-likes
+          - if logged_in? && current_user.already_liked?(comment)
+            = button_to comment_like_path(comment), method: :delete, class: 'like-icon comment-like' do
+              %i.fas.fa-heart.fa-lg
+          - else
+            = button_to comment_likes_path(comment), class: 'like-icon comment-like' do
+              %i.far.fa-heart.fa-lg

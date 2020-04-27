@@ -10,7 +10,7 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     @comment = current_user.comments.build(article_id: params[:id]) if logged_in?
     @comments = @article.comments
-    @likes_article = Article.where(article_id: params[:id])
+    @like = current_user.likes.build if logged_in?
   end
 
   def new

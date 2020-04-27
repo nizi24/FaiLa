@@ -346,14 +346,21 @@ span.by {
   margin-bottom: 20px;
   justify-content: space-between;
 
-  .article-like-icon {
-    margin-right: 40px;
-    color: #FF0066;
-  }
   .to-like {
     color: #FF0066;
     font-size: 1.4em;
   }
+}
+
+.like-icon {
+  margin-right: 40px;
+  color: #FF0066;
+  background: none;
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .comment-form {
@@ -387,6 +394,12 @@ span.by {
   border-bottom: 1px solid #ddd;
 }
 
+.comment-item-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
 .comment-user-name {
   font-size: 1.2em;
   color: inherit;
@@ -402,6 +415,7 @@ span.by {
 }
 
 .comment-item-footer {
+  margin-bottom: 10px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
