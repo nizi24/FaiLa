@@ -14,8 +14,8 @@ has_many :articles
 has_many :comments
 has_many :likes
 
-  def already_liked?(likeable)
-    self.likes.exists?(likeable_id: likeable.id)
+  def already_liked?(likeable_id)
+    self.likes.exists?(likeable_id: likeable_id)
   end
 
   #remember_tokenを発行して、データベースにハッシュ化されたremember_digestを保存
