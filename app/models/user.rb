@@ -1,29 +1,45 @@
 class User < ApplicationRecord
 before_save { self.email = self.email.downcase }
 attr_accessor :remember_token
-validates :name, presence: true,
-          length: { maximum: 50 }
+
+validates :name,
+          presence:   true,
+          length:     { maximum: 50 }
+
 VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
-validates :email, presence: true,
-          uniqueness: { case_sensitive: false },
-          length: { maximum: 255 },
-          format: { with: VALID_EMAIL_REGEX }
-validates :password, length: { minimum: 6 }, allow_nil: true
+validates :email,
+          presence:     true,
+          uniqueness:   { case_sensitive: false },
+          length:       { maximum: 255 },
+          format:       { with: VALID_EMAIL_REGEX }
+
+validates :password,
+          length:       { minimum: 6 },
+          allow_nil:    true
+
+validates :icon, content_type: { in: %w[image/jpeg image/gif image/png image/heic],
+                                message: '有効な形式の画像を選択してください'},
+                size:          { less_than: 5.megabytes,
+                                message: '5MB以下の画像を選択してください'}
 has_secure_password
 
+has_one_attached :icon
 has_many :articles
 has_many :comments
 has_many :likes
-has_many :active_relationships, class_name: 'Relationship',
-                              foreign_key: 'follower_id',
-                              dependent: :destroy
-has_many :passive_relationships, class_name: 'Relationship',
-                                foreign_key: 'followed_id',
-                                dependent: :destroy
+has_many :active_relationships,   class_name:   'Relationship',
+                                  foreign_key:  'follower_id',
+                                  dependent:    :destroy
+
+has_many :passive_relationships,  class_name:   'Relationship',
+                                  foreign_key:  'followed_id',
+                                  dependent:    :destroy
+
 has_many :following, through: :active_relationships,
-                    source: :followed
+                     source:  :followed
+
 has_many :followers, through: :passive_relationships,
-                    source: :follower
+                     source:  :follower
 
   def follow(other_user)
     self.following << other_user

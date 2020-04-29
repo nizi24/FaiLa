@@ -15,6 +15,7 @@ gem 'puma'
 # Use SCSS for stylesheets
 gem 'sass-rails'
 # Use Uglifier as compressor for JavaScript assets
+gem 'active_storage_validations'
 gem 'uglifier'
 gem 'bootstrap'
 gem 'bootstrap-sass'

@@ -28,6 +28,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    @user.icon.attach(params[:user][:icon])
     if @user.update(user_params)
       flash[:success] = '更新に成功しました'
       redirect_to @user
@@ -45,7 +46,7 @@ class UsersController < ApplicationController
 private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :icon)
   end
 
 
