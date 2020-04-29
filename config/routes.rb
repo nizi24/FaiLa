@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
-  resources :users
+  resources :users do
+    member do
+      get :followers
+    end
+  end
 
   resources :articles do
     resources :likes, only: [:create, :destroy]
@@ -13,4 +17,5 @@ Rails.application.routes.draw do
     resources :likes, only: [:create, :destroy]
   end
 
+  resources :relationships, only: [:create, :destroy]
 end

@@ -1,0 +1,8 @@
+.row
+  = render 'users/user_info'
+
+  .col-md-6
+    %h3.center #{@user.name}さんのフォロワー
+    - @users.each do |user|
+      .followers-item
+        = link_to user.name, user, class: 'article-author'

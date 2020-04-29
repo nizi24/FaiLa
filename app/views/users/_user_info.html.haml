@@ -1,0 +1,19 @@
+.col-md-3.bg-light.user-info
+  =image_tag 'default_icon.jpeg', size: '80x80', id: 'user-show'
+  %h3#user-name= @user.name
+  - if identification
+    =link_to 'ユーザー情報を編集する', edit_user_path(@user), class: 'btn btn-success btn-sm text-nowrap font-weight-bold edit-user-info'
+  - elsif logged_in? && current_user.following?(@user)
+    = form_with model: current_user.active_relationships.find_by(followed_id: @user.id), html: { method: :delete }, local: true do |f|
+      = f.submit 'フォロー解除', class: 'btn btn-info follow-button'
+  - elsif logged_in?
+    = form_with model: current_user.active_relationships.build, local: true do |f|
+      = hidden_field_tag :followed_id, @user.id
+      = f.submit 'フォロー', class: 'btn btn-outline-info follow-button'
+  - else
+    = button_to 'フォロー', relationships_path, class: 'btn btn-outline-info follow-button'
+
+  .col-md-6.user-followers
+    = link_to followers_user_path(@user) do
+      %span フォロワー
+      %p= @user.followers.count

@@ -187,8 +187,36 @@ input.h6 {
   margin: auto;
 }
 
+.follow-button {
+  display: block;
+  margin: auto;
+}
+
+.user-followers {
+  margin-top: 20px;
+  a {
+    text-align: center;
+    color: #808080;
+  }
+  p {
+    color: black;
+    font-size: 1.4em;
+  }
+}
+
 .paginate {
   margin-top: 20px;
+}
+
+/* followers */
+
+.followers-item {
+  display: flex;
+  width: 100%;
+  font-size: 1.4rem;
+  border-bottom: 1px solid #e8e8e8;
+  padding: 16px;
+  text-align: center;
 }
 
 /* articles#new */

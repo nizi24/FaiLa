@@ -3,7 +3,7 @@
     .comment-form-header
       %h3#post-comment コメントを投稿する
     .comment-form-content
-      = form_with model: @comment do |f|
+      = form_with model: @comment, local: true do |f|
 
         = f.hidden_field :article_id, id: 'article_id'
         = f.text_area :content, class: 'comment-textarea rounded'

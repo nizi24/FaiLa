@@ -10,12 +10,35 @@ validates :email, presence: true,
           format: { with: VALID_EMAIL_REGEX }
 validates :password, length: { minimum: 6 }, allow_nil: true
 has_secure_password
+
 has_many :articles
 has_many :comments
 has_many :likes
+has_many :active_relationships, class_name: 'Relationship',
+                              foreign_key: 'follower_id',
+                              dependent: :destroy
+has_many :passive_relationships, class_name: 'Relationship',
+                                foreign_key: 'followed_id',
+                                dependent: :destroy
+has_many :following, through: :active_relationships,
+                    source: :followed
+has_many :followers, through: :passive_relationships,
+                    source: :follower
 
-  def already_liked?(likeable_id)
-    self.likes.exists?(likeable_id: likeable_id)
+  def follow(other_user)
+    self.following << other_user
+  end
+
+  def unfollow(other_user)
+    self.following.delete(other_user)
+  end
+
+  def following?(other_user)
+    self.following.include?(other_user)
+  end
+
+  def already_liked?(object)
+    self.likes.exists?(likeable_id: object.id)
   end
 
   #remember_tokenを発行して、データベースにハッシュ化されたremember_digestを保存

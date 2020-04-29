@@ -12,7 +12,7 @@
       .comment-item-footer
         %span.timestamp #{ time_ago_in_words(comment.created_at)}前
         .comment-likes
-          - if logged_in? && current_user.already_liked?(comment.id)
+          - if logged_in? && current_user.already_liked?(comment)
             = button_to comment_like_path(comment), method: :delete, class: 'like-icon comment-like' do
               %i.fas.fa-heart.fa-lg
             %span.likes_total= comment.likes_total

@@ -2,8 +2,10 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   subject(:user) { FactoryBot.create(:user) }
-  let(:project) { FactoryBot.create(:project) }
+  let(:article) { FactoryBot.create(:article) }
   let(:comment) { FactoryBot.create(:comment) }
+  let(:article_like) { FactoryBot.create(:like, :article_like, user: user, likeable: article)}
+  let(:comment_like) { FactoryBot.create(:like, :comment_like, user: user, likeable: comment)}
 
   it { is_expected.to be_valid }
 
@@ -53,4 +55,48 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe '#already_liked?' do
+    context '対象を既にいいねしている時' do
+      it 'trueを返すこと' do
+        article_like
+        expect(user.already_liked?(article)).to be true
+        comment_like
+        expect(user.already_liked?(comment)).to be true
+      end
+    end
+
+    context '対象をいいねしていない時' do
+      it 'falseを返すこと' do
+        expect(user.already_liked?(article)).to be false
+        expect(user.already_liked?(comment)).to be false
+      end
+    end
+  end
+
+  describe '#following?' do
+    context '対象をfollowした時' do
+      it 'trueを返すこと' do
+        other_user = FactoryBot.create(:user)
+        expect(user.following?(other_user)).to be false
+        user.follow(other_user)
+        expect(user.following?(other_user)).to be true
+      end
+
+      it 'other_userのフォロワーにuserが存在すること' do
+        other_user = FactoryBot.create(:user)
+        user.follow(other_user)
+        expect(other_user.followers.include?(user)).to be true
+      end
+    end
+
+    context '対象をunfollowした時' do
+      it 'falseを返すこと' do
+        other_user = FactoryBot.create(:user)
+        user.follow(other_user)
+        expect(user.following?(other_user)).to be true
+        user.unfollow(other_user)
+        expect(user.following?(other_user)).to be false
+      end
+    end
+  end
 end

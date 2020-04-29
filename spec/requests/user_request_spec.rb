@@ -81,4 +81,13 @@ RSpec.describe "Users", type: :request do
       end
     end
   end
+
+  describe '#followers' do
+    context 'ゲストとして' do
+      it 'ログインページにリダイレクトすること' do
+        get followers_user_path(user)
+        expect(response).to redirect_to login_url
+      end
+    end
+  end
 end

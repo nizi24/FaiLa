@@ -1,7 +1,7 @@
 .d-flex.align-items-center
   %h1.h1 投稿
 .form-group
-  = form_with model: @article do |f|
+  = form_with model: @article, local: true do |f|
     = render 'shared/error_messages', object: f.object
     = f.label :title
     = f.text_field :title, class: 'form-control col-md-6'

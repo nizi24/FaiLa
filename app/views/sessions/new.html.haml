@@ -2,7 +2,7 @@
 .row
   .col-md-3
   .col-md-6.form-group
-    = form_with scope: :session, url: login_path do |f|
+    = form_with scope: :session, url: login_path, local: true do |f|
 
       = f.label :email, 'メールアドレス', class: 'signup'
       = f.email_field :email, class: 'form-control'

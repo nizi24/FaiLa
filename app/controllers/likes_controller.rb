@@ -28,6 +28,7 @@ private
 
   #destroyでcurrent_userがいいねしているかどうか確かめるのでいらないかも？
   #destroyに複数同じリクエストが送られると、ダッシュボードに飛ばされてしまう
+  #コメントアウトを外すときはalready_liked?とメソッドを使用しているviewの変更必須(id)
   # def correct_user
   #   unless current_user.already_liked?(sort_params)
   #     flash[:danger] = '許可されていないリクエストです'
@@ -57,11 +58,11 @@ private
   end
 
   #paramsを分類　いらないかも？
-  def sort_params
-    if params[:article_id]
-      params[:article_id]
-    elsif params[:comment_id]
-      params[:comment_id]
-    end
-  end
+  # def sort_params
+  #   if params[:article_id]
+  #     params[:article_id]
+  #   elsif params[:comment_id]
+  #     params[:comment_id]
+  #   end
+  # end
 end
