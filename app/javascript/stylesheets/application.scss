@@ -305,6 +305,10 @@ span.by {
   font-size: 0.6em;
   color: 	#BBBBBB;
 }
+
+.article-item-likes {
+  margin-left: 20px;
+}
 /* articles#show */
 
 .article{
@@ -345,15 +349,14 @@ span.by {
   margin-top: 60px;
   margin-bottom: 20px;
   justify-content: space-between;
+}
 
-  .to-like {
-    color: #FF0066;
-    font-size: 1.4em;
-  }
+.article-likes {
+  margin-right: 20px;
+  display: flex;
 }
 
 .like-icon {
-  margin-right: 40px;
   color: #FF0066;
   background: none;
   border: none;
@@ -361,6 +364,12 @@ span.by {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+}
+
+span.likes_total {
+  color: #FF0066;
+  margin-bottom: 0;
+  font-size: 1.4em;
 }
 
 .comment-form {
@@ -419,4 +428,8 @@ span.by {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+.comment-likes {
+  display: flex;
 }

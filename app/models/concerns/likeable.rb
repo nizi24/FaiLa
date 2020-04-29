@@ -6,6 +6,6 @@ module Likeable
   end
 
   def likes_total
-    raise NotImplementedError
+    self.likes.length
   end
 end

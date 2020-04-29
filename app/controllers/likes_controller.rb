@@ -1,25 +1,24 @@
 class LikesController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
-  before_action :correct_user, only: [:destroy]
+  # before_action :correct_user, only: [:destroy]
 
 
   def create
     if object = sort_like_object
       @like = object.likes.build
       @like.user_id = current_user.id
-      redirect_back(fallback_location: root_path) if @like.save
+      @like.save
+      redirect_back(fallback_location: root_path)
     else
       redirect_to root_url
     end
   end
 
-
-
   def destroy
     if sort_liked_object
       @like = Like.find_by(sort_liked_object)
     else
-      redirect_to root_url
+      redirect_back(fallback_location: root_path)
     end
     @like.destroy if @like
     redirect_back(fallback_location: root_path)
@@ -28,12 +27,13 @@ class LikesController < ApplicationController
 private
 
   #destroyでcurrent_userがいいねしているかどうか確かめるのでいらないかも？
-  def correct_user
-    unless current_user.already_liked?(sort_params)
-      flash[:danger] = '許可されていないリクエストです'
-      redirect_to root_url
-    end
-  end
+  #destroyに複数同じリクエストが送られると、ダッシュボードに飛ばされてしまう
+  # def correct_user
+  #   unless current_user.already_liked?(sort_params)
+  #     flash[:danger] = '許可されていないリクエストです'
+  #     redirect_to root_url
+  #   end
+  # end
 
   #likeする対象を分類
   def sort_like_object

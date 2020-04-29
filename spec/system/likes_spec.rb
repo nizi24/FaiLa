@@ -13,6 +13,7 @@ RSpec.describe "Likes", type: :system do
     it '記事にいいねできること' do
       log_in_as user
       visit article_path(article)
+      expect(page).to have_content '0'
 
       expect{
         expect {
@@ -20,6 +21,7 @@ RSpec.describe "Likes", type: :system do
           find(:css, '.like-icon').click
         }.to change(user.likes, :count).by(1)
       }.to change(article.likes, :count).by(1)
+      expect(page).to have_content '1'
 
       expect {
         expect {
@@ -27,6 +29,7 @@ RSpec.describe "Likes", type: :system do
           find(:css, '.like-icon').click
         }.to change(user.likes, :count).by(-1)
       }.to change(article.likes, :count).by(-1)
+      expect(page).to have_content '0'
 
     end
 
@@ -36,6 +39,7 @@ RSpec.describe "Likes", type: :system do
 
       log_in_as user
       visit article_path(article)
+      expect(page).to have_content '0'
 
       expect{
         expect {
@@ -43,6 +47,7 @@ RSpec.describe "Likes", type: :system do
           find(:css, '.comment-like').click
         }.to change(user.likes, :count).by(1)
       }.to change(comment.likes, :count).by(1)
+      expect(page).to have_content '1'
 
       expect {
         expect {
@@ -50,6 +55,7 @@ RSpec.describe "Likes", type: :system do
           find(:css, '.comment-like').click
         }.to change(user.likes, :count).by(-1)
       }.to change(comment.likes, :count).by(-1)
+      expect(page).to have_content '0'
     end
   end
 end

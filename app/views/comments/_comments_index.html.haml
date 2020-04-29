@@ -15,6 +15,8 @@
           - if logged_in? && current_user.already_liked?(comment.id)
             = button_to comment_like_path(comment), method: :delete, class: 'like-icon comment-like' do
               %i.fas.fa-heart.fa-lg
+            %span.likes_total= comment.likes_total
           - else
             = button_to comment_likes_path(comment), class: 'like-icon comment-like' do
               %i.far.fa-heart.fa-lg
+            %span.likes_total= comment.likes_total

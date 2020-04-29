@@ -10,6 +10,9 @@
       =button_to '削除', article, method: :delete,
         data: { confirm: '本当に削除しますか？' },
         class: 'h6 form-inline'
+    .article-item-likes
+      %i.far.fa-heart.like-icon
+      %span.like-icon= article.likes_total
 
 = will_paginate @articles,
   previous_label: '←  前', next_label: '次 →', inner_window: 1, outer_window: 0,

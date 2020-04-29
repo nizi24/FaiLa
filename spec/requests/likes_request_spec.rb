@@ -16,9 +16,25 @@ RSpec.describe "Likes", type: :request do
         }.to change(article.likes, :count).by(1)
       end
 
+      it 'ユーザーは同一記事に複数いいねできないこと' do
+        log_in user
+        expect {
+          post article_likes_path(article), params: { article_id: article.id }
+          post article_likes_path(article), params: { article_id: article.id }
+        }.to change(article.likes, :count).by(1)
+      end
+
       it 'コメントにいいねできること' do
         log_in user
         expect {
+          post comment_likes_path(comment), params: { comment_id: comment.id }
+        }.to change(comment.likes, :count).by(1)
+      end
+
+      it 'ユーザーは同一コメントに複数いいねできないこと' do
+        log_in user
+        expect {
+          post comment_likes_path(comment), params: { comment_id: comment.id }
           post comment_likes_path(comment), params: { comment_id: comment.id }
         }.to change(comment.likes, :count).by(1)
       end
