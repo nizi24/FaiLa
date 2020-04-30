@@ -13,6 +13,7 @@ gem 'puma'
 # Use SCSS for stylesheets
 gem 'sass-rails'
 # Use Uglifier as compressor for JavaScript assets
+gem 'aws-sdk-s3', require: false
 gem 'active_storage_validations'
 gem 'uglifier'
 gem 'bootstrap'
