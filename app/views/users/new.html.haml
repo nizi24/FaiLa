@@ -1,6 +1,6 @@
 %h1.text-secondary.h1 ユーザー登録
 .row
-  .col-md-6.form-group-offset-md-3.col-xs-12
+  .col-md-6.form-group.offset-md-3.col-xs-12
     = form_with model: @user, local: true do |f|
       = render 'shared/error_messages', object: f.object
       = f.label :name
