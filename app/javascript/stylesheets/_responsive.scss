@@ -1,0 +1,40 @@
+
+/* PC向けデザイン　*/
+@media (min-width: 960px) {
+  .pc-none {
+    display: none;
+  }
+}
+
+/* スマホ向けデザイン */
+@media (max-width: 480px) {
+  .mobile-none {
+    display: none;
+  }
+
+  .menu-trigger {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    transform: translateX(0);
+    transition: transform .5s;
+  }
+  .menu-trigger.active {
+    transform: translateX(-250px);
+  }
+
+  .slide-menu {
+    opacity: 0.8;
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    right: 0%;
+    transform: translate(250px);
+    transition: all .5s;
+  }
+  .open {
+    transform: translateZ(0);
+  }
+}

@@ -53,8 +53,9 @@ has_many :followers, through: :passive_relationships,
     self.following.include?(other_user)
   end
 
+  include LikesHelper
   def already_liked?(object)
-    self.likes.exists?(likeable_id: object.id)
+    self.likes.exists?(sort_object(object))
   end
 
   #remember_tokenを発行して、データベースにハッシュ化されたremember_digestを保存
