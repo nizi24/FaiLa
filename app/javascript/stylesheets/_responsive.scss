@@ -16,6 +16,7 @@
     position: fixed;
     top: 30px;
     right: 30px;
+    z-index: 100;
     transform: translateX(0);
     transition: transform .5s;
   }
@@ -36,5 +37,28 @@
   }
   .open {
     transform: translateZ(0);
+  }
+
+  .slide-item {
+    height: 50px;
+    opacity: 1;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-bottom: 10px;
+    svg {
+      position: absolute;
+      left: 30px;
+    }
+    a, input {
+      font-size: 1.4em;
+      padding-top: 0;
+      position: absolute;
+      left: 90px;
+    }
+  }
+
+  input.slide-item {
+    @include reset-css-button;
   }
 }

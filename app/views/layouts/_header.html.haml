@@ -26,12 +26,21 @@
               %li.dropdown-item=               button_to 'ログアウト',   logout_path, method: :delete, class: 'fix-hover'
 
   %i.fas.fa-align-justify.fa-2x.menu-trigger.pc-none
-  %nav.slide-menu.bg-dark.header.pc-none.close
-    %h2 メニュー
-    %ul.navbar-nav.navbar-right
-      %li.nav-item=  link_to  '投稿一覧',       articles_path
-      %li.nav-item=  link_to  '投稿する',       new_article_path
-      %li.nav-item=  link_to   'プロフィール',  current_user,                 class: 'fix-hover'
-      %li.nav-item=  link_to   '設定',         '#',                           class: 'fix-hover'
-      %li.nav-item=  button_to 'ログアウト',    logout_path, method: :delete, class: 'fix-hover'
+  %nav.slide-menu.bg-dark.pc-none.close
+    .slide-item
+    .slide-item
+      %i.far.fa-address-card.fa-2x
+      = link_to   'プロフィール',  current_user,                 class: 'fix-hover slide-item'
+    .slide-item
+      %i.far.fa-edit.fa-2x
+      = link_to    '投稿する',     new_article_path,             class: 'slide-item'
+    .slide-item
+      %i.fas.fa-list-ul.fa-2x
+      = link_to  '投稿一覧',     articles_path,              class: 'slide-item'
+    .slide-item
+      %i.fas.fa-cog.fa-2x
+      = link_to   '設定',         '#',                           class: 'fix-hover slide-item'
+    .slide-item
+      %i.fas.fa-sign-out-alt.fa-2x
+      = button_to 'ログアウト',    logout_path, method: :delete, class: 'fix-hover slide-item'
   .overlay
