@@ -70,7 +70,36 @@
     @include reset-css-button;
   }
 
+  /* user#show */
+
+  h3.center {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  /* article#new */
+
+  #editor {
+    height: 800px !important;
+    display: block !important;
+  }
+
+  .form_content {
+    width: 100% !important;
+    height: 50% !important;
+  }
+
+  .preview {
+    width: 100% !important;
+    height: 50% !important;
+  }
+
   /* article_index */
+
+  h1.h1 {
+    font-size: 2.4em !important;
+  }
 
   .article-item {
     display: block !important;
@@ -79,9 +108,11 @@
     }
   }
 
-  .article-title {
-    font-size: 22px !important;
-    margin-bottom: 0 !important;
+  .article-item-body {
+    a.article-title {
+      font-size: 22px !important;
+      margin-bottom: 0 !important;
+    }
   }
 
   .article-item-meta {
@@ -110,7 +141,7 @@
     }
   }
 
-  .article{
+  .article, .preview{
     h1 {
       font-size: 1.6em !important;
       padding-bottom: 0.1em;
@@ -132,4 +163,6 @@
       font-size: 0.8em !important;
     }
   }
+
+
 }

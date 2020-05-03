@@ -4,7 +4,7 @@
   = form_with model: @article, local: true do |f|
     = render 'shared/error_messages', object: f.object
     = f.label :title
-    = f.text_field :title, class: 'form-control col-md-6'
+    = f.text_field :title, class: 'form-control col-12 col-md-6'
 
     #editor
       .form_content

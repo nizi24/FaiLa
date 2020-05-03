@@ -235,31 +235,6 @@ label#form-content {
   width: 50%;
   height: 100%;
   display: inline-block;
-  p {
-    line-height: 1.9;
-  }
-  h1 {
-    font-size: 1.8em;
-    // border-bottom: 1px solid #ddd;
-    padding-bottom: 0.1em;
-  }
-  h2 {
-    font-size: 1.6em;
-    // border-bottom: 1px solid #ddd;
-    padding-bottom: .1em;
-  }
-  h3 {
-    font-size: 1.4em;
-  }
-  h4 {
-    font-size: 1.2em;
-  }
-  h5 {
-    font-size: 1.0em;
-  }
-  h6 {
-    font-size: 0.8em;
-  }
 }
 
 span#preview {
@@ -327,7 +302,7 @@ span.by {
 }
 /* articles#show */
 
-.article{
+.article, .preview {
   p {
     line-height: 1.9;
   }
@@ -387,8 +362,11 @@ span.by {
 
 span.likes_total {
   color: #FF0066;
-  margin-bottom: 0;
   font-size: 1.4em;
+}
+
+.fa-heart.fa-lg {
+  margin-top: 5px;
 }
 
 .comment-form {
