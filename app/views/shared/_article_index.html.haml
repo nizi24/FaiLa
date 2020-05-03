@@ -1,18 +1,26 @@
 - @articles.each  do |article|
   .article-item
+
     .article-item-body
       = link_to article.title, article, class: 'article-title'
+
     .article-item-meta
       %span.by by
       = link_to article.user.name, article.user, class: 'article-author'
       %span.timestamp #{ time_ago_in_words(article.created_at)}前
+
     -if current_user == article.user
       =button_to '削除', article, method: :delete,
-        data: { confirm: '本当に削除しますか？' },
-        class: 'h6 form-inline'
+                  data: { confirm: '本当に削除しますか？' },
+                  class: 'h6 form-inline'
+
     .article-item-likes
-      %i.far.fa-heart.like-icon
-      %span.like-icon= article.likes_total
+      %i.far.fa-heart.like-icon.mobile-none
+      %span.like-icon.mobile-none= article.likes_total
+
+      /* スマホ向けデザイン */
+      %i.far.fa-heart.fa-sm.like-icon.mobile-only
+      %span.like-icon.mobile-likes= article.likes_total
 
 = will_paginate @articles,
   previous_label: '←  前', next_label: '次 →', inner_window: 1, outer_window: 0,

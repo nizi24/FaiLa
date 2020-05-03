@@ -1,9 +1,15 @@
 
-/* PC向けデザイン　*/
-@media (min-width: 960px) {
-  .pc-none {
+
+@media (min-width: 481px) {
+  .mobile-only {
     display: none;
   }
+  .article-header {
+    form.button_to {
+      display: none;
+    }
+  }
+
 }
 
 /* スマホ向けデザイン */
@@ -12,6 +18,7 @@
     display: none;
   }
 
+  /* ヘッダー*/
   .menu-trigger {
     position: fixed;
     top: 30px;
@@ -55,10 +62,74 @@
       padding-top: 0;
       position: absolute;
       left: 90px;
+      text-decoration: none;
     }
   }
 
   input.slide-item {
     @include reset-css-button;
+  }
+
+  /* article_index */
+
+  .article-item {
+    display: block !important;
+    form.button_to {
+      display: none;
+    }
+  }
+
+  .article-title {
+    font-size: 22px !important;
+    margin-bottom: 0 !important;
+  }
+
+  .article-item-meta {
+    display: inline-block;
+    font-size: 0.8em;
+  }
+
+  .article-item-likes {
+    display: inline-block !important;
+    span.mobile-likes {
+      font-size: 0.8em;
+    }
+  }
+
+/* articles#show */
+
+  .article-header {
+    span {
+      margin-right: 4px;
+    }
+    span,a {
+      margin-top: 10px;
+    }
+    form.button_to {
+      display: inline-block;
+    }
+  }
+
+  .article{
+    h1 {
+      font-size: 1.6em !important;
+      padding-bottom: 0.1em;
+    }
+    h2 {
+      font-size: 1.5em !important;
+      padding-bottom: .1em;
+    }
+    h3 {
+      font-size: 1.3em !important;
+    }
+    h4 {
+      font-size: 1.1em !important;
+    }
+    h5 {
+      font-size: 0.9em !important;
+    }
+    h6 {
+      font-size: 0.8em !important;
+    }
   }
 }

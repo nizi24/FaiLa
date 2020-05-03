@@ -5,7 +5,14 @@
         = @article.title
       %span.by by
       = link_to @article.user.name, @article.user, class: 'article-author'
+      
+      /* スマホ向けデザイン */
+      -if current_user == @article.user
+        =button_to '削除', @article, method: :delete,
+                    data: { confirm: '本当に削除しますか？' },
+                    class: 'h6 form-inline'
       %hr
+
     .article-content
       = markdown("#{@article.content}")
 

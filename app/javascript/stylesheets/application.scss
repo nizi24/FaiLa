@@ -183,6 +183,9 @@ input.h6 {
     text-align: center;
     color: #808080;
   }
+  span {
+    display: block;
+  }
   p {
     color: black;
     font-size: 1.4em;
@@ -329,16 +332,19 @@ span.by {
     line-height: 1.9;
   }
   h1 {
+    font-weight: bold;
     font-size: 1.8em;
     // border-bottom: 1px solid #ddd;
     padding-bottom: 0.1em;
   }
   h2 {
+    font-weight: bold;
     font-size: 1.6em;
     // border-bottom: 1px solid #ddd;
     padding-bottom: .1em;
   }
   h3 {
+    font-weight: bold;
     font-size: 1.4em;
   }
   h4 {

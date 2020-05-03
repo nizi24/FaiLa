@@ -4,15 +4,16 @@
       = link_to 'Failearn', root_path, id: "logo"
 
       %ul.navbar-nav.navbar-right
+
         -if !logged_in?
           %li.nav-item.fix-margin.mobile-none= link_to 'ヘルプ',  '#'
           %li.nav-item.fix-margin.mobile-none= link_to '概要',    '#'
           %li.nav-item.fix-margin=             link_to 'ログイン', login_path
           %li.nav-item.fix-margin=             link_to '新規登録', new_user_path
-        -else
 
-          %li.nav-item.fix-margin.mobile-none=             link_to '投稿一覧', articles_path
-          %li.nav-item.fix-margin.mobile-none=             link_to '投稿する', new_article_path
+        -else
+          %li.nav-item.fix-margin.mobile-none= link_to '投稿一覧', articles_path
+          %li.nav-item.fix-margin.mobile-none= link_to '投稿する', new_article_path
 
           %li.nav-item.dropdown.mobile-none
             %a#dropdown.nav-link.dropdown-toggle{ "aria-expanded": "false",
@@ -21,26 +22,28 @@
                                                   href: "#"} アカウント
             %ul.dropdown-menu{"aria-labelledby": "dropdown"}
 
-              %li.dropdown-item=               link_to   'プロフィール', current_user,                 class: 'fix-hover'
-              %li.dropdown-item=               link_to   '設定',        '#',                          class: 'fix-hover'
-              %li.dropdown-item=               button_to 'ログアウト',   logout_path, method: :delete, class: 'fix-hover'
+              %li.dropdown-item= link_to   'プロフィール', current_user,                 class: 'fix-hover'
+              %li.dropdown-item= link_to   '設定',        '#',                          class: 'fix-hover'
+              %li.dropdown-item= button_to 'ログアウト',   logout_path, method: :delete, class: 'fix-hover'
 
-  %i.fas.fa-align-justify.fa-2x.menu-trigger.pc-none
-  %nav.slide-menu.bg-dark.pc-none.close
-    .slide-item
-    .slide-item
-      %i.far.fa-address-card.fa-2x
-      = link_to   'プロフィール',  current_user,                 class: 'fix-hover slide-item'
-    .slide-item
-      %i.far.fa-edit.fa-2x
-      = link_to    '投稿する',     new_article_path,             class: 'slide-item'
-    .slide-item
-      %i.fas.fa-list-ul.fa-2x
-      = link_to  '投稿一覧',     articles_path,              class: 'slide-item'
-    .slide-item
-      %i.fas.fa-cog.fa-2x
-      = link_to   '設定',         '#',                           class: 'fix-hover slide-item'
-    .slide-item
-      %i.fas.fa-sign-out-alt.fa-2x
-      = button_to 'ログアウト',    logout_path, method: :delete, class: 'fix-hover slide-item'
-  .overlay
+  -# スマホ向け
+  -if logged_in?
+    %i.fas.fa-align-justify.fa-2x.menu-trigger.mobile-only
+    %nav.slide-menu.bg-dark.mobile-only.close
+      .slide-item
+      .slide-item
+        %i.far.fa-address-card.fa-2x
+        = link_to 'プロフィール',current_user, class: 'fix-hover slide-item'
+      .slide-item
+        %i.far.fa-edit.fa-2x
+        = link_to '投稿する', new_article_path, class: 'slide-item'
+      .slide-item
+        %i.fas.fa-list-ul.fa-2x
+        = link_to '投稿一覧', articles_path, class: 'slide-item'
+      .slide-item
+        %i.fas.fa-cog.fa-2x
+        = link_to '設定', '#', class: 'fix-hover slide-item'
+      .slide-item
+        %i.fas.fa-sign-out-alt.fa-2x
+        = button_to 'ログアウト', logout_path, method: :delete, class: 'fix-hover slide-item'
+    .overlay
