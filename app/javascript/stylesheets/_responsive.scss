@@ -12,13 +12,25 @@
 
 }
 
+/* タブレット向けデザイン */
+@media (max-width: 1024px) {
+  .post-modal {
+    top: 35% !important;
+    left: 30% !important;
+    width: 45% !important;
+    height: 15% !important;
+  }
+}
+
 /* スマホ向けデザイン */
 @media (max-width: 480px) {
+
   .mobile-none {
     display: none;
   }
 
   /* ヘッダー*/
+
   .menu-trigger {
     position: fixed;
     top: 30px;
@@ -27,6 +39,7 @@
     transform: translateX(0);
     transition: transform .5s;
   }
+
   .menu-trigger.active {
     transform: translateX(-250px);
   }
@@ -42,6 +55,7 @@
     transform: translate(250px);
     transition: all .5s;
   }
+
   .open {
     transform: translateZ(0);
   }
@@ -53,10 +67,12 @@
     text-align: center;
     padding: 10px 0;
     margin-bottom: 10px;
+
     svg {
       position: absolute;
       left: 30px;
     }
+
     a, input {
       font-size: 1.4em;
       padding-top: 0;
@@ -68,6 +84,11 @@
 
   input.slide-item {
     @include reset-css-button;
+  }
+
+  .post-modal {
+    left: 20% !important;
+    width: 60% !important;
   }
 
   /* user#show */
@@ -102,7 +123,6 @@
   }
 
   .article-item {
-    display: block !important;
     form.button_to {
       display: none;
     }
@@ -116,12 +136,10 @@
   }
 
   .article-item-meta {
-    display: inline-block;
     font-size: 0.8em;
   }
 
   .article-item-likes {
-    display: inline-block !important;
     span.mobile-likes {
       font-size: 0.8em;
     }
@@ -133,9 +151,11 @@
     span {
       margin-right: 4px;
     }
+
     span,a {
       margin-top: 10px;
     }
+
     form.button_to {
       display: inline-block;
     }

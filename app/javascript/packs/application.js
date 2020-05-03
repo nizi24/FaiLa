@@ -27,6 +27,6 @@ require("jquery")
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 require('header.js')
-
+require('postModal.js')
 
 console.log('Hello World from Webpacker')

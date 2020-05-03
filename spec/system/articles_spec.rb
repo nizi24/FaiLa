@@ -10,7 +10,7 @@ RSpec.describe "Articles", js: true, type: :system do
 
     it '作成に成功すること' do
       log_in_as user
-      click_link '投稿する'
+      click_link '投稿する', match: :first
 
       expect {
         fill_in 'article[title]', with: 'Test article'

@@ -1,3 +1,18 @@
+.modal-bg
+  .post-modal
+    %i.fas.fa-times.fa-2x.mobile-none
+    %i.fas.fa-times.mobile-only
+    .article-select
+      = button_to new_article_path, method: :get, class: 'button-css-none' do
+        %i.far.fa-edit.fa-4x.mobile-none
+        %i.far.fa-edit.fa-2x.mobile-only
+        %p.article-select 記事を書く
+    .micropost-select
+      = button_to new_article_path, method: :get, class: 'button-css-none' do
+        %i.far.fa-comment-dots.fa-4x.mobile-none
+        %i.far.fa-comment-dots.fa-2x.mobile-only
+        %p.article-select つぶやく
+
 .fixed-top
   %nav.navbar.navbar-expand.bg-info.text-secondary.header
     .container
@@ -13,7 +28,7 @@
 
         -else
           %li.nav-item.fix-margin.mobile-none= link_to '投稿一覧', articles_path
-          %li.nav-item.fix-margin.mobile-none= link_to '投稿する', new_article_path
+          %li.nav-item.fix-margin.mobile-none= link_to '投稿する', '#', class: 'post-modal-trigger'
 
           %li.nav-item.dropdown.mobile-none
             %a#dropdown.nav-link.dropdown-toggle{ "aria-expanded": "false",
@@ -26,6 +41,7 @@
               %li.dropdown-item= link_to   '設定',        '#',                          class: 'fix-hover'
               %li.dropdown-item= button_to 'ログアウト',   logout_path, method: :delete, class: 'fix-hover'
 
+
   -# スマホ向け
   -if logged_in?
     %i.fas.fa-align-justify.fa-2x.menu-trigger.mobile-only
@@ -36,7 +52,7 @@
         = link_to 'プロフィール',current_user, class: 'fix-hover slide-item'
       .slide-item
         %i.far.fa-edit.fa-2x
-        = link_to '投稿する', new_article_path, class: 'slide-item'
+        = link_to '投稿する', '#', class: 'slide-item post-modal-trigger'
       .slide-item
         %i.fas.fa-list-ul.fa-2x
         = link_to '投稿一覧', articles_path, class: 'slide-item'

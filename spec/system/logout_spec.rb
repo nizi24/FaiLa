@@ -12,7 +12,7 @@ RSpec.describe "Logouts", type: :system do
     expect(page).to have_content 'ログインに成功しました'
 
     click_link 'アカウント'
-    click_button 'ログアウト'
+    click_button 'ログアウト', match: :first
 
     expect(current_path).to eq login_path
     expect(page).to have_css 'div.alert-info'

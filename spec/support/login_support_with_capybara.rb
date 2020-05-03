@@ -10,7 +10,7 @@ module LoginSupportWithCapybara
 
   def log_out_as(user)
     click_link 'アカウント'
-    click_button 'ログアウト'
+    click_button 'ログアウト', match: :first
   end
 end
 
