@@ -47,7 +47,7 @@ let(:article) { FactoryBot.create(:article) }
 
         log_in user
         expect {
-          delete comment_path(comment), params: { id: comment.id }
+          delete comment_path(comment)
         }.to change(user.comments, :count).by(-1)
       end
     end
@@ -59,8 +59,8 @@ let(:article) { FactoryBot.create(:article) }
 
         log_in user
         expect {
-          delete comment_path(comment), params: { id: comment.id }
-        }.to_not change(Comment, :count)
+          delete comment_path(comment)
+        }.to_not change(other_user.comments, :count)
       end
 
       it 'ダッシュボードにリダイレクトすること' do
@@ -68,8 +68,7 @@ let(:article) { FactoryBot.create(:article) }
         comment = FactoryBot.create(:comment, user: other_user)
 
         log_in user
-
-        delete comment_path(comment), params: { id: comment.id }
+        delete comment_path(comment)
         expect(response).to redirect_to root_url
       end
     end
@@ -79,14 +78,14 @@ let(:article) { FactoryBot.create(:article) }
         comment = FactoryBot.create(:comment, user: user)
 
         expect {
-          delete comment_path(comment), params: { id: comment.id }
+          delete comment_path(comment)
         }.to_not change(user.comments, :count)
       end
 
       it 'ログインページにリダイレクトすること' do
         comment = FactoryBot.create(:comment, user: user)
 
-        delete comment_path(comment), params: { id: comment.id }
+        delete comment_path(comment)
         expect(response).to redirect_to login_url
       end
     end

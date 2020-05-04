@@ -25,6 +25,7 @@ has_secure_password
 
 has_one_attached :icon
 has_many :articles
+has_many :microposts
 has_many :comments
 has_many :likes
 has_many :active_relationships,   class_name:   'Relationship',
@@ -53,9 +54,22 @@ has_many :followers, through: :passive_relationships,
     self.following.include?(other_user)
   end
 
-  include LikesHelper
   def already_liked?(object)
-    self.likes.exists?(sort_object(object))
+    self.likes.exists?(User.sort_object(object))
+  end
+
+  def self.sort_object(object)
+    object_type = { likeable_id: object.id }
+    case object
+    when Article
+      object_type.merge({ likeable_type: 'Article' })
+    when Comment
+      object_type.merge({ likeable_type: 'Comment'})
+    when Micropost
+      object_type.merge({ likeable_type: 'Micropost'})
+    else
+      object_type = nil
+    end
   end
 
   #remember_tokenを発行して、データベースにハッシュ化されたremember_digestを保存

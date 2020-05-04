@@ -1,11 +1,11 @@
-.article-likes.mobile-none
+.article-likes
   - if logged_in? && current_user.already_liked?(@article)
-    = button_to article_like_path(@article), method: :delete, class: 'like-icon' do
+    = button_to @article_like, method: :delete, params: { likeable_type: 'Article', likeable_id: @article.id } , class: 'like-icon' do
       %i.fas.fa-heart.fa-2x.mobile-none
       %i.fas.fa-heart.fa-lg.mobile-only
     %span.likes_total= @article.likes_total
   - else
-    = button_to article_likes_path(@article), class: 'like-icon' do
+    = button_to @article.likes.build, params: { likeable_type: 'Article', likeable_id: @article.id } , class: 'like-icon' do
       %i.far.fa-heart.fa-2x.mobile-none
       %i.far.fa-heart.fa-lg.mobile-only
-    %span.likes_total= @article.likes_total
+    %span.likes_total= @article.likes_total - 1

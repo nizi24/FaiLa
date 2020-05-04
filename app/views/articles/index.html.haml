@@ -1,4 +1,10 @@
 %h1.text-secondary.h1 投稿一覧
 .row
   .col-md-8.offset-md-2
-    = render 'shared/article_index'
+    .posted-select
+      .col-6.posted-select-articles.btn-light 記事
+      .col-6.posted-select-microposts.btn-light  つぶやき
+    .user-articles
+      = render 'articles/article_index'
+    .user-microposts
+      = render 'microposts/microposts_index'

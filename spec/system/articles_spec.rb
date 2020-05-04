@@ -11,11 +11,14 @@ RSpec.describe "Articles", js: true, type: :system do
     it '作成に成功すること' do
       log_in_as user
       click_link '投稿する', match: :first
+      click_button '記事を書く'
 
       expect {
         fill_in 'article[title]', with: 'Test article'
         fill_in 'article[content]', with: 'This is a test article'
-        click_button '投稿'
+        within '.form-group' do
+          click_button '投稿'
+        end
       }.to change(user.articles, :count).by(1)
 
       expect(page).to have_content 'Test article'
@@ -45,6 +48,7 @@ RSpec.describe "Articles", js: true, type: :system do
     it '自分の記事は削除できること' do
       log_in_as user
       post_article 'Test article'
+      click_link 'Test article'
 
       expect {
         expect(page).to have_button '削除'

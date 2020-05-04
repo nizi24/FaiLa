@@ -4,13 +4,18 @@ class ArticlesController < ApplicationController
 
   def index
     @articles = Article.all.order(created_at: :desc).paginate(page: params[:page])
+    @microposts = Micropost.all.order(created_at: :desc).paginate(page: params[:page])
+    @micropost_like = Like.find_by(user_id: current_user.id, likeable_type: 'Micropost') if logged_in?
   end
 
   def show
     @article = Article.find(params[:id])
-    @comment = current_user.comments.build(article_id: params[:id]) if logged_in?
     @comments = @article.comments
-    @like = current_user.likes.build if logged_in?
+    if logged_in?
+      @comment = current_user.comments.build(article_id: params[:id])
+      @article_like = Like.find_by(user_id: current_user.id, likeable_type: 'Article', likeable_id: params[:id])
+      @comment_like = Like.find_by(user_id: current_user.id, likeable_type: 'Comment')
+    end
   end
 
   def new

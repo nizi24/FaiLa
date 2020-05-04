@@ -8,6 +8,10 @@ FactoryBot.define do
 
     trait :comment_like do
       association :likeable, factory: :comment
-    end    
+    end
+
+    trait :micropost_like do
+      association :likeable, factory: :micropost
+    end
   end
 end

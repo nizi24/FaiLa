@@ -2,21 +2,36 @@
 
 @media (min-width: 481px) {
   .mobile-only {
-    display: none;
+    display: none !important;
   }
   .article-header {
     form.button_to {
       display: none;
     }
   }
-
 }
 
 /* タブレット向けデザイン */
 @media (max-width: 1024px) {
   .post-modal {
     top: 35% !important;
-    left: 30% !important;
+    left: 35% !important;
+    width: 30% !important;
+    height: 12% !important;
+    .post-modal-select {
+      left: 20% !important;
+    }
+  }
+
+  .micropost-modal {
+    left: 10% !important;
+    width: 80% !important;
+  }
+
+}
+
+@media (max-width: 896px) {
+  .post-modal {
     width: 45% !important;
     height: 15% !important;
   }
@@ -26,7 +41,7 @@
 @media (max-width: 480px) {
 
   .mobile-none {
-    display: none;
+    display: none !important;
   }
 
   /* ヘッダー*/
@@ -89,6 +104,18 @@
   .post-modal {
     left: 20% !important;
     width: 60% !important;
+    .post-modal-select {
+      left: 10% !important;
+    }
+  }
+
+  .micropost-modal {
+    left: 10% !important;
+    width: 80% !important;
+    height: 60% !important;
+    form {
+      height: 70% !important;
+    }
   }
 
   /* user#show */

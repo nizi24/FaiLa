@@ -9,13 +9,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :articles do
-    resources :likes, only: [:create, :destroy]
-  end
+  resources :articles
 
-  resources :comments, only: [:create, :destroy] do
-    resources :likes, only: [:create, :destroy]
-  end
+  resources :likes, only: [:create, :destroy]
+
+  resources :comments, only: [:create, :destroy] 
+
+  resources :microposts
 
   resources :relationships, only: [:create, :destroy]
 end

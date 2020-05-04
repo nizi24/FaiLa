@@ -1,6 +1,6 @@
 import 'bootstrap';
 import '../stylesheets/application';
-import '@fortawesome/fontawesome-free/js/all'
+import '@fortawesome/fontawesome-free/js/all';
 // import Rails from '@rails/ujs';
 //
 // Rails.start();
@@ -28,5 +28,7 @@ require("jquery")
 // const imagePath = (name) => images(name, true)
 require('header.js')
 require('postModal.js')
+require('micropostModal.js')
+require('postedSelect.js')
 
 console.log('Hello World from Webpacker')

@@ -46,7 +46,7 @@ let(:user) { FactoryBot.create(:user) }
 
         log_in user
         expect{
-          delete article_path(article), params: { id: article.id }
+          delete article_path(article)
         }.to change(user.articles, :count).by(-1)
       end
     end
@@ -58,7 +58,7 @@ let(:user) { FactoryBot.create(:user) }
 
         log_in user
         expect{
-          delete article_path(article), params: { id: article.id }
+          delete article_path(article)
         }.to_not change(Article, :count)
       end
     end
@@ -76,13 +76,13 @@ let(:user) { FactoryBot.create(:user) }
       it '記事を削除できないこと' do
         article = FactoryBot.create(:article, user: user)
         expect{
-          delete article_path(article), params: { id: article.id }
+          delete article_path(article)
         }.to_not change(Article, :count)
       end
 
       it 'ログインページにリダイレクトすること' do
         article = FactoryBot.create(:article, user: user)
-        delete article_path(article), params: { id: article.id }
+        delete article_path(article)
         expect(response).to redirect_to login_url
       end
     end

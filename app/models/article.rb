@@ -5,4 +5,5 @@ class Article < ApplicationRecord
   validates :content, presence: true, length: { minimum: 20 }
   belongs_to :user
   has_many :comments
+
 end

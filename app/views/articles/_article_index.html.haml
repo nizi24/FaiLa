@@ -1,0 +1,34 @@
+- @articles.each  do |article|
+  .article-item
+
+    .article-author-icon
+      - if article.user.icon.attached?
+        = image_tag micropost.user.icon, size: '50x50', class: 'user-icon mobile-none'
+        = image_tag micropost.user.icon, size: '30x30', class: 'user-icon mobile-only'
+      - else
+        = image_tag 'default_icon.jpeg', size: '50x50', class: 'user-icon mobile-none'
+        = image_tag 'default_icon.jpeg', size: '30x30', class: 'user-icon mobile-only'
+
+    .article-item-main
+      .article-item-body
+        = link_to article.title, article, class: 'article-title'
+
+
+      .article-item-sub
+        .article-item-meta
+          %span.by by
+          = link_to article.user.name, article.user, class: 'article-author'
+          %span.timestamp #{ time_ago_in_words(article.created_at)}前
+
+        .article-item-likes
+          %i.far.fa-heart.like-icon.mobile-none
+          %span.like-icon.mobile-none= article.likes_total
+
+          /* スマホ向けデザイン */
+          %i.far.fa-heart.fa-sm.like-icon.mobile-only
+          %span.like-icon.mobile-likes.mobile-only= article.likes_total
+
+= will_paginate @articles,
+  previous_label: '←  前', next_label: '次 →', inner_window: 1, outer_window: 0,
+  renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer,
+  class: 'paginate'

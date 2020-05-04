@@ -1,11 +1,11 @@
 $(function() {
 
   $('.post-modal-trigger').on('click', function() {
-    $('.modal-bg').fadeIn();
+    $('#post-modal-bg').fadeIn();
   });
 
   $('.fa-times').on('click', function() {
-    $('.modal-bg').fadeOut();
+    $('#post-modal-bg').fadeOut();
   });
 
 });

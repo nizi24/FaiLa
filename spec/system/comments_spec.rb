@@ -18,7 +18,9 @@ RSpec.describe "Comments", type: :system do
 
       expect {
         fill_in 'comment[content]', with: ''
-        click_button '投稿'
+        within '.comment-form' do
+          click_button '投稿'
+        end
         expect(find('#article_id', visible: false).value).to eq "#{article.id}"
       }.to_not change(user.comments, :count)
 
@@ -27,7 +29,9 @@ RSpec.describe "Comments", type: :system do
 
       expect {
         fill_in 'comment[content]', with: 'Interesting.'
-        click_button '投稿'
+        within '.comment-form' do
+          click_button '投稿'
+        end
       }.to change(user.comments, :count).by(1)
 
       expect(page).to have_content 'コメントしました'

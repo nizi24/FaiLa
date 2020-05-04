@@ -1,17 +1,30 @@
-.modal-bg
-  .post-modal
-    %i.fas.fa-times.fa-2x.mobile-none
-    %i.fas.fa-times.mobile-only
-    .article-select
-      = button_to new_article_path, method: :get, class: 'button-css-none' do
-        %i.far.fa-edit.fa-4x.mobile-none
-        %i.far.fa-edit.fa-2x.mobile-only
-        %p.article-select 記事を書く
-    .micropost-select
-      = button_to new_article_path, method: :get, class: 'button-css-none' do
-        %i.far.fa-comment-dots.fa-4x.mobile-none
-        %i.far.fa-comment-dots.fa-2x.mobile-only
-        %p.article-select つぶやく
+-if logged_in?
+  .modal-bg#post-modal-bg
+    .post-modal
+      %i.fas.fa-times.fa-2x.mobile-none
+      %i.fas.fa-times.mobile-only
+      .post-modal-select
+        .article-select
+          = button_to new_article_path, method: :get, class: 'button-css-none' do
+            %i.far.fa-edit.fa-4x.mobile-none
+            %i.far.fa-edit.fa-2x.mobile-only
+            %p.article-select 記事を書く
+        .micropost-select
+          %i.far.fa-comment-dots.fa-4x.mobile-none
+          %i.far.fa-comment-dots.fa-2x.mobile-only
+          %p.micropost-select つぶやく
+
+  .modal-bg#micropost-modal-bg
+    .micropost-modal
+      .micropost-modal-header
+        %h2　つぶやく
+        %i.fas.fa-times.fa-2x.mobile-none
+        %i.fas.fa-times.mobile-only
+      = form_with model: current_user.microposts.build, local: true do |f|
+
+        = f.text_area :content, class: 'micropost-textarea'
+        =f.submit '投稿', class: 'btn btn-info micropost-submit'
+
 
 .fixed-top
   %nav.navbar.navbar-expand.bg-info.text-secondary.header

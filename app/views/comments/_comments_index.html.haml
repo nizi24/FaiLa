@@ -1,6 +1,7 @@
 .comment-item-wrapper
   - @comments.each do |comment|
     .comment-item
+      = hidden_field_tag :comment_id, comment.id
       .comment-item-header
         =link_to comment.user.name, comment.user, class: 'comment-user-name'
         -if current_user == comment.user
@@ -13,10 +14,10 @@
         %span.timestamp #{ time_ago_in_words(comment.created_at)}前
         .comment-likes
           - if logged_in? && current_user.already_liked?(comment)
-            = button_to comment_like_path(comment), method: :delete, class: 'like-icon comment-like' do
+            = button_to @comment_like, method: :delete, params: { likeable_type: 'Comment', likeable_id: comment.id } , class: 'like-icon comment-like' do
               %i.fas.fa-heart.fa-lg
             %span.likes_total= comment.likes_total
           - else
-            = button_to comment_likes_path(comment), class: 'like-icon comment-like' do
+            = button_to comment.likes.build, params: { likeable_type: 'Comment', likeable_id: comment.id } , class: 'like-icon comment-like' do
               %i.far.fa-heart.fa-lg
-            %span.likes_total= comment.likes_total
+            %span.likes_total= comment.likes_total - 1

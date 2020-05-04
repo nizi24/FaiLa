@@ -57,5 +57,30 @@ RSpec.describe "Likes", type: :system do
       }.to change(comment.likes, :count).by(-1)
       expect(page).to have_content '0'
     end
+
+    it 'つぶやきにいいねできること' do
+      micropost = FactoryBot.create(:micropost)
+
+      log_in_as user
+      visit articles_path
+      find('.posted-select-microposts').click
+      expect(page).to have_content '0'
+
+      expect{
+        expect {
+          expect(page).to have_css '.far'
+          find(:css, '.like-icon').click
+        }.to change(user.likes, :count).by(1)
+      }.to change(micropost.likes, :count).by(1)
+      expect(page).to have_content '1'
+
+      expect {
+        expect {
+          expect(page).to have_css '.fas'
+          find(:css, '.like-icon').click
+        }.to change(user.likes, :count).by(-1)
+      }.to change(micropost.likes, :count).by(-1)
+      expect(page).to have_content '0'
+    end
   end
 end
