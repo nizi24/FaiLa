@@ -30,5 +30,6 @@ require('header.js')
 require('postModal.js')
 require('micropostModal.js')
 require('postedSelect.js')
+require('micropostShow')
 
 console.log('Hello World from Webpacker')

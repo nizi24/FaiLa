@@ -6,6 +6,16 @@ RSpec.describe "Microposts", type: :request do
   let(:other_user) { FactoryBot.create(:user) }
   let(:micropost) { FactoryBot.create(:micropost, user: user) }
 
+
+  describe '#show' do
+    context 'ゲストとして' do
+      it '200レスポンスを返すこと' do
+        get micropost_path(micropost)
+        expect(response).to have_http_status(200)
+      end
+    end
+  end
+
   describe '#create' do
     context 'ログインしたユーザーの時' do
       it 'つぶやきを投稿できること' do

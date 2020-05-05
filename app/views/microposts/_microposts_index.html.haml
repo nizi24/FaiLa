@@ -10,12 +10,19 @@
         = image_tag 'default_icon.jpeg', size: '30x30', class: 'user-icon mobile-only'
 
     .micropost-main
-      .micropost-meta
-        = link_to micropost.user.name, micropost.user
-        %span.timestamp #{ time_ago_in_words(micropost.created_at)}前
+      .micropost-header
+        .micropost-header-left
+          = link_to micropost.user.name, micropost.user
+          %span.timestamp #{ time_ago_in_words(micropost.created_at)}前
+        .micropost-header-right
+          -if current_user == micropost.user
+            =button_to '削除', micropost, method: :delete,
+                        data: { confirm: '本当に削除しますか？' },
+                        class: 'h6 form-inline'
+
 
       .micropost-body
-        = micropost.content
+        = link_to micropost.content, micropost
 
       .micropost-item-footer
         .micropost-item-likes
@@ -26,7 +33,7 @@
                                         class: 'like-icon' do
               %i.fas.fa-heart.fa-lg.mobile-none
               %i.fas.fa-heart.mobile-only
-            %span.likes_total= micropost.likes_total
+            %span.likes_total.mobile-likes= micropost.likes_total
 
           - else
             = button_to micropost.likes.build, params: { likeable_type: 'Micropost',
@@ -34,4 +41,4 @@
                                                class: 'like-icon' do
               %i.far.fa-heart.fa-lg.mobile-none
               %i.far.fa-heart.mobile-only
-            %span.likes_total= micropost.likes_total - 1
+            %span.likes_total.mobile-likes= micropost.likes_total - 1

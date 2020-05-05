@@ -1,0 +1,42 @@
+.micropost-detail.col-md-8.offset-md-2
+  .micropost-header
+
+    .micropost-header-left
+      - if @micropost.user.icon.attached?
+        = image_tag @micropost.user.icon, size: '50x50', class: 'user-icon mobile-none'
+        = image_tag @micropost.user.icon, size: '30x30', class: 'user-icon mobile-only'
+      - else
+        = image_tag 'default_icon.jpeg', size: '50x50', class: 'user-icon mobile-none'
+        = image_tag 'default_icon.jpeg', size: '30x30', class: 'user-icon mobile-only'
+
+      = link_to @micropost.user.name, @micropost.user
+      %span.timestamp #{ time_ago_in_words(@micropost.created_at)}前
+
+
+    .micropost-header-right
+      -if current_user == @micropost.user
+        =button_to '削除', @micropost, method: :delete,
+                    data: { confirm: '本当に削除しますか？' },
+                    class: 'h6 form-inline'
+
+    .micropost-body
+      = @micropost.content
+
+    .micropost-item-footer
+      .micropost-item-likes
+        - if logged_in? && current_user.already_liked?(@micropost)
+          = button_to @micropost_like, method: :delete,
+                                      params: { likeable_type: 'Micropost',
+                                                likeable_id: @micropost.id } ,
+                                      class: 'like-icon' do
+            %i.fas.fa-heart.fa-lg.mobile-none
+            %i.fas.fa-heart.mobile-only
+          %span.likes_total.mobile-likes= @micropost.likes_total
+
+        - else
+          = button_to @micropost.likes.build, params: { likeable_type: 'Micropost',
+                                                       likeable_id: @micropost.id } ,
+                                             class: 'like-icon' do
+            %i.far.fa-heart.fa-lg.mobile-none
+            %i.far.fa-heart.mobile-only
+          %span.likes_total.mobile-likes= @micropost.likes_total - 1

@@ -126,6 +126,21 @@
     border-bottom: 1px solid #ddd;
   }
 
+  /* micropost#show */
+  .micropost-detail {
+    .micropost-header-left {
+      a {
+        font-size: 1.0em !important;
+      }
+    }
+    input {
+      font-size: 0.8em !important;
+    }
+    .micropost-body {
+      font-size: 0.8em;
+    }
+  }
+
   /* article#new */
 
   #editor {
@@ -141,6 +156,13 @@
   .preview {
     width: 100% !important;
     height: 50% !important;
+  }
+
+  .micropost-item-likes {
+    span.mobile-likes {
+      font-size: 1.0em;
+      margin-top: 2px;
+    }
   }
 
   /* article_index */

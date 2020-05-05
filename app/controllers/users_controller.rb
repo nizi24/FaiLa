@@ -4,13 +4,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @articles = Article.where(user_id: params[:id])
-                       .order(created_at: :desc)
-                       .paginate(page: params[:page], per_page: 20)
-    @microposts = Micropost.where(user_id: params[:id])
-                           .order(created_at: :desc)
-                           .paginate(page: params[:page], per_page: 20)
-    @micropost_like = Like.find_by(user_id: current_user.id, likeable_type: 'Micropost') if logged_in?
+    @articles = Article.user_have_all(params[:id], params[:page])
+    @microposts = Micropost.user_have_all(params[:id], params[:page])
+    @micropost_like = Like.micropost_like(current_user) if logged_in?
   end
 
   def new

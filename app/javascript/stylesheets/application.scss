@@ -320,6 +320,8 @@ h3.center {
   display: none;
 }
 
+/* micropost#index */
+
 .micropost-item{
   width: 100%;
   border-bottom: 1px solid #e8e8e8;
@@ -338,8 +340,15 @@ h3.center {
   vertical-align: top;
 }
 
-.micropost-meta {
+.micropost-header {
+  justify-content: space-between;
   flex-wrap: wrap;
+  .micropost-header-left, .micropost-header-right {
+    display: inline-block;
+  }
+  .micropost-header-right {
+    float: right;
+  }
   a {
     color: black;
     text-decoration: none;
@@ -358,6 +367,13 @@ h3.center {
   }
 }
 
+.micropost-body {
+  a {
+    color: black;
+    text-decoration: none;
+  }
+}
+
 /* followers */
 
 .followers-item {
@@ -367,6 +383,26 @@ h3.center {
   border-bottom: 1px solid #e8e8e8;
   padding: 16px;
   text-align: center;
+}
+
+/* micropost#show */
+
+.micropost-detail {
+  .micropost-header-left {
+    img.user-icon {
+      display: inline-block;
+    }
+    a, span {
+      vertical-align: middle;
+    }
+    a {
+      font-size: 1.4em;
+      margin-left: 10px;
+    }
+  }
+  .micropost-body{
+    margin-top: 10px;
+  }
 }
 
 /* articles#new */
@@ -594,6 +630,13 @@ span.likes_total {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+.comment-item-header-left {
+  img {
+    display: inline-block;
+    margin-right: 10px;
+  }
 }
 
 .comment-user-name {

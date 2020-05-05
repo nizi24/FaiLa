@@ -3,9 +3,9 @@ class ArticlesController < ApplicationController
   before_action :correct_user, only: [:destroy]
 
   def index
-    @articles = Article.all.order(created_at: :desc).paginate(page: params[:page])
-    @microposts = Micropost.all.order(created_at: :desc).paginate(page: params[:page])
-    @micropost_like = Like.find_by(user_id: current_user.id, likeable_type: 'Micropost') if logged_in?
+    @articles = Article.all_page(params[:page])
+    @microposts = Micropost.all_page(params[:page])
+    @micropost_like = Like.micropost_like(current_user) if logged_in?
   end
 
   def show
@@ -13,8 +13,8 @@ class ArticlesController < ApplicationController
     @comments = @article.comments
     if logged_in?
       @comment = current_user.comments.build(article_id: params[:id])
-      @article_like = Like.find_by(user_id: current_user.id, likeable_type: 'Article', likeable_id: params[:id])
-      @comment_like = Like.find_by(user_id: current_user.id, likeable_type: 'Comment')
+      @article_like = Like.article_like(current_user)
+      @comment_like = Like.comment_like(current_user)
     end
   end
 
