@@ -1,10 +1,18 @@
 class User < ApplicationRecord
 before_save { self.email = self.email.downcase }
+before_save { self.unique_name = self.unique_name.downcase }
 attr_accessor :remember_token
 
 validates :name,
           presence:   true,
           length:     { maximum: 50 }
+
+VALID_UNIQUE_NAME_REGEX = /\A[a-z0-9_]+\z/i
+validates :unique_name,
+          presence:   true,
+          length:     { in: 5..15 },
+          uniqueness:   { case_sensitive: false },
+          format:     { with: VALID_UNIQUE_NAME_REGEX, message: '半角英数とアンダースコアのみ使用できます' }
 
 VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 validates :email,

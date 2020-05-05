@@ -8,6 +8,7 @@ ja:
       user:
         id: ID
         name: 名前
+        unique_name: ユーザー名
         email: メールアドレス
         password: パスワード
         password_confirmation: 確認

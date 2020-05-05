@@ -13,6 +13,24 @@ RSpec.describe User, type: :model do
 
   it { is_expected.to validate_length_of(:name) }
 
+  it { is_expected.to validate_presence_of(:unique_name) }
+
+  it { is_expected.to validate_length_of(:unique_name) }
+
+  it 'ユーザー名はユニークであること' do
+    FactoryBot.create(:user, unique_name: 'abc123_')
+    user = FactoryBot.build(:user, unique_name: 'ABC123_')
+    expect(user).to_not be_valid
+  end
+
+  it '無効なユーザー名では登録に成功しないこと' do
+    invalid_unique_name = %w[123-~@ 123:;{} 123?<>]
+    invalid_unique_name.each do |name|
+      user = FactoryBot.build(:user, unique_name: name)
+      expect(user).to_not be_valid
+    end
+  end
+
   it { is_expected.to validate_presence_of(:email) }
 
   it { is_expected.to validate_length_of(:email) }

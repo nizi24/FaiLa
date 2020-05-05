@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_03_120104) do
+ActiveRecord::Schema.define(version: 2020_05_05_044355) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -90,7 +90,9 @@ ActiveRecord::Schema.define(version: 2020_05_03_120104) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.string "remember_digest"
+    t.string "unique_name"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["unique_name"], name: "index_users_on_unique_name", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
