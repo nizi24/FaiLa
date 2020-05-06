@@ -50,6 +50,14 @@ has_many :following, through: :active_relationships,
 has_many :followers, through: :passive_relationships,
                      source:  :follower
 
+has_many :send_replies,    class_name:  'Reply',
+                           foreign_key: 'sended_user_id',
+                           dependent:   :destroy
+
+has_many :receive_replies, class_name:  'Reply',
+                           foreign_key: 'received_user_id',
+                           dependent:   :destroy
+
   def follow(other_user)
     self.following << other_user
   end

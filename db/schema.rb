@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_05_044355) do
+ActiveRecord::Schema.define(version: 2020_05_06_033101) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 2020_05_05_044355) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "likeable_type"
     t.integer "likeable_id"
-    t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable_type_and_likeable_id", unique: true
+    t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable_type_and_likeable_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
@@ -81,6 +81,20 @@ ActiveRecord::Schema.define(version: 2020_05_05_044355) do
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
+  end
+
+  create_table "replies", force: :cascade do |t|
+    t.integer "sended_user_id"
+    t.integer "received_user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "sended_micropost_id"
+    t.integer "received_micropost_id"
+    t.index "\"microposts\"", name: "index_replies_on_microposts"
+    t.index ["received_micropost_id"], name: "index_replies_on_received_micropost_id"
+    t.index ["received_user_id"], name: "index_replies_on_received_user_id"
+    t.index ["sended_micropost_id"], name: "index_replies_on_sended_micropost_id"
+    t.index ["sended_user_id"], name: "index_replies_on_sended_user_id"
   end
 
   create_table "users", force: :cascade do |t|

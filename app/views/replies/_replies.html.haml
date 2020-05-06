@@ -1,0 +1,17 @@
+- if micropost.receive_replies.count == 1
+
+  - micropost.received_replies.each do |micropost|
+    .border
+      = render partial: 'microposts/micropost_detail', locals: { micropost: micropost }
+
+    - if micropost.received_replies
+      = render partial: 'replies/replies', locals: { micropost: micropost }
+
+
+- elsif micropost.receive_replies.count > 1
+
+  .border
+  = render 'microposts/micropost_detail', micropost: max_likes_reply(micropost)
+
+  - if micropost.received_replies
+    = render 'replies/replies', micropost: max_likes_reply(micropost)

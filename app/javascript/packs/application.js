@@ -31,5 +31,9 @@ require('postModal.js')
 require('micropostModal.js')
 require('postedSelect.js')
 require('micropostShow')
+require('replyForm')
+require('replyHide')
+
+
 
 console.log('Hello World from Webpacker')

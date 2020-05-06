@@ -2,6 +2,17 @@ class Micropost < ApplicationRecord
   include Likeable
 
   belongs_to :user
+  has_many :send_replies,    class_name:  'Reply',
+                             foreign_key: 'sended_micropost_id'
+
+  has_many :receive_replies, class_name:  'Reply',
+                             foreign_key: 'received_micropost_id'
+
+  has_many :sended_replies,   through: :send_replies,
+                              source:  :received_micropost
+
+  has_many :received_replies, through: :receive_replies,
+                              source:  :sended_micropost
 
   validates :content, presence: true,
                       length: { maximum: 280 }

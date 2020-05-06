@@ -361,9 +361,22 @@ h3.center {
 
 .micropost-item-footer {
   width: 100%;
-  div.micropost-item-likes {
+  margin-top: 10px;
+
+  .micropost-item-likes {
     display: flex;
     float: right;
+  }
+
+  .micropost-item-reply {
+    display: inline-block;
+    svg {
+      text-align: center;
+    }
+    p {
+      font-size: 0.6em;
+      margin: 0 auto;
+    }
   }
 }
 
@@ -388,6 +401,9 @@ h3.center {
 /* micropost#show */
 
 .micropost-detail {
+  margin-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
   .micropost-header-left {
     img.user-icon {
       display: inline-block;
@@ -403,6 +419,57 @@ h3.center {
   .micropost-body{
     margin-top: 10px;
   }
+}
+
+.received-replies {
+  .micropost-detail {
+    border-bottom: initial;
+  }
+}
+
+.replies {
+  .border {
+    width: 5px;
+    height: 30px;
+    background-color: #e8e8e8;
+  }
+  .micropost-detail {
+    border-bottom: initial;
+  }
+}
+
+.sended-replies-hide, .received-replies-hide {
+  text-align: center;
+  height: 30px;
+}
+
+.received-replies-hide {
+  margin-top: 10px;
+}
+
+.sended-replies, .received-replies {
+  display: none;
+}
+
+.reply-form {
+  border: 5px solid #e8e8e8;
+  padding: 25px;
+  border-radius: 14px;
+  margin: 10px 0;
+  display: none;
+}
+
+.reply-form-header {
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+}
+
+.reply-textarea {
+  resize: none;
+  margin-top: 7px;
+  width: 100%;
+  height: 100px;
 }
 
 /* articles#new */
