@@ -4,7 +4,11 @@
     .posted-select
       .col-6.posted-select-articles.btn-light 記事
       .col-6.posted-select-microposts.btn-light  つぶやき
+
+    -# 記事一覧
     .user-articles
       = render 'articles/article_index'
+      
+    -# つぶやき一覧
     .user-microposts
       = render 'microposts/microposts_index'

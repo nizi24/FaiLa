@@ -58,6 +58,12 @@ has_many :receive_replies, class_name:  'Reply',
                            foreign_key: 'received_user_id',
                            dependent:   :destroy
 
+has_many :sended_replies,   through: :send_replies,
+                           source:  :received_user
+
+has_many :received_replies, through: :receive_replies,
+                           source:  :sended_user
+
   def follow(other_user)
     self.following << other_user
   end

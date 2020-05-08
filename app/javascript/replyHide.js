@@ -7,7 +7,7 @@ $(function() {
 
     if ($span.hasClass('hide')) {
       $('.sended-replies').slideDown();
-      $span.text('返信を隠す');
+      $span.text('返信先を隠す');
       $span.removeClass('hide');
     } else {
       $('.sended-replies').slideUp();

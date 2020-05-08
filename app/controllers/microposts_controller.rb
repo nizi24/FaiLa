@@ -1,8 +1,8 @@
 class MicropostsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
   before_action :correct_user,   only: [:destroy]
-  # before_action :correct_reply,  only: [:create]
-
+  
+  USER_UNIQUE_NAME_REGEX = /@([a-z0-9_]{5,15})/i
 
   def show
     @micropost = Micropost.find(params[:id])
@@ -14,9 +14,16 @@ class MicropostsController < ApplicationController
   def create
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
+
+      #つぶやきにリプライする場合
       if params[:received_user_id]
-        create_reply
+        create_reply_to_micropost
+
+      #ユーザーにリプライする場合
+      elsif @unique_names = @micropost.content.scan(USER_UNIQUE_NAME_REGEX)
+        create_reply_to_user
       end
+
       flash[:success] = '投稿しました'
       redirect_back(fallback_location: root_path)
     else
@@ -45,21 +52,27 @@ class MicropostsController < ApplicationController
       end
     end
 
-    # def correct_reply
-    #   reply = Reply.find_by(received_user_id: params[:received_user_id])
-    #   if reply.nil? && params[:received_user_id]
-    #     create_reply
-    #   else
-    #     true
-    #   end
-    # end
-
-    def create_reply
+    def create_reply_to_micropost
       @reply = current_user.send_replies.build(received_user_id: params[:received_user_id],
-                                               sended_micropost_id: @micropost.id)
-      if params[:received_micropost_id]
-        @reply.received_micropost_id = params[:received_micropost_id]
-      end
+                                               sended_micropost_id: @micropost.id,
+                                               received_micropost_id: params[:received_micropost_id])
       @reply.save
+    end
+
+    def create_reply_to_user
+      #マッチしたユーザー名からユーザーを捕捉して配列にする
+      users = []
+      @unique_names.each do |unique_name|
+        if user = User.find_by(unique_name: unique_name[0].downcase)
+          users << user
+        end
+      end
+
+      #リプライを作成
+      users.each do |user|
+        @reply = current_user.send_replies.build(received_user_id: user.id,
+                                                 sended_micropost_id: @micropost.id)
+        @reply.save
+      end
     end
 end

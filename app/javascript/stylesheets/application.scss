@@ -357,6 +357,9 @@ h3.center {
 
 .micropost-body {
   margin-top: 5px;
+  .user-unique-name {
+    color: blue;
+  }
 }
 
 .micropost-item-footer {
@@ -419,23 +422,31 @@ h3.center {
   .micropost-body{
     margin-top: 10px;
   }
+  .user-unique-name {
+    color: blue;
+  }
 }
 
-.received-replies {
+.received-replies, .sended-replies {
   .micropost-detail {
     border-bottom: initial;
   }
+}
+
+.border {
+  width: 5px;
+  height: 30px;
+  background-color: #e8e8e8;
 }
 
 .replies {
-  .border {
-    width: 5px;
-    height: 30px;
-    background-color: #e8e8e8;
-  }
   .micropost-detail {
     border-bottom: initial;
   }
+}
+
+.received-replies, .sended-replies {
+  display: none;
 }
 
 .sended-replies-hide, .received-replies-hide {
@@ -447,9 +458,7 @@ h3.center {
   margin-top: 10px;
 }
 
-.sended-replies, .received-replies {
-  display: none;
-}
+
 
 .reply-form {
   border: 5px solid #e8e8e8;

@@ -8,9 +8,8 @@ RSpec.describe "Likes", type: :request do
   let(:micropost) { FactoryBot.create(:micropost) }
 
   let(:other_user) { FactoryBot.create(:user) }
-  let(:article_like) { FactoryBot.create(:like, :article_like, user: other_user, likeable: article) }
-  let(:comment_like) { FactoryBot.create(:like, :comment_like, user: other_user, likeable: comment) }
-  # let(:micropost_like) { FactoryBot.create(:like, :micropost_like, user: other_user, likeable: micropost) }}
+  let(:article_like) { FactoryBot.create(:article_like, user: other_user, likeable: article) }
+  let(:comment_like) { FactoryBot.create(:comment_like, user: other_user, likeable: comment) }
 
 
   describe '#create' do

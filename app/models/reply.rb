@@ -1,7 +1,7 @@
 class Reply < ApplicationRecord
 
   belongs_to :sended_micropost,   class_name: 'Micropost'
-  belongs_to :received_micropost, class_name: 'Micropost'
+  belongs_to :received_micropost, class_name: 'Micropost', optional: true
 
   belongs_to :sended_user,   class_name: 'User'
   belongs_to :received_user, class_name: 'User'

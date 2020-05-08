@@ -1,13 +1,16 @@
-- if @received_replies
+- if @received_replies.length > 0
 
   .received-replies-hide.btn-light
     %span.hide #{ @received_replies.length }件の返信を表示する
 
   .received-replies
     - @received_replies.each do |micropost|
+
       %hr
       = render 'microposts/micropost_detail', micropost: micropost
 
-      - if micropost.received_replies
+      - if micropost.received_replies.length > 0
         .replies
           = render 'replies/replies', micropost: micropost
+
+- else

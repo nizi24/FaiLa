@@ -1,0 +1,7 @@
+- if micropost.sended_replies.length > 0
+  - micropost.sended_replies.each do |micropost|
+
+    = render 'replies/ancestor_replies', micropost: micropost
+
+    = render 'microposts/micropost_detail', micropost: micropost
+    .border

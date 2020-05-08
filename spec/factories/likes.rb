@@ -1,17 +1,17 @@
 FactoryBot.define do
-  factory :like do
+
+  factory :article_like, class: 'Like' do
     association :user
+    association :likeable, factory: :article
+  end
 
-    trait :article_like do
-      association :likeable, factory: :article
-    end
+  factory :comment_like, class: 'Like' do
+    association :user
+    association :likeable, factory: :comment
+  end
 
-    trait :comment_like do
-      association :likeable, factory: :comment
-    end
-
-    trait :micropost_like do
-      association :likeable, factory: :micropost
-    end
+  factory :micropost_like, class: 'Like' do
+    association :user
+    association :likeable, factory: :micropost
   end
 end

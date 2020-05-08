@@ -3,10 +3,12 @@ class Micropost < ApplicationRecord
 
   belongs_to :user
   has_many :send_replies,    class_name:  'Reply',
-                             foreign_key: 'sended_micropost_id'
+                             foreign_key: 'sended_micropost_id',
+                             dependent:    :destroy
 
   has_many :receive_replies, class_name:  'Reply',
-                             foreign_key: 'received_micropost_id'
+                             foreign_key: 'received_micropost_id',
+                             dependent:    :destroy
 
   has_many :sended_replies,   through: :send_replies,
                               source:  :received_micropost

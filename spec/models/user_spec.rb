@@ -4,8 +4,8 @@ RSpec.describe User, type: :model do
   subject(:user) { FactoryBot.create(:user) }
   let(:article) { FactoryBot.create(:article) }
   let(:comment) { FactoryBot.create(:comment) }
-  let(:article_like) { FactoryBot.create(:like, :article_like, user: user, likeable: article)}
-  let(:comment_like) { FactoryBot.create(:like, :comment_like, user: user, likeable: comment)}
+  let(:article_like) { FactoryBot.create(:article_like, user: user, likeable: article)}
+  let(:comment_like) { FactoryBot.create(:comment_like, user: user, likeable: comment)}
 
   it { is_expected.to be_valid }
 

@@ -20,13 +20,22 @@
                     class: 'h6 form-inline'
 
     .micropost-body
-      = micropost.content
+      -# ユーザー名が含まれている場合、プロフィールへのリンクにする
+      - if scan_user_name(micropost) #micropost_helper
+        - @received_users.each do |user|
+          = link_to '@' + user.unique_name, user, class: 'user-unique-name'
+        = micropost.content
+
+      - else
+        = micropost.content
 
     .micropost-item-footer
       .micropost-item-reply
         %i.fas.fa-reply.fa-lg
         %span.reply #{micropost.received_replies.count}
+
       .micropost-item-likes
+        -# いいねしていた場合
         - if logged_in? && current_user.already_liked?(micropost)
           = button_to @like, method: :delete,
                                       params: { likeable_type: 'Micropost',
@@ -36,6 +45,7 @@
             %i.fas.fa-heart.mobile-only
           %span.likes_total.mobile-likes= micropost.likes_total
 
+          -# まだいいねしていない場合
         - else
           = button_to micropost.likes.build, params: { likeable_type: 'Micropost',
                                                        likeable_id: micropost.id } ,

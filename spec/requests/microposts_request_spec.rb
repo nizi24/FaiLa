@@ -24,6 +24,24 @@ RSpec.describe "Microposts", type: :request do
           post microposts_path, params: { micropost: { content: 'Test'} }
         }.to change(user.microposts, :count).by(1)
       end
+
+      it 'つぶやきにリプライできること' do
+        log_in user
+        expect {
+          post microposts_path, params: { micropost: { content: 'Test'},
+                                          received_micropost_id: micropost.id,
+                                          received_user_id:      micropost.user.id}
+        }.to change(micropost.received_replies, :count).by(1)
+      end
+    end
+
+    it 'ユーザーにリプライできること' do
+      other_user = FactoryBot.create(:user, unique_name: 'test1')
+
+      log_in user
+      expect {
+        post microposts_path, params: { micropost: { content: '@test1 hello'} }
+      }.to change(other_user.received_replies, :count).by(1)
     end
 
     context 'ゲストとして' do
@@ -45,6 +63,16 @@ RSpec.describe "Microposts", type: :request do
         expect {
           delete micropost_path(micropost)
         }.to change(user.microposts, :count).by(-1)
+      end
+
+      it 'つぶやきを削除したとき、同時にリプライの関係性も削除されること' do
+        log_in user
+        post microposts_path, params: { micropost: { content: 'Test'},
+                                        received_micropost_id: micropost.id,
+                                        received_user_id:      micropost.user.id}
+        expect {
+          delete micropost_path(micropost)
+        }.to change(Reply, :count).by(-1)
       end
     end
 
