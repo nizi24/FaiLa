@@ -62,8 +62,7 @@ RSpec.describe "Likes", type: :system do
       micropost = FactoryBot.create(:micropost)
 
       log_in_as user
-      visit articles_path
-      find('.posted-select-microposts').click
+      visit micropost_path(micropost)
       expect(page).to have_content '0'
 
       expect{

@@ -10,4 +10,8 @@ $(function() {
     $replyForm.slideUp();
   });
 
+  $('.micropost-item-reply').on('click', function() {
+    var $replyForm = $(this).parents('.micropost-item').find('.reply-form');
+    $replyForm.slideDown();
+  });
 });
