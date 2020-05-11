@@ -1,11 +1,15 @@
 $(function() {
 
   $('.micropost-item-reply').on('click', function() {
-    return false
+    return false;
   });
 
-  $('.reply-form').on('click', function() {
-    return false
+  $('.reply-form').on('click', function(e) {
+    if ($(e.target).is('input')) {
+      return true;
+    } else {
+      return false;
+    }
   });
 
   $('.micropost-item').on('click', function() {

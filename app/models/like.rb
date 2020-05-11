@@ -7,4 +7,8 @@ class Like < ApplicationRecord
   scope :micropost_like, ->(user) { find_by(user_id: user.id, likeable_type: 'Micropost') }
   scope :article_like,   ->(user) { find_by(user_id: user.id, likeable_type: 'Article') }
   scope :comment_like,   ->(user) { find_by(user_id: user.id, likeable_type: 'Comment') }
+
+  scope :articles,   -> { where(likeable_type: 'Article') }
+  scope :microposts, -> { where(likeable_type: 'Micropost')}
+  scope :rank,       -> { group(:likeable_id, :likeable_type).order('count(likeable_id) desc').limit(30).pluck(:likeable_id) }
 end

@@ -10,6 +10,7 @@
         = image_tag 'default_icon.jpeg', size: '30x30', class: 'user-icon mobile-only'
 
       = link_to micropost.user.name, micropost.user
+      = link_to "@#{micropost.user.unique_name}", micropost.user, class: 'user-unique-name'
       %span.timestamp #{ time_ago_in_words(micropost.created_at)}前
 
 

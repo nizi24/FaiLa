@@ -1,6 +1,7 @@
 
 5.times do |n|
   User.create!(
+    unique_name: "test#{n + 1}",
     email: "test#{n + 1}@example.com",
     name: "example user#{n + 1}",
     password: 'password'
@@ -12,7 +13,7 @@ users = User.all
   users.each do |user|
     user.articles.create!(
       title: "テスト投稿#{n + 1}",
-      content: '# テスト  **太字**  ***強調太字***  ---  ~~打消し~~'
+      content: '# テスト   **太字**   ***強調太字***    ~~打消し~~   ---'
       )
   end
 end

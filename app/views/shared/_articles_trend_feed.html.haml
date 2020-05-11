@@ -1,0 +1,30 @@
+.article-trend
+  -# 最近(3日間)
+  .trend-recent.feed-left
+    - if @article_trend_recent.any?
+      - @article_trend_recent.each do |article|
+
+        = render 'articles/article_index', article: article
+
+    - else
+      %p まだ投稿がありません。
+
+  -# 週間
+  .trend-week.feed-center
+    - if @article_trend_week.any?
+      - @article_trend_week.each do |article|
+
+        = render 'articles/article_index', article: article
+
+    - else
+      %p まだ投稿がありません。
+
+  -# 月間
+  .trend-month.feed-right
+    - if @article_trend_month.any?
+      - @article_trend_month.each do |article|
+
+        = render 'articles/article_index', article: article
+
+    - else
+      %p まだ投稿がありません。

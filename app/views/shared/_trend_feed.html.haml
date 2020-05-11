@@ -1,0 +1,12 @@
+.posted-select
+  .col-6.btn-success.select-article  記事
+  .col-6.btn-light.select-micropost　つぶやき
+
+.posted-select.hold-selected
+  .col-4.select-left.btn-success 最近
+  .col-4.select-center.btn-light 週間
+  .col-4.select-right.btn-light 月間
+
+= render 'shared/articles_trend_feed'
+
+= render 'shared/microposts_trend_feed'

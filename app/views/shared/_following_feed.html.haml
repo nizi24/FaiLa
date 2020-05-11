@@ -1,0 +1,36 @@
+- if @following_feed_items.any?
+
+  .posted-select.hold-selected
+    .col-4.select-left.btn-success すべて
+    .col-4.select-center.btn-light 記事
+    .col-4.select-right.btn-light  つぶやき
+
+  .feed-all.feed-left
+    - @following_feed_items.each do |item|
+      - case item
+
+        - when Micropost
+          = render 'microposts/microposts_index', micropost: item
+
+        - when Article
+          = render 'articles/article_index', article: item
+
+  - if @following_feed_articles.any?
+    .feed-articles.feed-center
+      - @following_feed_articles.each do |article|
+
+        = render 'articles/article_index', article: article
+
+  - if @following_feed_microposts.any?
+    .feed-microposts.feed-right
+      - @following_feed_microposts.each do |micropost|
+
+        = render 'microposts/microposts_index', micropost: micropost
+
+
+- elsif current_user.following.any?
+  %p まだ投稿がありません。
+
+- else
+  %p まだフォローしている人がいません。
+  %p 面白い投稿をしている人を見かけたら、フォローしてみましょう。

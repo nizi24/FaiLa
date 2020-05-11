@@ -2,13 +2,7 @@
 .row
   .col-md-8.offset-md-2
     .posted-select
-      .col-6.posted-select-articles.btn-light 記事
-      .col-6.posted-select-microposts.btn-light  つぶやき
+      .col-6.select-left.btn-success 記事
+      .col-6.select-right.btn-light  つぶやき
 
-    -# 記事一覧
-    .user-articles
-      = render 'articles/article_index'
-      
-    -# つぶやき一覧
-    .user-microposts
-      = render 'microposts/microposts_index'
+    = render 'shared/articles_and_microposts_index'

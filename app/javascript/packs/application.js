@@ -33,7 +33,7 @@ require('postedSelect.js')
 require('micropostShow')
 require('replyForm')
 require('replyHide')
-
+require('feedSelect')
 
 
 console.log('Hello World from Webpacker')

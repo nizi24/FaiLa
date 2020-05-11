@@ -190,6 +190,51 @@ a.signup {
   margin-top: 30px;
 }
 
+.side-menu {
+  height: 400px;
+  .btn {
+    svg {
+      float: left;
+      margin-top: 5px;
+    }
+    margin-top: 20px;
+    width: 90%;
+  }
+}
+
+.feed {
+  h2 {
+    font-size: 2.4em;
+  }
+  .posted-select-all {
+    border-right: 1px solid #17a2b8;
+  }
+  .feed-all {
+  }
+  .feed-microposts {
+    display: none;
+  }
+  .feed-articles {
+    display: none;
+  }
+}
+
+.timeline, .trend {
+  p {
+    text-align: center;
+  }
+}
+
+.trend {
+  display: none;
+  .micropost-trend {
+    display: none;
+  }
+}
+
+.feed-center, .feed-right {
+  display: none;
+}
 /* footer */
 
 footer {
@@ -255,13 +300,17 @@ a#edit-user-info {
 
 h3#user-name {
   text-align: center;
-  padding-bottom: 10px;
+}
+
+p.user-unique-name {
+  text-align: center;
   border-bottom: 1px solid #ddd;
+  color: #808080;
 }
 
 .user-info {
   padding: 20px;
-  height: 300px;
+  height: 320px;
 }
 
 input.h6 {
@@ -322,7 +371,7 @@ h3.center {
 
 /* micropost#index */
 
-.micropost-item{
+.micropost-item {
   width: 100%;
   border-bottom: 1px solid #e8e8e8;
   padding: 16px;
@@ -345,6 +394,13 @@ h3.center {
   flex-wrap: wrap;
   .micropost-header-left, .micropost-header-right {
     display: inline-block;
+  }
+  .micropost-header-left {
+    .user-unique-name {
+      font-size: 0.8em;
+      color: #808080;
+      margin-right: 10px;
+    }
   }
   .micropost-header-right {
     float: right;
@@ -418,7 +474,14 @@ h3.center {
       font-size: 1.4em;
       margin-left: 10px;
     }
+    .user-unique-name {
+      color:  #808080;
+      font-size: 1.0em;
+      margin-left: 2px;
+      margin-right: 10px;
+    }
   }
+
   .micropost-body{
     margin-top: 10px;
   }
@@ -523,6 +586,7 @@ span#preview {
   overflow-y: scroll;
   overflow-wrap: break-word;
   margin-top: 7px;
+  background-color: white;
 }
 
 .btn-info {

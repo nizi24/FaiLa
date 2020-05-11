@@ -1,3 +1,28 @@
-.center.home
-  %h1.h1 Failearnへようこそ!
-  = link_to 'Sign Up Now!!', new_user_path, class: 'btn btn-primary active signup'
+- if logged_in?
+
+  .feed.row
+    .col-md-2.side-menu.bg-light
+      .btn.btn-info.timeline-select
+        %i.fas.fa-history
+        %span タイムライン
+
+      .btn.btn-outline-info.trend-select
+        %i.fas.fa-poll-h
+        %span トレンド
+
+    .offset-md-1.col-md-8
+
+      .timeline
+        %h2.h2.center タイムライン
+
+        = render 'shared/following_feed'
+
+      .trend
+        %h2.h2.center トレンド
+
+        = render 'shared/trend_feed'
+
+- else
+  .home.center
+    %h1.h1 Failearnへようこそ!
+    = link_to 'Sign Up Now!!', new_user_path, class: 'btn btn-primary active signup'

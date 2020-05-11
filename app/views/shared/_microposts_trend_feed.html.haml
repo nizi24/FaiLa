@@ -1,0 +1,30 @@
+.micropost-trend
+  -# 最近(3日間)
+  .trend-recent.feed-left
+    - if @micropost_trend_recent.any?
+      - @micropost_trend_recent.each do |micropost|
+
+        = render 'microposts/microposts_index', micropost: micropost
+
+    - else
+      %p まだ投稿がありません。
+
+  -# 週間
+  .trend-week.feed-center
+    - if @micropost_trend_week.any?
+      - @micropost_trend_week.each do |micropost|
+
+        = render 'microposts/microposts_index', micropost: micropost
+
+    - else
+      %p まだ投稿がありません。
+
+  -# 月間
+  .trend-month.feed-right
+    - if @micropost_trend_month.any?
+      - @micropost_trend_month.each do |micropost|
+
+        = render 'microposts/microposts_index', micropost: micropost
+
+    - else
+      %p まだ投稿がありません。

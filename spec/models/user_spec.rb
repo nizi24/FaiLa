@@ -117,4 +117,44 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe 'following_microposts_feed' do
+    it 'フォローしているユーザーのつぶやきを最新順で返すこと' do
+      other_user =     FactoryBot.create(:user)
+      following_user = FactoryBot.create(:user)
+      other_user_micropost =         FactoryBot.create(:micropost,                   user: other_user)
+      following_user_micropost_new = FactoryBot.create(:micropost, :yesterday,       user: following_user)
+      following_user_micropost_old = FactoryBot.create(:micropost, :one_week_before, user: following_user)
+      user.follow(following_user)
+
+      expect(user.following_microposts_feed).to eq [following_user_micropost_new, following_user_micropost_old]
+    end
+  end
+
+  describe 'following_articles_feed' do
+    it 'フォローしているユーザーの記事を最新順で返すこと' do
+      other_user =     FactoryBot.create(:user)
+      following_user = FactoryBot.create(:user)
+      other_user_article =         FactoryBot.create(:article,                   user: other_user)
+      following_user_article_new = FactoryBot.create(:article, :yesterday,       user: following_user)
+      following_user_article_old = FactoryBot.create(:article, :one_week_before, user: following_user)
+      user.follow(following_user)
+
+      expect(user.following_articles_feed).to eq [following_user_article_new, following_user_article_old]
+    end
+  end
+
+  describe 'following_feed' do
+    it 'フォローしているユーザーのつぶやきと記事を最新順で返すこと' do
+      following_user = FactoryBot.create(:user)
+      micropost_yesterday =        FactoryBot.create(:micropost, :yesterday,         user: following_user)
+      article_three_days_before =  FactoryBot.create(:article,   :three_days_before, user: following_user)
+      micropost_one_week_before =  FactoryBot.create(:micropost, :one_week_before,   user: following_user)
+      article_one_month_before =   FactoryBot.create(:article,   :one_month_before,  user: following_user)
+      user.follow(following_user)
+
+      expect(user.following_feed).to eq [micropost_yesterday, article_three_days_before,
+                                         micropost_one_week_before, article_one_month_before]
+    end
+  end
 end

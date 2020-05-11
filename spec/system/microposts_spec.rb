@@ -21,9 +21,9 @@ RSpec.describe "Microposts", type: :system do
     expect(page).to have_content '投稿しました'
 
     visit user_path(user)
-    find('.posted-select-microposts').click
+    find('.select-right').click
     expect(page).to have_content 'Test now.'
     expect(page).to have_content user.name
-    
+
   end
 end

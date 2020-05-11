@@ -64,6 +64,25 @@ has_many :sended_replies,   through: :send_replies,
 has_many :received_replies, through: :receive_replies,
                            source:  :sended_user
 
+  def following_feed
+    following_feed_items = following_microposts_feed + following_articles_feed
+    following_feed_items.sort_by { |item|
+      item.created_at
+    }.reverse!
+  end
+
+  def following_microposts_feed
+    following_ids = "SELECT followed_id FROM relationships
+                     WHERE follower_id = :user_id"
+    Micropost.where("user_id IN (#{following_ids})", user_id: id).newest
+  end
+
+  def following_articles_feed
+    following_ids = "SELECT followed_id FROM relationships
+                     WHERE follower_id = :user_id"
+    Article.where("user_id IN (#{following_ids})", user_id: id).newest
+  end
+
   def follow(other_user)
     self.following << other_user
   end

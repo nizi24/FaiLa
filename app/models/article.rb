@@ -12,4 +12,10 @@ class Article < ApplicationRecord
   scope :user_have_all, -> (params, page, per = 20) { user_have(params).newest.pages(page, per) }
   scope :all_page,      -> (page, per = 30)         { all.newest.pages(page) }
 
+  def self.rank(time)
+    Article.find(Like.articles.rank).select do |article|
+      time.ago.beginning_of_day < article.created_at
+    end
+  end
+
 end

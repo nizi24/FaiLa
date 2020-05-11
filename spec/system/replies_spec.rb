@@ -28,7 +28,7 @@ RSpec.describe "Replies", type: :system do
   it 'ユーザーにリプライできること' do
     other_user1 = FactoryBot.create(:user, unique_name: 'test1')
     other_user2 = FactoryBot.create(:user, unique_name: 'test2')
-    
+
     log_in_as user
     click_link '投稿する', match: :first
     find('div.micropost-select').click
@@ -41,7 +41,7 @@ RSpec.describe "Replies", type: :system do
     }.to change(Reply, :count).by(2)
 
     visit articles_path
-    find('.posted-select-microposts').click
+    find('.select-right').click
     expect(page).to have_link '@test1'
     expect(page).to have_link '@test2'
 

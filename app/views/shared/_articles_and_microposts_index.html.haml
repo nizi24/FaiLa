@@ -1,0 +1,26 @@
+-# 記事一覧
+.user-articles.feed-left
+  - if @articles.any?
+    - @articles.each  do |article|
+      = render 'articles/article_index', article: article
+
+    = will_paginate @articles,
+    previous_label: '←  前', next_label: '次 →', inner_window: 1, outer_window: 0,
+    renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer,
+    class: 'paginate'
+
+  - else
+    %p.center まだ投稿がありません。
+
+-# つぶやき一覧
+.user-microposts.feed-right
+  - if @microposts.any?
+    - @microposts.each do |micropost|
+      = render 'microposts/microposts_index', micropost: micropost
+    = will_paginate @microposts,
+    previous_label: '←  前', next_label: '次 →', inner_window: 1, outer_window: 0,
+    renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer,
+    class: 'paginate'
+
+  - else
+    %p.center まだ投稿がありません。

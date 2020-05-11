@@ -9,7 +9,7 @@ RSpec.describe RepliesHelper, type: :helper do
 
     it '最もいいねの多いリプライを返すこと' do
       micropost = FactoryBot.create(:micropost, user: other_user)
-      have_one_likes_reply   = FactoryBot.create(:micropost, :have_one_likes,   user: user)
+      have_one_likes_reply   = FactoryBot.create(:micropost, :have_one_like,   user: user)
       have_three_likes_reply = FactoryBot.create(:micropost, :have_three_likes, user: user)
       have_five_likes_reply  = FactoryBot.create(:micropost, :have_five_likes,  user: user)
 

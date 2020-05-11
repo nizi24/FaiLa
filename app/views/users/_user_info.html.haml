@@ -5,6 +5,7 @@
     = image_tag 'default_icon.jpeg', size: '80x80', class: 'user-icon'
 
   %h3#user-name= @user.name
+  %p.user-unique-name= "@#{@user.unique_name}"
 
   - if identification
     =link_to 'ユーザー情報を編集する', edit_user_path(@user),
