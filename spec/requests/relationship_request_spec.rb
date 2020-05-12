@@ -14,6 +14,13 @@ RSpec.describe "Relationships", type: :request do
           post relationships_path, params: { followed_id: other_user.id}
         }.to change(other_user.followers, :count).by(1)
       end
+
+      it 'フォローされたとき通知が送信されること' do
+        log_in user
+        expect {
+          post relationships_path, params: { followed_id: other_user.id}
+        }.to change(other_user.notices, :count).by(1)
+      end
     end
 
     context 'ゲストとして' do

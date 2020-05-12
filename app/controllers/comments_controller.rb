@@ -3,10 +3,11 @@ before_action :logged_in_user, only: [:create, :destroy]
 before_action :correct_user, only: [:destroy]
 
   def create
-    article = Article.find(params[:comment][:article_id])
-    @comment = article.comments.build(comment_params)
+    @article = Article.find(params[:comment][:article_id])
+    @comment = @article.comments.build(comment_params)
     @comment.user_id = current_user.id
     if @comment.save
+      create_notice
       flash[:success] = 'コメントしました'
       redirect_back(fallback_location: root_path)
     else
@@ -36,5 +37,15 @@ private
       redirect_to root_url
     end
   end
-  
+
+  def create_notice
+    if @article.user != @comment.user
+      @notice = Notification.new(received_user_id: @article.user.id,
+                                 action_user_id: @comment.user.id,
+                                 message: "@#{@comment.user.unique_name}さんがあなたの記事にコメントしました",
+                                 link: "/articles/#{@article.id}")
+      @notice.save
+    end
+  end
+
 end

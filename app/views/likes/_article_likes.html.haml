@@ -3,6 +3,7 @@
     = button_to @article_like, method: :delete,
                                params: { likeable_type: 'Article',
                                          likeable_id: @article.id } ,
+                               remote: true,
                                class: 'like-icon' do
       %i.fas.fa-heart.fa-2x.mobile-none
       %i.fas.fa-heart.fa-lg.mobile-only
@@ -10,7 +11,9 @@
 
   - else
     = button_to @article.likes.build, params: { likeable_type: 'Article',
-                                                likeable_id: @article.id } ,
+                                                likeable_id: @article.id,
+                                                user_id: @article.user.id },
+                                      remote: true,
                                       class: 'like-icon' do
       %i.far.fa-heart.fa-2x.mobile-none
       %i.far.fa-heart.fa-lg.mobile-only

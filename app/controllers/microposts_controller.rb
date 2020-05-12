@@ -68,6 +68,7 @@ class MicropostsController < ApplicationController
           @reply = current_user.send_replies.build(received_user_id: user.id,
                                                    sended_micropost_id: @micropost.id)
           @reply.save
+          create_notice
         end
       end
       # 返信先のつぶやきが存在するとき
@@ -81,8 +82,19 @@ class MicropostsController < ApplicationController
                                                sended_micropost_id: @micropost.id,
                                                received_micropost_id: params[:received_micropost_id])
       @reply.save
+      create_notice
       # リプライ先のユーザー名をcontentに追加
       user = User.find(params[:received_user_id])
       @micropost.update(content: "@#{user.unique_name} #{@micropost.content}")
+    end
+
+    def create_notice
+      if @reply.received_user != current_user
+        @notice = Notification.new(received_user_id: @reply.received_user_id,
+                                   action_user_id: current_user.id,
+                                   message: "#{@micropost.content}",
+                                   link: "/microposts/#{@micropost.id}")
+        @notice.save
+      end
     end
 end

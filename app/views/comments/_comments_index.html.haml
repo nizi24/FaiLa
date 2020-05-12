@@ -29,13 +29,16 @@
             = button_to @comment_like, method: :delete,
                                        params: { likeable_type: 'Comment',
                                                  likeable_id: comment.id } ,
+                                       remote: true,
                                        class: 'like-icon comment-like' do
               %i.fas.fa-heart.fa-lg
             %span.likes_total= comment.likes_total
 
           - else
             = button_to comment.likes.build, params: { likeable_type: 'Comment',
-                                                       likeable_id: comment.id } ,
+                                                       likeable_id: comment.id,
+                                                       user_id: comment.user.id },
+                                             remote: true,
                                              class: 'like-icon comment-like' do
               %i.far.fa-heart.fa-lg
             %span.likes_total= comment.likes_total - 1

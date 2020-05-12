@@ -24,6 +24,5 @@ RSpec.describe "Microposts", type: :system do
     find('.select-right').click
     expect(page).to have_content 'Test now.'
     expect(page).to have_content user.name
-
   end
 end

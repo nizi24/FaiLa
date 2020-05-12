@@ -36,6 +36,8 @@ has_many :articles
 has_many :microposts
 has_many :comments
 has_many :likes
+
+# Relationship
 has_many :active_relationships,   class_name:   'Relationship',
                                   foreign_key:  'follower_id',
                                   dependent:    :destroy
@@ -50,6 +52,7 @@ has_many :following, through: :active_relationships,
 has_many :followers, through: :passive_relationships,
                      source:  :follower
 
+# Reply
 has_many :send_replies,    class_name:  'Reply',
                            foreign_key: 'sended_user_id',
                            dependent:   :destroy
@@ -59,10 +62,19 @@ has_many :receive_replies, class_name:  'Reply',
                            dependent:   :destroy
 
 has_many :sended_replies,   through: :send_replies,
-                           source:  :received_micropost
+                            source:  :received_micropost
 
 has_many :received_replies, through: :receive_replies,
-                           source:  :sended_micropost
+                            source:  :sended_micropost
+
+# Notification
+has_many :action,   class_name:  'Notification',
+                    foreign_key: 'action_user_id',
+                    dependent:   :destroy
+
+has_many :notices,  class_name:  'Notification',
+                    foreign_key: 'received_user_id',
+                    dependent:   :destroy
 
   def following_feed
     following_feed_items = following_microposts_feed + following_articles_feed + self.received_replies

@@ -61,6 +61,56 @@ p {
 
 /* header */
 
+.fa-bell {
+  margin-right: 10px;
+}
+.notice-field {
+  display: none;
+}
+
+.notice-field.open {
+  display: block;
+  position: absolute;
+  right: 360px;
+  z-index: 1000;
+  width: 320px;
+  height: 480px;
+  background-color: #fff;
+  padding: 16px 0;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  box-shadow: 0 0 8px 0 rgba(0,0,0,0.15);
+
+  .notice-field-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #333;
+    font-size: 1.0em;
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .notice-items {
+    padding: 10px;
+  }
+
+  .notice-item {
+    display: flex;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e8e8e8;
+    .notice-action-user-icon {
+      padding-top: 10px;
+    }
+    .notice-message {
+      padding-left: 10px;
+    }
+  }
+}
+
+
+
 .modal-bg {
   position: fixed;
   top: 0;

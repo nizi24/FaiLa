@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Comments", type: :request do
 let(:user) { FactoryBot.create(:user) }
+let(:other_user) { FactoryBot.create(:user) }
 let(:article) { FactoryBot.create(:article) }
 
   describe '#create' do
@@ -13,6 +14,24 @@ let(:article) { FactoryBot.create(:article) }
           expect {
             post comments_path, params: { comment: { content: 'Interesting.', article_id: article.id} }
           }.to change(user.comments, :count).by(1)
+        end
+
+        it '記事のユーザーに通知が送信されること' do
+          article = FactoryBot.create(:article, user: other_user)
+
+          log_in user
+          expect {
+            post comments_path, params: { comment: { content: 'Interesting.', article_id: article.id} }
+          }.to change(other_user.notices, :count).by(1)
+        end
+
+        it '自分の記事に自分でコメントしても通知は送信されないこと' do
+          article = FactoryBot.create(:article, user: user)
+
+          log_in user
+          expect {
+            post comments_path, params: { comment: { content: 'Interesting.', article_id: article.id} }
+          }.to_not change(user.notices, :count)
         end
 
       context '無効な情報の時'

@@ -44,6 +44,7 @@
           = button_to @micropost_like, method: :delete,
                                       params: { likeable_type: 'Micropost',
                                                 likeable_id: micropost.id } ,
+                                      remote: true,
                                       class: 'like-icon' do
             %i.fas.fa-heart.fa-lg.mobile-none
             %i.fas.fa-heart.mobile-only
@@ -52,7 +53,9 @@
           -# まだいいねしていない場合
         - else
           = button_to micropost.likes.build, params: { likeable_type: 'Micropost',
-                                                       likeable_id: micropost.id } ,
+                                                       likeable_id: micropost.id,
+                                                       user_id: micropost.user.id },
+                                             remote: true,
                                              class: 'like-icon' do
             %i.far.fa-heart.fa-lg.mobile-none
             %i.far.fa-heart.mobile-only

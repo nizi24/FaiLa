@@ -34,6 +34,7 @@ require('micropostShow')
 require('replyForm')
 require('replyHide')
 require('feedSelect')
+require('noticeField')
 
 
 console.log('Hello World from Webpacker')

@@ -16,8 +16,8 @@ RSpec.describe "Edits", type: :system do
 
     click_link 'ユーザー情報を編集する'
 
-    expect(page).to have_field 'user[name]', 'Foo'
-    expect(page).to have_field 'user[email]', 'tester@example.com'
+    expect(page).to have_field 'user[name]', with: 'Foo'
+    expect(page).to have_field 'user[email]', with: 'tester@example.com'
 
     fill_in 'user[name]', with: 'Bar'
     fill_in 'user[email]', with: 'update@example.com'

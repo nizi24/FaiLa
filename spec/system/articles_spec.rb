@@ -54,7 +54,6 @@ RSpec.describe "Articles", js: true, type: :system do
         expect(page).to have_button '削除'
         link = find_button('削除')
         click_button '削除'
-        expect(link['data-confirm']).to eq '本当に削除しますか？'
       }.to change(user.articles, :count).by(-1)
 
       expect(page).to have_content '削除しました'

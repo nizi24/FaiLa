@@ -51,6 +51,24 @@ RSpec.describe "Likes", type: :request do
           post likes_path, params: { likeable_id: micropost.id, likeable_type: 'Micropost' }
         }.to change(micropost.likes, :count).by(1)
       end
+
+      it 'いいねされたときに通知が送信されること' do
+        micropost = FactoryBot.create(:micropost, user: other_user)
+
+        log_in user
+        expect{
+          post likes_path, params: { likeable_id: micropost.id, likeable_type: 'Micropost', user_id: other_user.id }
+        }.to change(other_user.notices, :count).by(1)
+      end
+
+      it '自分の投稿にいいねしても、通知が送信されないこと' do
+        micropost = FactoryBot.create(:micropost, user: user)
+
+        log_in user
+        expect{
+          post likes_path, params: { likeable_id: micropost.id, likeable_type: 'Micropost', user_id: user.id }
+        }.to_not change(user.notices, :count)
+      end
     end
 
     context 'ゲストとして' do
