@@ -16,5 +16,4 @@ module MicropostsHelper
       end
     end
   end
-
 end

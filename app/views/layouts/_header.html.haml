@@ -40,7 +40,6 @@
           %li.nav-item.fix-margin=             link_to '新規登録', new_user_path
 
         -else
-          %li.nav-item.fix-margin.mobile-none= link_to '投稿一覧', articles_path
           %li.nav-item.fix-margin.mobile-none= link_to '投稿する', '#', class: 'post-modal-trigger'
 
           %li.nav-item.dropdown.mobile-none
@@ -61,14 +60,14 @@
     %nav.slide-menu.bg-dark.mobile-only.close
       .slide-item
       .slide-item
+        %i.fas.fa-home.fa-2x
+        = link_to 'ホーム', articles_path, class: 'slide-item'
+      .slide-item
         %i.far.fa-address-card.fa-2x
         = link_to 'プロフィール',current_user, class: 'fix-hover slide-item'
       .slide-item
         %i.far.fa-edit.fa-2x
         = link_to '投稿する', '#', class: 'slide-item post-modal-trigger'
-      .slide-item
-        %i.fas.fa-list-ul.fa-2x
-        = link_to '投稿一覧', articles_path, class: 'slide-item'
       .slide-item
         %i.fas.fa-cog.fa-2x
         = link_to '設定', '#', class: 'fix-hover slide-item'

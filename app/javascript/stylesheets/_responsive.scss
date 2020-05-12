@@ -35,6 +35,10 @@
     width: 45% !important;
     height: 15% !important;
   }
+
+  .side-menu {
+    margin-bottom: 10px;
+  }
 }
 
 /* スマホ向けデザイン */
@@ -43,6 +47,12 @@
   .mobile-none {
     display: none !important;
   }
+
+/* home */
+
+.posted-select {
+  font-size: 1.2em !important;
+}
 
   /* ヘッダー*/
 

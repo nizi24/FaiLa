@@ -59,13 +59,13 @@ has_many :receive_replies, class_name:  'Reply',
                            dependent:   :destroy
 
 has_many :sended_replies,   through: :send_replies,
-                           source:  :received_user
+                           source:  :received_micropost
 
 has_many :received_replies, through: :receive_replies,
-                           source:  :sended_user
+                           source:  :sended_micropost
 
   def following_feed
-    following_feed_items = following_microposts_feed + following_articles_feed
+    following_feed_items = following_microposts_feed + following_articles_feed + self.received_replies
     following_feed_items.sort_by { |item|
       item.created_at
     }.reverse!
@@ -74,7 +74,7 @@ has_many :received_replies, through: :receive_replies,
   def following_microposts_feed
     following_ids = "SELECT followed_id FROM relationships
                      WHERE follower_id = :user_id"
-    Micropost.where("user_id IN (#{following_ids})", user_id: id).newest
+    following_microposts = Micropost.where("user_id IN (#{following_ids})", user_id: id).newest
   end
 
   def following_articles_feed

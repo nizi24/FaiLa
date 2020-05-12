@@ -24,7 +24,7 @@
       -# ユーザー名が含まれている場合、プロフィールへのリンクにする
       - if scan_user_name(micropost) #micropost_helper
         - @received_users.each do |user|
-          = link_to '@' + user.unique_name, user, class: 'user-unique-name'
+          = link_to "@#{user.unique_name}", user, class: 'user-unique-name'
         = micropost.content
 
       - else

@@ -1,7 +1,7 @@
 - if logged_in?
 
   .feed.row
-    .col-md-2.side-menu.bg-light
+    .offset-1.col-10.offset-md-2.col-md-8.offset-lg-0.col-lg-2.side-menu.bg-light
       .btn.btn-info.timeline-select
         %i.fas.fa-history
         %span タイムライン
@@ -10,7 +10,12 @@
         %i.fas.fa-poll-h
         %span トレンド
 
-    .offset-md-1.col-md-8
+      = link_to articles_path, class: 'btn btn-outline-info' do
+        %i.fas.fa-hourglass-half
+        新着順
+
+
+    .offset-md-1.col-md-10.offset-lg-1.col-lg-8
 
       .timeline
         %h2.h2.center タイムライン

@@ -33,6 +33,16 @@ RSpec.describe "Microposts", type: :request do
                                           received_user_id:      micropost.user.id}
         }.to change(micropost.received_replies, :count).by(1)
       end
+
+      it 'つぶやきに返信しつつ、他のユーザーにリプライできること' do
+        other_user = FactoryBot.create(:user, unique_name: 'test0')
+        log_in user
+        expect {
+          post microposts_path, params: { micropost: { content: '@test0 Test'},
+                                          received_micropost_id: micropost.id,
+                                          received_user_id:      micropost.user.id}
+        }.to change(Reply, :count).by(2)
+      end
     end
 
     it 'ユーザーにリプライできること' do

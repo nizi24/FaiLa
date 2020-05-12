@@ -1,7 +1,7 @@
 class MicropostsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
   before_action :correct_user,   only: [:destroy]
-  
+
   USER_UNIQUE_NAME_REGEX = /@([a-z0-9_]{5,15})/i
 
   def show
@@ -15,13 +15,14 @@ class MicropostsController < ApplicationController
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
 
-      #つぶやきにリプライする場合
-      if params[:received_user_id]
+      #リプライをする場合
+      #@unique_nameが含まれている場合
+      @unique_names = @micropost.content.scan(USER_UNIQUE_NAME_REGEX)
+      if @unique_names.any?
+        create_reply
+      #返信先のつぶやきが存在し、@unique_nameが含まれていない場合
+      elsif params[:received_micropost_id]
         create_reply_to_micropost
-
-      #ユーザーにリプライする場合
-      elsif @unique_names = @micropost.content.scan(USER_UNIQUE_NAME_REGEX)
-        create_reply_to_user
       end
 
       flash[:success] = '投稿しました'
@@ -35,7 +36,7 @@ class MicropostsController < ApplicationController
     @micropost = Micropost.find(params[:id])
     if @micropost.destroy
       flash[:info] = '投稿を削除しました'
-      redirect_to articles_path
+      redirect_to root_url
     end
   end
 
@@ -52,27 +53,36 @@ class MicropostsController < ApplicationController
       end
     end
 
+    def create_reply
+      if @unique_names.any?
+        #マッチしたユーザー名からユーザーを捕捉して配列にする
+        users = []
+        @unique_names.each do |unique_name|
+          if user = User.find_by(unique_name: unique_name[0].downcase)
+            users << user
+          end
+        end
+
+        #リプライを作成
+        users.each do |user|
+          @reply = current_user.send_replies.build(received_user_id: user.id,
+                                                   sended_micropost_id: @micropost.id)
+          @reply.save
+        end
+      end
+      # 返信先のつぶやきが存在するとき
+      if params[:received_micropost_id]
+        create_reply_to_micropost
+      end
+    end
+
     def create_reply_to_micropost
       @reply = current_user.send_replies.build(received_user_id: params[:received_user_id],
                                                sended_micropost_id: @micropost.id,
                                                received_micropost_id: params[:received_micropost_id])
       @reply.save
-    end
-
-    def create_reply_to_user
-      #マッチしたユーザー名からユーザーを捕捉して配列にする
-      users = []
-      @unique_names.each do |unique_name|
-        if user = User.find_by(unique_name: unique_name[0].downcase)
-          users << user
-        end
-      end
-
-      #リプライを作成
-      users.each do |user|
-        @reply = current_user.send_replies.build(received_user_id: user.id,
-                                                 sended_micropost_id: @micropost.id)
-        @reply.save
-      end
+      # リプライ先のユーザー名をcontentに追加
+      user = User.find(params[:received_user_id])
+      @micropost.update(content: "@#{user.unique_name} #{@micropost.content}")
     end
 end

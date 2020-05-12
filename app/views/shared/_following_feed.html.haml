@@ -24,7 +24,7 @@
   - if @following_feed_microposts.any?
     .feed-microposts.feed-right
       - @following_feed_microposts.each do |micropost|
-
+      
         = render 'microposts/microposts_index', micropost: micropost
 
 

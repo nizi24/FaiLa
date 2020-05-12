@@ -191,14 +191,14 @@ a.signup {
 }
 
 .side-menu {
-  height: 400px;
+  height: 200px;
   .btn {
     svg {
       float: left;
       margin-top: 5px;
     }
     margin-top: 20px;
-    width: 90%;
+    width: 100%;
   }
 }
 
@@ -235,6 +235,7 @@ a.signup {
 .feed-center, .feed-right {
   display: none;
 }
+
 /* footer */
 
 footer {
