@@ -35,28 +35,10 @@
         %i.fas.fa-reply.fa-lg
         %span.reply #{micropost.received_replies.count}
 
-      .micropost-item-likes
-        -# いいねしていた場合
-        - if logged_in? && current_user.already_liked?(micropost)
-          = button_to @like, method: :delete,
-                                      params: { likeable_type: 'Micropost',
-                                                likeable_id: micropost.id } ,
-                                      remote: true,
-                                      class: 'like-icon' do
-            %i.fas.fa-heart.fa-lg.mobile-none
-            %i.fas.fa-heart.mobile-only
-          %span.likes_total.mobile-likes= micropost.likes_total
-
-          -# まだいいねしていない場合
-        - else
-          = button_to micropost.likes.build, params: { likeable_type: 'Micropost',
-                                                       likeable_id: micropost.id,
-                                                       user_id: micropost.user.id },
-                                             remote: true,
-                                             class: 'like-icon' do
-            %i.far.fa-heart.fa-lg.mobile-none
-            %i.far.fa-heart.mobile-only
-          %span.likes_total.mobile-likes= micropost.likes_total - 1
+      .micropost-item-likes{id: "like-form-micropost-#{micropost.id}"}
+        = render partial: 'likes/like_form', locals: { object: micropost, likeable_type: 'Micropost',
+                                                       likeable_id: micropost.id, user_id: micropost.user.id,
+                                                       like: @like }
 
   -if logged_in?
     .reply-form

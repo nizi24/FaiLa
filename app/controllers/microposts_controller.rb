@@ -1,6 +1,6 @@
 class MicropostsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
-  before_action :correct_user,   only: [:destroy]
+  before_action :correct_user,   only: :destroy
 
   USER_UNIQUE_NAME_REGEX = /@([a-z0-9_]{5,15})/i
 
@@ -36,7 +36,7 @@ class MicropostsController < ApplicationController
     @micropost = Micropost.find(params[:id])
     if @micropost.destroy
       flash[:info] = '投稿を削除しました'
-      redirect_to root_url
+      redirect_back(fallback_location: root_path)
     end
   end
 

@@ -6,18 +6,29 @@ class LikesController < ApplicationController
                                      likeable_type: params[:likeable_type])
     if @like.save
       create_notice
-      redirect_back(fallback_location: root_path)
+
+      respond_to do |format|
+        format.html { redirect_back(fallback_location: root_path) }
+        format.js { sort_object }
+      end
+
     else
       redirect_to root_url
     end
   end
+
 
   def destroy
     @like = Like.find_by(likeable_id:   params[:likeable_id],
                          likeable_type: params[:likeable_type],
                          user_id:       current_user.id)
     @like.destroy if @like
-    redirect_back(fallback_location: root_path)
+
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: root_path) }
+      format.js { sort_object }
+    end
+
   end
 
 
@@ -31,6 +42,20 @@ class LikesController < ApplicationController
                                  message:          "@#{current_user.unique_name}さんがあなたの投稿にいいねしました",
                                  link:             "/#{object_type}s/#{params[:likeable_id]}")
       @notice.save
+    end
+  end
+
+  # ajax用処理
+  def sort_object
+    if 'Article' == params[:likeable_type]
+      @object = Article.find(params[:likeable_id])
+      @form_id = "article-#{@object.id}"
+    elsif 'Comment' == params[:likeable_type]
+      @object = Comment.find(params[:likeable_id])
+      @form_id = "comment-#{@object.id}"
+    else
+      @object = Micropost.find(params[:likeable_id])
+      @form_id = "micropost-#{@object.id}"
     end
   end
 end

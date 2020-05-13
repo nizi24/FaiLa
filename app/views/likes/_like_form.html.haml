@@ -1,0 +1,19 @@
+- if logged_in? && current_user.already_liked?(object)
+  = button_to like, method: :delete,
+                             params: { likeable_type: likeable_type,
+                                       likeable_id: likeable_id } ,
+                             remote: true,
+                             class: 'like-icon' do
+    %i.fas.fa-heart.fa-lg.mobile-none
+    %i.fas.fa-heart.mobile-only
+  %span.likes_total= object.likes_total
+
+- else
+  = button_to object.likes.build, params: { likeable_type: likeable_type,
+                                            likeable_id: likeable_id,
+                                            user_id: user_id },
+                                    remote: true,
+                                    class: 'like-icon' do
+    %i.far.fa-heart.fa-lg.mobile-none
+    %i.far.fa-heart.mobile-only
+  %span.likes_total= object.likes_total - 1

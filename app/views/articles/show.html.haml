@@ -5,7 +5,7 @@
         = @article.title
       %span.by by
       = link_to @article.user.name, @article.user, class: 'article-author'
-      
+
       -if current_user == @article.user
         =button_to '削除', @article, method: :delete,
                     data: { confirm: '本当に削除しますか？' },
@@ -17,7 +17,10 @@
 
     .article-footer
       %span.timestamp #{ time_ago_in_words(@article.created_at)}前
-      = render 'likes/article_likes'
+      .article-likes{id: "like-form-article-#{@article.id}"}
+        = render partial: 'likes/like_form', locals: { object: @article, likeable_type: 'Article',
+                                                       likeable_id: @article.id, user_id: @article.user.id,
+                                                       like: @article_like }
 
   %hr
   .comments

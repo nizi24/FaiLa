@@ -1,0 +1,1 @@
+$('#{"#like-form-#{@form_id}"}').html("#{j(render partial: 'likes/like_form', locals: { object: @object, like: @like, likeable_type: params[:likeable_type], likeable_id:   params[:likeable_id], user_id: params[:user_id]})}");

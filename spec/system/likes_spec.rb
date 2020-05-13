@@ -44,7 +44,9 @@ RSpec.describe "Likes", type: :system do
       expect{
         expect {
           expect(page).to have_css '.far'
-          find(:css, '.comment-like').click
+          within ".comment-item" do
+            find(:css, '.like-icon').click
+          end
         }.to change(user.likes, :count).by(1)
       }.to change(comment.likes, :count).by(1)
       expect(page).to have_content '1'
@@ -52,7 +54,9 @@ RSpec.describe "Likes", type: :system do
       expect {
         expect {
           expect(page).to have_css '.fas'
-          find(:css, '.comment-like').click
+          within ".comment-item" do
+            find(:css, '.like-icon').click
+          end
         }.to change(user.likes, :count).by(-1)
       }.to change(comment.likes, :count).by(-1)
       expect(page).to have_content '0'
@@ -68,16 +72,18 @@ RSpec.describe "Likes", type: :system do
       expect{
         expect {
           expect(page).to have_css '.far'
-          find(:css, '.like-icon').click
+          within ".micropost-detail" do
+            find(:css, '.like-icon').click
+          end
         }.to change(user.likes, :count).by(1)
       }.to change(micropost.likes, :count).by(1)
       expect(page).to have_content '1'
 
       expect {
-        expect {
-          expect(page).to have_css '.fas'
+        expect(page).to have_css '.fas'
+        within ".micropost-detail" do
           find(:css, '.like-icon').click
-        }.to change(user.likes, :count).by(-1)
+        end
       }.to change(micropost.likes, :count).by(-1)
       expect(page).to have_content '0'
     end

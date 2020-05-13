@@ -24,21 +24,7 @@
       .comment-item-footer
         %span.timestamp #{ time_ago_in_words(comment.created_at)}前
 
-        .comment-likes
-          - if logged_in? && current_user.already_liked?(comment)
-            = button_to @comment_like, method: :delete,
-                                       params: { likeable_type: 'Comment',
-                                                 likeable_id: comment.id } ,
-                                       remote: true,
-                                       class: 'like-icon comment-like' do
-              %i.fas.fa-heart.fa-lg
-            %span.likes_total= comment.likes_total
-
-          - else
-            = button_to comment.likes.build, params: { likeable_type: 'Comment',
-                                                       likeable_id: comment.id,
-                                                       user_id: comment.user.id },
-                                             remote: true,
-                                             class: 'like-icon comment-like' do
-              %i.far.fa-heart.fa-lg
-            %span.likes_total= comment.likes_total - 1
+        .comment-likes{id: "like-form-comment-#{comment.id}"}
+          = render partial: 'likes/like_form', locals: { object: comment, likeable_type: 'Comment',
+                                                         likeable_id: comment.id, user_id: comment.user.id,
+                                                         like: @comment_like }

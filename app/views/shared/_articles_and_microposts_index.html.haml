@@ -17,6 +17,7 @@
   - if @microposts.any?
     - @microposts.each do |micropost|
       = render 'microposts/microposts_index', micropost: micropost
+      
     = will_paginate @microposts,
     previous_label: '←  前', next_label: '次 →', inner_window: 1, outer_window: 0,
     renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer,
