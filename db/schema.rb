@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_13_142552) do
+ActiveRecord::Schema.define(version: 2020_05_14_073555) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -102,7 +102,6 @@ ActiveRecord::Schema.define(version: 2020_05_13_142552) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "sended_micropost_id"
     t.integer "received_micropost_id"
-    t.index "\"microposts\"", name: "index_replies_on_microposts"
     t.index ["received_micropost_id"], name: "index_replies_on_received_micropost_id"
     t.index ["received_user_id"], name: "index_replies_on_received_user_id"
     t.index ["sended_micropost_id"], name: "index_replies_on_sended_micropost_id"
