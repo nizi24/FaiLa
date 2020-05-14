@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_14_073555) do
+ActiveRecord::Schema.define(version: 2020_05_14_081754) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -108,6 +108,17 @@ ActiveRecord::Schema.define(version: 2020_05_14_073555) do
     t.index ["sended_user_id"], name: "index_replies_on_sended_user_id"
   end
 
+  create_table "settings", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.boolean "notice_of_like", default: true
+    t.boolean "notice_of_reply", default: true
+    t.boolean "notice_of_comment", default: true
+    t.boolean "notice_of_follow", default: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_settings_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
@@ -126,4 +137,5 @@ ActiveRecord::Schema.define(version: 2020_05_14_073555) do
   add_foreign_key "comments", "users"
   add_foreign_key "likes", "users"
   add_foreign_key "microposts", "users"
+  add_foreign_key "settings", "users"
 end

@@ -36,6 +36,7 @@ has_many :articles
 has_many :microposts
 has_many :comments
 has_many :likes
+has_one :setting
 
 # Relationship
 has_many :active_relationships,   class_name:   'Relationship',
