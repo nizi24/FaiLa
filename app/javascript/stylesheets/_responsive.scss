@@ -28,6 +28,10 @@
     width: 80% !important;
   }
 
+  .notice-field.open {
+    right: 200px !important;
+  }
+
 }
 
 @media (max-width: 896px) {
@@ -63,8 +67,8 @@
   }
 
   .notice-field.open {
-    right: 60px !important;
-    top: 20px;
+    right: 50px !important;
+    top: 60px;
   }
 
   .menu-trigger {
