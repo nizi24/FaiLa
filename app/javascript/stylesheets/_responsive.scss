@@ -62,6 +62,11 @@
     right: 70px;
   }
 
+  .notice-field.open {
+    right: 60px !important;
+    top: 20px;
+  }
+
   .menu-trigger {
     position: fixed;
     top: 30px;
