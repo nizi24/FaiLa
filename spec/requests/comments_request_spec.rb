@@ -4,6 +4,14 @@ RSpec.describe "Comments", type: :request do
 let(:user) { FactoryBot.create(:user) }
 let(:other_user) { FactoryBot.create(:user) }
 let(:article) { FactoryBot.create(:article) }
+let(:comment) { FactoryBot.create(:comment)}
+
+  describe '#show' do
+    it '200レスポンスを返すこと' do
+      get comment_path(comment)
+      expect(response).to have_http_status(200)
+    end
+  end
 
   describe '#create' do
 

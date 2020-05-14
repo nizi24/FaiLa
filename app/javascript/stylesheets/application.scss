@@ -61,6 +61,12 @@ p {
 
 /* header */
 
+.notice {
+  a {
+    padding: 0 !important;
+  }
+}
+
 .fa-bell {
   margin-right: 10px;
 }
@@ -90,6 +96,9 @@ p {
     font-size: 1.0em;
     padding-right: 16px;
     padding-left: 16px;
+    p {
+      margin: 0;
+    }
   }
 
   .notice-items {

@@ -157,4 +157,17 @@ RSpec.describe User, type: :model do
                                          micropost_one_week_before, article_one_month_before]
     end
   end
+
+  describe 'nonchecked?' do
+    it '未読の通知があればtrueを返すこと' do
+      notice = FactoryBot.create(:notification, received_user: user)
+      expect(user.nonchecked?).to eq notice
+    end
+
+    it '未読の通知がなければfalseであること' do
+      notice = FactoryBot.create(:notification, received_user: user,
+                                                checked: true)
+      expect(user.nonchecked?).to eq nil
+    end
+  end
 end

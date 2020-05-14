@@ -1,12 +1,23 @@
 $(function() {
 
-
-  $('.fa-bell').on('click', function(){
+  $('.notice').find('.text-warning').on('click', function(){
     if ($('.notice-field').hasClass('open')) {
       $('.notice-field').removeClass('open');
     } else {
       $('.notice-field').addClass('open');
     }
+  });
+
+  $(document).on('click', ".fa-bell", function(){
+    if ($('.notice-field').hasClass('open')) {
+      $('.notice-field').removeClass('open');
+    } else {
+      $('.notice-field').addClass('open');
+    }
+  });
+
+  $('.notice-field').find('.fa-times').on('click', function() {
+    $('.notice-field').removeClass('open');
   });
 
   $('.notice-action-user-icon').on('click', function(){

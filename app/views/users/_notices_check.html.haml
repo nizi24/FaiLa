@@ -1,0 +1,5 @@
+- if current_user.nonchecked?
+  = link_to notices_check_user_path(current_user), method: :post, remote: true do
+    %i.far.fa-bell.fa-2x.text-warning.nav-item.fix-margin
+- else
+  %i.far.fa-bell.fa-2x.text-white.nav-item.fix-margin

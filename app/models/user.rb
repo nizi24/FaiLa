@@ -76,8 +76,13 @@ has_many :notices,  class_name:  'Notification',
                     foreign_key: 'received_user_id',
                     dependent:   :destroy
 
+  #未読の通知があればtrue
+  def nonchecked?
+    self.notices.find_by(checked: false)
+  end
+
   def following_feed
-    following_feed_items = following_microposts_feed + following_articles_feed + self.received_replies
+    following_feed_items = following_microposts_feed + following_articles_feed
     following_feed_items.sort_by { |item|
       item.created_at
     }.reverse!

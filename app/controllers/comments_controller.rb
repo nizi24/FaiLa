@@ -2,6 +2,11 @@ class CommentsController < ApplicationController
 before_action :logged_in_user, only: [:create, :destroy]
 before_action :correct_user, only: [:destroy]
 
+  def show
+    @comment = Comment.find(params[:id])
+    @like = Like.find_by(id: 1..100)
+  end
+
   def create
     @article = Article.find(params[:comment][:article_id])
     @comment = @article.comments.build(comment_params)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_12_022145) do
+ActiveRecord::Schema.define(version: 2020_05_13_142552) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 2020_05_12_022145) do
     t.string "link"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "checked", default: false
     t.index ["action_user_id"], name: "index_notifications_on_action_user_id"
     t.index ["received_user_id"], name: "index_notifications_on_received_user_id"
   end

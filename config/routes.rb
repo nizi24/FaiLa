@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :users do
     member do
       get :followers
+      post :notices_check
     end
   end
 
@@ -13,7 +14,7 @@ Rails.application.routes.draw do
 
   resources :likes, only: [:create, :destroy]
 
-  resources :comments, only: [:create, :destroy]
+  resources :comments, only: [:show, :create, :destroy]
 
   resources :microposts
 

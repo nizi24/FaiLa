@@ -11,7 +11,7 @@ module MicropostsHelper
         user = User.find_by(unique_name: unique_name[0])
         if user
           @received_users << user
-          micropost.content.gsub!("@#{unique_name[0]} ", '')
+          micropost.content.gsub!("@#{unique_name[0]}", '')
         end
       end
     end

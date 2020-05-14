@@ -90,4 +90,34 @@ RSpec.describe "Users", type: :request do
       end
     end
   end
+
+  describe '#notices_check' do
+    context '認可されたユーザーの時' do
+      it 'すべてのcheckedをtrueに変えること' do
+        log_in user
+        notice1 = FactoryBot.create(:notification, received_user: user,
+                                                   checked: false)
+        notice2 = FactoryBot.create(:notification, received_user: user,
+                                                   checked: false)
+        post notices_check_user_path(user)
+        expect(user.nonchecked?).to eq nil
+      end
+    end
+
+    context '認可されていないユーザーの時' do
+      it 'ダッシュボードにリダイレクトすること' do
+        other_user = FactoryBot.create(:user)
+        log_in other_user
+        post notices_check_user_path(user)
+        expect(response).to redirect_to root_url
+      end
+    end
+
+    context 'ゲストとして' do
+      it 'ログインページにリダイレクトすること' do
+        post notices_check_user_path(user)
+        expect(response).to redirect_to login_url
+      end
+    end
+  end
 end

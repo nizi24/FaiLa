@@ -1,0 +1,27 @@
+.comment-item
+  .comment-item-header
+    .comment-item-header-left
+      - if comment.user.icon.attached?
+        = image_tag comment.user.icon, size: '50x50', class: 'user-icon mobile-none'
+        = image_tag comment.user.icon, size: '30x30', class: 'user-icon mobile-only'
+      - else
+        = image_tag 'default_icon.jpeg', size: '50x50', class: 'user-icon mobile-none'
+        = image_tag 'default_icon.jpeg', size: '30x30', class: 'user-icon mobile-only'
+
+        =link_to comment.user.name, comment.user, class: 'comment-user-name'
+
+    -if current_user == comment.user
+      =button_to '削除', comment, method: :delete,
+        data: { confirm: '本当に削除しますか？' },
+        class: 'h6 destroy-comment'
+
+  .comment-item-body
+    %p.comment-content=comment.content
+
+  .comment-item-footer
+    %span.timestamp #{ time_ago_in_words(comment.created_at)}前
+
+    .comment-likes{id: "like-form-comment-#{comment.id}"}
+      = render partial: 'likes/like_form', locals: { object: comment, likeable_type: 'Comment',
+                                                     likeable_id: comment.id, user_id: comment.user.id,
+                                                     like: like }

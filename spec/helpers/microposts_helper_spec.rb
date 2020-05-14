@@ -4,7 +4,7 @@ RSpec.describe MicropostsHelper, type: :helper do
 
   describe 'scan_user_name' do
 
-    let(:micropost) { FactoryBot.create(:micropost, content: '@test1 @test2 @test3 @test4') }
+    let(:micropost) { FactoryBot.create(:micropost, content: '@test1@test2@test3@test4') }
 
     before do
       @user1 = User.create(name: 'test1', email: 'test1@example.com', password: 'password',
