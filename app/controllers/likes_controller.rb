@@ -6,6 +6,7 @@ class LikesController < ApplicationController
                                      likeable_type: params[:likeable_type])
     if @like.save
       create_notice
+
       respond_to do |format|
         format.html { redirect_back(fallback_location: root_path) }
         format.js { sort_object }
@@ -36,18 +37,19 @@ class LikesController < ApplicationController
   def create_notice
     user = User.find_by(id: params[:user_id])
     if user.setting.notice_of_like #相手のユーザーの設定を参照
+      object_type = "#{params[:likeable_type].downcase}"
       if params[:user_id].to_i != current_user.id #自分のいいねでは通知は作られない
-        object_type = "#{params[:likeable_type].downcase}"
         @notice = Notification.new(received_user_id: params[:user_id],
                                    action_user_id:   current_user.id,
                                    message:          "@#{current_user.unique_name}さんがあなたの投稿にいいねしました",
-                                   link:             "/#{object_type}s/#{params[:likeable_id]}")
+                                   link:             "/#{@object_type}s/#{params[:likeable_id]}")
         @notice.save
       end
     end
   end
 
   # ajax用処理
+  # 更新するlikeボタンを特定する
   def sort_object
     if 'Article' == params[:likeable_type]
       @object = Article.find(params[:likeable_id])

@@ -40,8 +40,7 @@
 
       .micropost-item-likes{id: "like-form-micropost-#{micropost.id}"}
         = render partial: 'likes/like_form', locals: { object: micropost, likeable_type: 'Micropost',
-                                                       likeable_id: micropost.id, user_id: micropost.user.id,
-                                                       like: @like }
+                                                       likeable_id: micropost.id, user_id: micropost.user.id }
 
 
   -if logged_in?

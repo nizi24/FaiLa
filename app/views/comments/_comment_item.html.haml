@@ -23,5 +23,4 @@
 
     .comment-likes{id: "like-form-comment-#{comment.id}"}
       = render partial: 'likes/like_form', locals: { object: comment, likeable_type: 'Comment',
-                                                     likeable_id: comment.id, user_id: comment.user.id,
-                                                     like: like }
+                                                     likeable_id: comment.id, user_id: comment.user.id }

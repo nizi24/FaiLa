@@ -4,7 +4,6 @@ before_action :correct_user, only: [:destroy]
 
   def show
     @comment = Comment.find(params[:id])
-    @like = Like.find_by(id: 1..100)
   end
 
   def create

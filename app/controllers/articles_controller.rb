@@ -5,7 +5,6 @@ class ArticlesController < ApplicationController
   def index
     @articles = Article.all_page(params[:page])
     @microposts = Micropost.all_page(params[:page])
-    @micropost_like = Like.micropost_like(current_user) if logged_in?
   end
 
   def show
@@ -13,8 +12,6 @@ class ArticlesController < ApplicationController
     @comments = @article.comments
     if logged_in?
       @comment = current_user.comments.build(article_id: params[:id])
-      @article_like = Like.article_like(current_user)
-      @comment_like = Like.comment_like(current_user)
     end
   end
 
