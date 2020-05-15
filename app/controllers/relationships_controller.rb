@@ -23,12 +23,14 @@ before_action :logged_in_user
   private
 
   def create_notice
-    if @user != current_user
-      @notice = Notification.new(received_user_id: @user.id,
-                                 action_user_id: current_user.id,
-                                 message: "@#{current_user.unique_name}さんがあなたをフォローしました",
-                                 link: "/users/#{current_user.id}")
-      @notice.save
+    if @user.setting.notice_of_follow #ユーザーの設定を参照
+      if @user != current_user
+        @notice = Notification.new(received_user_id: @user.id,
+                                   action_user_id: current_user.id,
+                                   message: "@#{current_user.unique_name}さんがあなたをフォローしました",
+                                   link: "/users/#{current_user.id}")
+        @notice.save
+      end
     end
   end
 end

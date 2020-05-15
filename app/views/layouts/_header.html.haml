@@ -52,9 +52,9 @@
                                                   href: "#"} アカウント
             %ul.dropdown-menu{"aria-labelledby": "dropdown"}
 
-              %li.dropdown-item= link_to   'プロフィール', current_user,                 class: 'fix-hover'
-              %li.dropdown-item= link_to   '設定',        '#',                          class: 'fix-hover'
-              %li.dropdown-item= button_to 'ログアウト',   logout_path, method: :delete, class: 'fix-hover'
+              %li.dropdown-item= link_to   'プロフィール', current_user,                   class: 'fix-hover'
+              %li.dropdown-item= link_to   '設定',        setting_form_user_path(current_user), class: 'fix-hover'
+              %li.dropdown-item= button_to 'ログアウト',   logout_path, method: :delete,   class: 'fix-hover'
 
 
   -# スマホ向け
@@ -73,7 +73,7 @@
         = link_to '投稿する', '#', class: 'slide-item post-modal-trigger'
       .slide-item
         %i.fas.fa-cog.fa-2x
-        = link_to '設定', '#', class: 'fix-hover slide-item'
+        = link_to '設定', setting_form_user_path(current_user), class: 'fix-hover slide-item'
       .slide-item
         %i.fas.fa-sign-out-alt.fa-2x
         = button_to 'ログアウト', logout_path, method: :delete, class: 'fix-hover slide-item'

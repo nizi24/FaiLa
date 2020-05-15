@@ -1,0 +1,30 @@
+.row
+  .offset-1.col-10.offset-md-2.col-md-8.offset-lg-0.col-lg-2.side-menu-setting.bg-light
+    .btn.btn-info
+      %i.far.fa-bell
+      %span  通知
+
+  .offset-md-1.col-md-10.offset-lg-1.col-lg-8.setting-form
+    %h1.text-secondary.h1 設定
+
+    .notice-setting.form-group
+      = form_with url: setting_user_path(current_user), method: :patch, local: true do |f|
+
+        = f.label :notice_of_like, class: "checkbox inline form-control" do
+          =f.check_box :notice_of_like, checked: current_user.setting.notice_of_like
+          %span いいねされた時
+
+        = f.label :notice_of_reply, class: "checkbox inline form-control" do
+          =f.check_box :notice_of_reply, checked: current_user.setting.notice_of_reply
+          %span 返信を受け取った時
+
+        = f.label :notice_of_comment, class: "checkbox inline form-control" do
+          =f.check_box :notice_of_comment, checked: current_user.setting.notice_of_comment
+          %span 記事にコメントされた時
+
+        = f.label :notice_of_follow, class: "checkbox inline form-control" do
+          =f.check_box :notice_of_follow, checked: current_user.setting.notice_of_follow
+          %span フォローされた時
+
+        .submit
+          = f.submit '変更', class: 'btn btn-primary'

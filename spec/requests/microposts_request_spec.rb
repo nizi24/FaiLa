@@ -54,6 +54,18 @@ RSpec.describe "Microposts", type: :request do
                                           received_user_id:      micropost.user.id}
         }.to change(other_user.notices, :count).by(1)
       end
+
+      it '返信先のユーザーの設定がfalseの時は通知は作られないこと' do
+        micropost = FactoryBot.create(:micropost, user: other_user)
+        other_user.setting.update(notice_of_reply: false)
+
+        log_in user
+        expect {
+          post microposts_path, params: { micropost: { content: 'Test'},
+                                          received_micropost_id: micropost.id,
+                                          received_user_id:      micropost.user.id}
+        }.to_not change(other_user.notices, :count)
+      end
     end
 
     it 'ユーザーにリプライできること' do

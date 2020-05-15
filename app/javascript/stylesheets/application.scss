@@ -430,6 +430,36 @@ h3.center {
   display: none;
 }
 
+/* user#setting */
+
+.side-menu-setting {
+  height: 70px;
+  .btn {
+    svg {
+      float: left;
+      margin-top: 5px;
+    }
+    margin-top: 20px;
+    width: 100%;
+  }
+  .notice-setting {
+    margin-top: 10px;
+    .form-control {
+      border: none;
+      border-bottom: 1px solid #e8e8e8;
+    }
+  }
+}
+.setting-form {
+  margin-top: 10px;
+  .notice-setting {
+    .form-control {
+      border: none;
+      border-bottom: 1px solid #e8e8e8;
+    }
+  }
+}
+
 /* micropost#index */
 
 .micropost-item {

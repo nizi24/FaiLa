@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     member do
       get :followers
       post :notices_check
+      get :setting_form
+      patch :setting
     end
   end
 

@@ -89,12 +89,15 @@ class MicropostsController < ApplicationController
     end
 
     def create_notice
-      if @reply.received_user != current_user
-        @notice = Notification.new(received_user_id: @reply.received_user_id,
-                                   action_user_id: current_user.id,
-                                   message: "@#{@micropost.user.unique_name}さんが返信しました。\r#{@micropost.content}",
-                                   link: "/microposts/#{@micropost.id}")
-        @notice.save
+      user = User.find_by(id: @reply.received_user_id)
+      if user.setting.notice_of_reply #ユーザーの設定を参照
+        if @reply.received_user != current_user #自分で自分にリプライしても通知は作られない
+          @notice = Notification.new(received_user_id: @reply.received_user_id,
+                                     action_user_id: current_user.id,
+                                     message: "@#{@micropost.user.unique_name}さんが返信しました。\r#{@micropost.content}",
+                                     link: "/microposts/#{@micropost.id}")
+          @notice.save
+        end
       end
     end
 end

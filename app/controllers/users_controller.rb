@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update, :followers, :notices_check]
-  before_action :correct_user, only: [:edit, :update, :notices_check]
+  before_action :logged_in_user, only: [:edit, :update, :followers, :notices_check, :setting]
+  before_action :correct_user, only: [:edit, :update, :notices_check, :setting]
 
   def show
     @user = User.find(params[:id])
@@ -16,6 +16,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      create_settings #ユーザーの設定を構築
       redirect_to @user
       flash[:success] = 'ユーザー登録が完了しました'
       log_in @user
@@ -45,6 +46,7 @@ class UsersController < ApplicationController
     render 'relationships/followers'
   end
 
+  # checkedをすべてtrueにする
   def notices_check
     nonchecked_notices = Notification.where(received_user_id: params[:id], checked: false)
     nonchecked_notices.each do |notice|
@@ -56,12 +58,24 @@ class UsersController < ApplicationController
     end
   end
 
+  def setting_form
+  end
+
+  def setting
+    current_user.setting.update(setting_params)
+    flash[:success] = '設定を変更しました'
+    redirect_to user_path(current_user)
+  end
+
 private
 
   def user_params
     params.require(:user).permit(:name, :unique_name, :email, :password, :password_confirmation, :icon)
   end
 
+  def setting_params
+    params.permit(:notice_of_like, :notice_of_reply, :notice_of_comment, :notice_of_follow)
+  end
 
   def correct_user
     @user = User.find(params[:id])
@@ -71,4 +85,8 @@ private
     end
   end
 
+  def create_settings
+    settings = @user.build_setting
+    settings.save
+  end
 end

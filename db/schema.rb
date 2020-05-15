@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 2020_05_14_081754) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "sended_micropost_id"
     t.integer "received_micropost_id"
+    t.index "\"microposts\"", name: "index_replies_on_microposts"
     t.index ["received_micropost_id"], name: "index_replies_on_received_micropost_id"
     t.index ["received_user_id"], name: "index_replies_on_received_user_id"
     t.index ["sended_micropost_id"], name: "index_replies_on_sended_micropost_id"

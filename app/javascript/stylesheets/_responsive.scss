@@ -1,5 +1,4 @@
 
-
 @media (min-width: 481px) {
   .mobile-only {
     display: none !important;
@@ -169,6 +168,10 @@
     .micropost-body {
       font-size: 0.8em;
     }
+  }
+
+  span.likes_total {
+    font-size: 1.0em !important;
   }
 
   /* article#new */

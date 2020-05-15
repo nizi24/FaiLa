@@ -7,16 +7,19 @@
       %p 通知
       %i.fas.fa-times
     .notice-items
-      - current_user.notices.newest.each do |notice|
-        .notice-item
-          .notice-action-user-icon
-            - if notice.action_user
-              - if notice.action_user.icon.attached?
-                = image_tag notice.action_user.icon, size: '30x30', class: 'user-icon'
-              - else
-                = image_tag 'default_icon.jpeg', size: '30x30', class: 'user-icon'
-              = hidden_field_tag :action_user, notice.action_user.id
-          .notice-message
-            = notice.message
-            = hidden_field_tag :link, notice.link
-            %span.timestamp #{ time_ago_in_words(notice.created_at)}前
+      -if current_user.notices.any?
+        - current_user.notices.newest.each do |notice|
+          .notice-item
+            .notice-action-user-icon
+              - if notice.action_user
+                - if notice.action_user.icon.attached?
+                  = image_tag notice.action_user.icon, size: '30x30', class: 'user-icon'
+                - else
+                  = image_tag 'default_icon.jpeg', size: '30x30', class: 'user-icon'
+                = hidden_field_tag :action_user, notice.action_user.id
+            .notice-message
+              = notice.message
+              = hidden_field_tag :link, notice.link
+              %span.timestamp #{ time_ago_in_words(notice.created_at)}前
+      - else
+        %p.center 通知はありません

@@ -44,12 +44,14 @@ private
   end
 
   def create_notice
-    if @article.user != @comment.user
-      @notice = Notification.new(received_user_id: @article.user.id,
-                                 action_user_id: @comment.user.id,
-                                 message: "@#{@comment.user.unique_name}さんがあなたの記事にコメントしました",
-                                 link: "/articles/#{@article.id}")
-      @notice.save
+    if @article.user.setting.notice_of_comment #ユーザーの設定を参照
+      if @article.user != @comment.user #自分のコメントでは通知は作られない
+        @notice = Notification.new(received_user_id: @article.user.id,
+                                   action_user_id: @comment.user.id,
+                                   message: "@#{@comment.user.unique_name}さんがあなたの記事にコメントしました",
+                                   link: "/articles/#{@article.id}")
+        @notice.save
+      end
     end
   end
 

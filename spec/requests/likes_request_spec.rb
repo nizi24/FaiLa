@@ -18,37 +18,40 @@ RSpec.describe "Likes", type: :request do
       it '記事にいいねできること' do
         log_in user
         expect {
-          post likes_path, params: { likeable_id: article.id, likeable_type: 'Article' }
+          post likes_path, params: { likeable_id: article.id, likeable_type: 'Article',
+                                     user_id: article.user.id }
         }.to change(article.likes, :count).by(1)
       end
 
       it 'ユーザーは同一記事に複数いいねできないこと' do
         log_in user
         expect {
-          post likes_path, params: { likeable_id: article.id, likeable_type: 'Article' }
-          post likes_path, params: { likeable_id: article.id, likeable_type: 'Article' }
+          post likes_path, params: { likeable_id: article.id, likeable_type: 'Article', user_id: article.user.id }
+          post likes_path, params: { likeable_id: article.id, likeable_type: 'Article', user_id: article.user.id }
         }.to change(article.likes, :count).by(1)
       end
 
       it 'コメントにいいねできること' do
         log_in user
         expect {
-          post likes_path, params: { likeable_id: comment.id, likeable_type: 'Comment' }
+          post likes_path, params: { likeable_id: comment.id, likeable_type: 'Comment',
+                                     user_id: comment.user.id }
         }.to change(comment.likes, :count).by(1)
       end
 
       it 'ユーザーは同一コメントに複数いいねできないこと' do
         log_in user
         expect {
-          post likes_path, params: { likeable_id: comment.id, likeable_type: 'Comment' }
-          post likes_path, params: { likeable_id: comment.id, likeable_type: 'Comment' }
+          post likes_path, params: { likeable_id: comment.id, likeable_type: 'Comment', user_id: comment.user.id }
+          post likes_path, params: { likeable_id: comment.id, likeable_type: 'Comment', user_id: comment.user.id }
         }.to change(comment.likes, :count).by(1)
       end
 
       it 'つぶやきにいいねできること' do
         log_in user
         expect{
-          post likes_path, params: { likeable_id: micropost.id, likeable_type: 'Micropost' }
+          post likes_path, params: { likeable_id: micropost.id, likeable_type: 'Micropost',
+                                     user_id: micropost.user.id }
         }.to change(micropost.likes, :count).by(1)
       end
 
@@ -68,6 +71,16 @@ RSpec.describe "Likes", type: :request do
         expect{
           post likes_path, params: { likeable_id: micropost.id, likeable_type: 'Micropost', user_id: user.id }
         }.to_not change(user.notices, :count)
+      end
+
+      it '投稿のユーザーの設定がfalseの時は通知は作られないこと' do
+        micropost = FactoryBot.create(:micropost, user: other_user)
+        other_user.setting.update(notice_of_like: false)
+
+        log_in user
+        expect{
+          post likes_path, params: { likeable_id: micropost.id, likeable_type: 'Micropost', user_id: other_user.id }
+        }.to_not change(other_user.notices, :count)
       end
     end
 

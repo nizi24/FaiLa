@@ -42,6 +42,16 @@ let(:comment) { FactoryBot.create(:comment)}
           }.to_not change(user.notices, :count)
         end
 
+        it '記事のユーザーの設定がfalseの時は通知は作られないこと' do
+          article = FactoryBot.create(:article, user: other_user)
+          other_user.setting.update(notice_of_comment: false)
+
+          log_in user
+          expect {
+            post comments_path, params: { comment: { content: 'Interesting.', article_id: article.id} }
+          }.to_not change(other_user.notices, :count)
+        end
+
       context '無効な情報の時'
         it 'コメント投稿に失敗すること' do
           log_in user

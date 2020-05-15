@@ -21,6 +21,15 @@ RSpec.describe "Relationships", type: :request do
           post relationships_path, params: { followed_id: other_user.id}
         }.to change(other_user.notices, :count).by(1)
       end
+
+      it 'フォローしたユーザーの設定がfalseの時、通知は作られないこと' do
+        other_user.setting.update(notice_of_follow: false)
+
+        log_in user
+        expect {
+          post relationships_path, params: { followed_id: other_user.id}
+        }.to_not change(other_user.notices, :count)
+      end
     end
 
     context 'ゲストとして' do
