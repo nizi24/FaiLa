@@ -1,7 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe "Articles", type: :request do
-let(:user) { FactoryBot.create(:user) }
+
+  let(:user) { FactoryBot.create(:user) }
+  let(:other_user) { FactoryBot.create(:user) }
+  let(:article) { FactoryBot.create(:article) }
 
   describe '#new' do
 
@@ -38,6 +41,65 @@ let(:user) { FactoryBot.create(:user) }
     end
   end
 
+  describe '#edit' do
+    context '認可されたユーザーの時' do
+      it '200レスポンスを返すこと' do
+        article = FactoryBot.create(:article, user: user)
+
+        log_in user
+        get edit_article_path(article)
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context '認可されていないユーザーの時' do
+      it 'ダッシュボードにリダイレクトすること' do
+        article = FactoryBot.create(:article, user: user)
+
+        log_in other_user
+        get edit_article_path(article)
+        expect(response).to redirect_to root_url
+      end
+    end
+
+    context 'ゲストとして' do
+      it 'ログインページにリダイレクトすること' do
+        get edit_article_path(article)
+        expect(response).to redirect_to login_url
+      end
+    end
+  end
+
+  describe '#update' do
+    context '認可されたユーザーの時' do
+      it '編集に成功すること' do
+        article = FactoryBot.create(:article, user: user,
+                                    content: 'Testing article functionality' )
+
+        log_in user
+        patch article_path(article), params: { article: { content: 'update article functionality' } }
+        expect(article.reload.content).to eq 'update article functionality'
+      end
+    end
+
+    context '認可されていないユーザーの時' do
+      it 'ダッシュボードにリダイレクトすること' do
+        article = FactoryBot.create(:article, user: user)
+
+        log_in other_user
+        patch article_path(article)
+        expect(response).to redirect_to root_url
+      end
+    end
+
+    context 'ゲストとして' do
+      it 'ログインページにリダイレクトすること' do
+        patch article_path(article)
+        expect(response).to redirect_to login_url
+      end
+    end
+  end
+
   describe '#destroy' do
 
     context '認可されたユーザーの時' do
@@ -53,7 +115,6 @@ let(:user) { FactoryBot.create(:user) }
 
     context '認可されていないユーザーの時' do
       it '記事削除に失敗すること' do
-        other_user = FactoryBot.create(:user)
         article = FactoryBot.create(:article, user: other_user)
 
         log_in user
@@ -64,7 +125,6 @@ let(:user) { FactoryBot.create(:user) }
     end
 
       it 'ダッシュボードにリダイレクトすること' do
-        other_user = FactoryBot.create(:user)
         article = FactoryBot.create(:article, user: other_user)
 
         log_in user
@@ -74,14 +134,13 @@ let(:user) { FactoryBot.create(:user) }
 
     context 'ゲストとして' do
       it '記事を削除できないこと' do
-        article = FactoryBot.create(:article, user: user)
+        article = FactoryBot.create(:article)
         expect{
           delete article_path(article)
         }.to_not change(Article, :count)
       end
 
       it 'ログインページにリダイレクトすること' do
-        article = FactoryBot.create(:article, user: user)
         delete article_path(article)
         expect(response).to redirect_to login_url
       end

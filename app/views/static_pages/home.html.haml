@@ -2,11 +2,11 @@
 
   .feed.row
     .offset-1.col-10.offset-md-2.col-md-8.offset-lg-0.col-lg-2.side-menu.bg-light
-      .btn.btn-info.timeline-select
+      .btn.btn-info.timeline-select.top-select
         %i.fas.fa-history
         %span タイムライン
 
-      .btn.btn-outline-info.trend-select
+      .btn.btn-outline-info.trend-select.second-select
         %i.fas.fa-poll-h
         %span トレンド
 
@@ -17,12 +17,12 @@
 
     .offset-md-1.col-md-10.offset-lg-1.col-lg-8
 
-      .timeline
+      .timeline.top
         %h2.h2.center タイムライン
 
         = render 'shared/following_feed'
 
-      .trend
+      .trend.second
         %h2.h2.center トレンド
 
         = render 'shared/trend_feed'

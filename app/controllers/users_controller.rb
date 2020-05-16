@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update, :followers, :notices_check, :setting]
-  before_action :correct_user, only: [:edit, :update, :notices_check, :setting]
+  before_action :logged_in_user, only: [:update, :followers, :notices_check, :setting_form, :setting]
+  before_action :correct_user, only: [:update, :notices_check, :setting_form, :setting]
 
   def show
     @user = User.find(params[:id])
@@ -25,10 +25,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
-    @user = User.find(params[:id])
-  end
-
   def update
     @user = User.find(params[:id])
     @user.icon.attach(params[:user][:icon])
@@ -36,7 +32,7 @@ class UsersController < ApplicationController
       flash[:success] = '更新に成功しました'
       redirect_to @user
     else
-      render 'edit'
+      render 'setting_form'
     end
   end
 
@@ -59,6 +55,7 @@ class UsersController < ApplicationController
   end
 
   def setting_form
+    @user = User.find(params[:id])
   end
 
   def setting
@@ -70,7 +67,7 @@ class UsersController < ApplicationController
 private
 
   def user_params
-    params.require(:user).permit(:name, :unique_name, :email, :password, :password_confirmation, :icon)
+    params.require(:user).permit(:name, :unique_name, :email, :password, :password_confirmation, :icon, :profile)
   end
 
   def setting_params

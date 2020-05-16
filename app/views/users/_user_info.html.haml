@@ -9,17 +9,21 @@
 
   #follow-form
     - if identification
-      =link_to 'ユーザー情報を編集する', edit_user_path(@user),
+      =link_to 'プロフィールを編集する', setting_form_user_path(@user),
                                       class: 'btn btn-success btn-sm text-nowrap font-weight-bold edit-user-info'
 
     - elsif logged_in? && current_user.following?(@user)
-      = render 'users/unfollow'
+      = render 'unfollow'
 
     - elsif logged_in?
-      = render 'users/follow'
+      = render 'follow'
 
     - else
       = button_to 'フォロー', relationships_path, class: 'btn btn-outline-info follow-button'
+
+  - unless @user.profile.nil?
+    .user-profile
+      = @user.profile
 
   .col-6.user-followers
     = link_to followers_user_path(@user) do

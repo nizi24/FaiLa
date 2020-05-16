@@ -1,0 +1,19 @@
+%h1.text-secondary.h1 プロフィール
+
+.form-group
+  = form_with model: @user, local: true do |f|
+    = render 'shared/error_messages', object: f.object
+    = f.label :name
+    = f.text_field :name, class: 'form-control'
+
+    = f.label :unique_name
+    = f.text_field :unique_name, class: 'form-control'
+
+    = f.label :profile
+    = f.text_area :profile, class: 'form-control profile-textarea'
+
+    %p.icon-image アイコン画像
+    %span.image= f.file_field :icon, accept: "image/jpeg,image/gif,image/png,image/heic"
+
+    .submit
+      = f.submit '変更', class: 'btn btn-primary'

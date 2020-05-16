@@ -1,0 +1,26 @@
+.author-info
+  .author-info-icon
+    -if user.icon.attached?
+      = image_tag user.icon, size: '50x50', class: 'user-icon'
+    -else
+      = image_tag 'default_icon.jpeg', size: '50x50', class: 'user-icon'
+
+  .author-info-right
+    .author-info-name
+      = user.name
+      = "@#{user.unique_name}"
+
+    .author-info-profile
+      = user.profile
+
+    -# 著者が自分以外の時
+    - unless logged_in? && current_user == user
+      #follow-form
+        - if logged_in? && current_user.following?(user)
+          = render 'users/unfollow'
+
+        - elsif logged_in?
+          = render 'users/follow'
+
+        - else
+          = button_to 'フォロー', relationships_path, class: 'btn btn-outline-info follow-button'

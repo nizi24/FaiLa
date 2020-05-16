@@ -25,6 +25,9 @@ validates :password,
           length:       { minimum: 6 },
           allow_nil:    true
 
+validates :profile,
+          length:       { maximum: 160 }
+
 validates :icon, content_type: { in: %w[image/jpeg image/gif image/png image/heic],
                                 message: '有効な形式の画像を選択してください'},
                 size:          { less_than: 5.megabytes,
@@ -32,11 +35,11 @@ validates :icon, content_type: { in: %w[image/jpeg image/gif image/png image/hei
 has_secure_password
 
 has_one_attached :icon
-has_many :articles
-has_many :microposts
-has_many :comments
-has_many :likes
-has_one :setting
+has_many :articles,   dependent: :destroy
+has_many :microposts, dependent: :destroy
+has_many :comments,   dependent: :destroy
+has_many :likes,      dependent: :destroy
+has_one :setting,     dependent: :destroy
 
 # Relationship
 has_many :active_relationships,   class_name:   'Relationship',

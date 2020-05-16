@@ -8,7 +8,6 @@ class MicropostsController < ApplicationController
     @micropost = Micropost.find(params[:id])
     @sended_replies = @micropost.sended_replies
     @received_replies = @micropost.received_replies
-    @like = Like.find_by(id: 1..100)
   end
 
   def create

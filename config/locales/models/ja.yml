@@ -12,6 +12,7 @@ ja:
         email: メールアドレス
         password: パスワード
         password_confirmation: 確認
+        profile: プロフィール
 
       article:
         id: ID

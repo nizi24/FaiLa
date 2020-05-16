@@ -4,6 +4,7 @@ FactoryBot.define do
     sequence(:unique_name) { |n| "tester#{n}" }
     sequence(:email) { |n| "tester#{n}@example.com" }
     password { "password" }
+    profile { 'my profile' }
 
     after(:create) { |user| FactoryBot.create(:setting, user: user) }
   end

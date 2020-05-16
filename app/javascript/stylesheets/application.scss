@@ -243,6 +243,7 @@ nav.header {
 }
 
 /* home */
+
 .home {
   padding: 50px;
 }
@@ -371,7 +372,7 @@ p.user-unique-name {
 
 .user-info {
   padding: 20px;
-  height: 320px;
+  max-height: 530px;
 }
 
 input.h6 {
@@ -390,19 +391,9 @@ input.h6 {
   margin: auto;
 }
 
-.user-followers {
-  margin-top: 20px;
-  a {
-    text-align: center;
-    color: #808080;
-  }
-  span {
-    display: block;
-  }
-  p {
-    color: black;
-    font-size: 1.4em;
-  }
+.user-profile {
+  margin-top: 10px;
+  font-size: 0.9em;
 }
 
 .paginate {
@@ -430,10 +421,46 @@ h3.center {
   display: none;
 }
 
+/* user#followers */
+
+.user-followers {
+  margin-top: 20px;
+  a {
+    text-align: center;
+    color: #808080;
+  }
+  span {
+    display: block;
+  }
+  p {
+    color: black;
+    font-size: 1.4em;
+  }
+}
+
+.follower-item {
+  display: flex;
+  border-bottom: 1px solid #e8e8e8;
+  padding: 16px;
+
+  .follower-item-right {
+    margin-left: 10px;
+  }
+
+  .follower-name {
+    font-size: 1.0em;
+    color: inherit;
+  }
+
+  .follower-profile {
+    font-size: 0.9em;
+  }
+}
+
 /* user#setting */
 
 .side-menu-setting {
-  height: 70px;
+  height: 200px;
   .btn {
     svg {
       float: left;
@@ -450,6 +477,7 @@ h3.center {
     }
   }
 }
+
 .setting-form {
   margin-top: 10px;
   .notice-setting {
@@ -458,6 +486,14 @@ h3.center {
       border-bottom: 1px solid #e8e8e8;
     }
   }
+}
+
+.profile-textarea {
+  resize: none;
+}
+
+.second, .third {
+  display: none;
 }
 
 /* micropost#index */
@@ -535,17 +571,6 @@ h3.center {
     color: black;
     text-decoration: none;
   }
-}
-
-/* followers */
-
-.followers-item {
-  display: flex;
-  width: 100%;
-  font-size: 1.4rem;
-  border-bottom: 1px solid #e8e8e8;
-  padding: 16px;
-  text-align: center;
 }
 
 /* micropost#show */
@@ -824,6 +849,19 @@ span.likes_total {
 
 .fa-heart.fa-lg {
   margin-top: 5px;
+}
+
+.author-info {
+  display: flex;
+  .author-info-right {
+    margin-left: 10px;
+  }
+  .author-info-name {
+    margin-bottom: 10px;
+  }
+  #follow-form {
+    float: left;
+  }
 }
 
 .comment-form {

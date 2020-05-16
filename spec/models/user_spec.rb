@@ -17,6 +17,8 @@ RSpec.describe User, type: :model do
 
   it { is_expected.to validate_length_of(:unique_name) }
 
+  it { is_expected.to validate_length_of(:profile) }
+
   it 'ユーザー名はユニークであること' do
     FactoryBot.create(:user, unique_name: 'abc123_')
     user = FactoryBot.build(:user, unique_name: 'ABC123_')

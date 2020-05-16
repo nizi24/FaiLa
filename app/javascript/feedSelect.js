@@ -2,7 +2,7 @@ $(function(){
 
   $.fn.colorChangeBtn = function() {
     if ($(this).hasClass('btn-outline-info')) {
-      var $currentSerect = $('.feed').find('.btn-info');
+      var $currentSerect = $('.container').find('.btn-info');
       $currentSerect.removeClass('btn-info');
       $currentSerect.addClass('btn-outline-info');
       $(this).removeClass('btn-outline-info');
@@ -28,16 +28,32 @@ $(function(){
   }
 
   $('.timeline-select').on('click', function() {
-    $(this).colorChangeBtn();
-    $('.trend').hide();
-    $('.timeline').show();
     showSelected('.timeline');
   });
 
   $('.trend-select').on('click', function() {
-    $(this).colorChangeBtn();
-    $('.trend').show();
-    $('.timeline').hide();
     showSelected('.trend');
   });
+
+  $('.top-select').on('click', function() {
+    $(this).colorChangeBtn();
+    $('.top').show();
+    $('.second').hide();
+    $('.third').hide();
+  });
+
+  $('.second-select').on('click', function() {
+    $(this).colorChangeBtn();
+    $('.top').hide();
+    $('.second').show();
+    $('.third').hide();
+  });
+
+  $('.third-select').on('click', function() {
+    $(this).colorChangeBtn();
+    $('.top').hide();
+    $('.second').hide();
+    $('.third').show();
+  });
+
 });

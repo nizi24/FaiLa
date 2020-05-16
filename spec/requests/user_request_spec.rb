@@ -25,33 +25,6 @@ RSpec.describe "Users", type: :request do
     end
   end
 
-  describe '#edit' do
-
-    context '認可されたユーザーの時' do
-      it '200レスポンスを返すこと' do
-        log_in user
-        get edit_user_path(user)
-        expect(response).to have_http_status(200)
-      end
-    end
-
-    context '認可されていないユーザーの時' do
-      it 'トップページにリダイレクトすること' do
-        other_user = FactoryBot.create(:user)
-        log_in other_user
-        get edit_user_path(user)
-        expect(response).to redirect_to root_url
-      end
-    end
-
-    context 'ゲストとして' do
-      it 'ログインページにリダイレクトすること' do
-        get edit_user_path(user)
-        expect(response).to redirect_to login_url
-      end
-    end
-  end
-
   describe '#update' do
 
     context '認可されたユーザーの時' do
@@ -117,6 +90,68 @@ RSpec.describe "Users", type: :request do
       it 'ログインページにリダイレクトすること' do
         post notices_check_user_path(user)
         expect(response).to redirect_to login_url
+      end
+    end
+  end
+
+  describe '#setting_form' do
+    context '認可されているユーザーの時' do
+      it '200レスポンスを返すこと' do
+        log_in user
+        get setting_form_user_path(user)
+        expect(response).to have_http_status 200
+      end
+    end
+
+    context '認可されていないユーザーの時' do
+      it 'ダッシュボードにリダイレクトすること' do
+        other_user = FactoryBot.create(:user)
+        log_in other_user
+        get setting_form_user_path(user)
+        expect(response).to redirect_to root_url
+      end
+    end
+
+    context 'ゲストとして' do
+      it 'ログインページにリダイレクトすること' do
+        get setting_form_user_path(user)
+        expect(response).to redirect_to login_url
+      end
+    end
+  end
+
+  describe '#setting' do
+    context '認可されたユーザーの時' do
+      it '設定を更新できること' do
+        log_in user
+        patch setting_user_path(user), params: { notice_of_like:   false, notice_of_reply:   false,
+                                                 notice_of_follow: false, notice_of_comment: false }
+        user.setting.reload
+        expect([user.setting.notice_of_like,   user.setting.notice_of_reply,
+                user.setting.notice_of_follow, user.setting.notice_of_comment]).to eq [false, false, false, false]
+      end
+
+      context '認可されていないユーザーの時' do
+        let(:other_user) { FactoryBot.create(:user) }
+
+        it '設定を更新できるないこと' do
+          log_in other_user
+          patch setting_user_path(user), params: { notice_of_like: false }
+          expect(user.setting.notice_of_like).to eq true
+        end
+
+        it 'ダッシュボードにリダイレクトすること' do
+          log_in other_user
+          patch setting_user_path(user), params: { notice_of_like: false }
+          expect(response).to redirect_to root_url
+        end
+      end
+
+      context 'ゲストとして' do
+        it 'ログインページにリダイレクトすること' do
+          patch setting_user_path(user)
+          expect(response).to redirect_to login_url
+        end
       end
     end
   end
