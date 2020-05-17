@@ -35,5 +35,6 @@ require('replyForm')
 require('replyHide')
 require('feedSelect')
 require('noticeField')
+require('searchForm')
 
 console.log('Hello World from Webpacker')

@@ -18,4 +18,8 @@ class Article < ApplicationRecord
     end
   end
 
+  def self.search(word)
+    Article.where(['title LIKE ?', "%#{word}%"]).newest
+  end
+
 end

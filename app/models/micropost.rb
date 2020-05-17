@@ -31,4 +31,8 @@ class Micropost < ApplicationRecord
     end
   end
 
+  def self.search(word)
+    Micropost.where(['content LIKE ?', "%#{word}%"]).newest
+  end
+
 end

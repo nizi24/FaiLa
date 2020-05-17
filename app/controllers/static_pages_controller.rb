@@ -18,4 +18,13 @@ class StaticPagesController < ApplicationController
       @micropost_trend_month =  Micropost.rank(1.month)
     end
   end
+
+  def search
+    @user_results = User.search(params[:search])
+    @article_results = Article.search(params[:search])
+    @micropost_results = Micropost.search(params[:search])
+    if params[:search].gsub!(/\A@/, '')
+      @user_results += User.unique_name_search(params[:search])
+    end
+  end
 end

@@ -80,6 +80,8 @@ has_many :notices,  class_name:  'Notification',
                     foreign_key: 'received_user_id',
                     dependent:   :destroy
 
+scope :newest, -> { order(created_at: :desc) }
+
   #未読の通知があればtrue
   def nonchecked?
     self.notices.find_by(checked: false)
@@ -118,6 +120,14 @@ has_many :notices,  class_name:  'Notification',
 
   def already_liked?(object)
     self.likes.exists?(User.sort_object(object))
+  end
+
+  def self.search(word)
+    User.where(['name LIKE ?', "%#{word}%"]).newest
+  end
+
+  def self.unique_name_search(word)
+    User.where(['unique_name LIKE ?', "%#{word}%"]).newest
   end
 
   def self.sort_object(object)

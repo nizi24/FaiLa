@@ -1,30 +1,4 @@
--if logged_in?
-  .modal-bg#post-modal-bg
-    .post-modal
-      %i.fas.fa-times.fa-2x.mobile-none
-      %i.fas.fa-times.mobile-only
-      .post-modal-select
-        .article-select
-          = button_to new_article_path, method: :get, class: 'button-css-none' do
-            %i.far.fa-edit.fa-4x.mobile-none
-            %i.far.fa-edit.fa-2x.mobile-only
-            %p.article-select 記事を書く
-        .micropost-select
-          %i.far.fa-comment-dots.fa-4x.mobile-none
-          %i.far.fa-comment-dots.fa-2x.mobile-only
-          %p.micropost-select つぶやく
-
-  .modal-bg#micropost-modal-bg
-    .micropost-modal
-      .micropost-modal-header
-        %h2　つぶやく
-        %i.fas.fa-times.fa-2x.mobile-none
-        %i.fas.fa-times.mobile-only
-      = form_with model: current_user.microposts.build, local: true do |f|
-
-        = f.text_area :content, class: 'micropost-textarea'
-        =f.submit '投稿', class: 'btn btn-info micropost-submit'
-
+= render 'layouts/post_form_modal'
 
 .fixed-top
   %nav.navbar.navbar-expand.bg-info.text-secondary.header
@@ -40,6 +14,17 @@
           %li.nav-item.fix-margin=             link_to '新規登録', new_user_path
 
         -else
+          -# 検索フォーム
+          = form_with url: search_path, method: :get, local: true do |f|
+            %span.fa-search.mobile-none
+              %i.fas.fa-search
+            = f.text_field :search, placeholder: 'キーワードを入力', class: 'fix-margin mobile-none search-form'
+
+            /* スマホ向けデザイン */
+          = form_with url: search_path, method: :get, local: true do |f|
+            %i.fas.fa-search.mobile-only.text-white.fa-lg
+            = f.text_field :search, placeholder: 'キーワードを入力', class: 'fix-margin mobile-only mobile-search-form'
+
           -# 通知
           = render 'notices/index'
 

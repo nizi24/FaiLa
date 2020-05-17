@@ -240,6 +240,22 @@ nav.header {
   input.fix-hover {
     @include reset-css-button;
   }
+
+  input.fix-margin {
+    margin-right: 20px;
+    border: none;
+    background-color: white;
+    padding: 3px;
+  }
+
+  span.fa-search {
+    background-color: white;
+    padding: 4.6px;
+    padding-top: 3.4px;
+  }
+  span.fa-search:before {
+    display: none;
+  }
 }
 
 /* home */
@@ -295,6 +311,20 @@ a.signup {
 
 .feed-center, .feed-right {
   display: none;
+}
+
+/* search */
+
+.search-results {
+  h2#search-results {
+    border: none;
+  }
+
+  h2.h2 {
+    font-size: 2em;
+    border-top: 1px solid #eaeaea;
+    padding: 10px 0;
+  }
 }
 
 /* footer */
@@ -438,21 +468,23 @@ h3.center {
   }
 }
 
-.follower-item {
+.user-item {
   display: flex;
   border-bottom: 1px solid #e8e8e8;
   padding: 16px;
 
-  .follower-item-right {
+  .user-item-right {
     margin-left: 10px;
   }
 
-  .follower-name {
+  .user-name {
     font-size: 1.0em;
-    color: inherit;
+    a {
+      color: inherit;
+    }
   }
 
-  .follower-profile {
+  .user-profile {
     font-size: 0.9em;
   }
 }

@@ -172,4 +172,24 @@ RSpec.describe User, type: :model do
       expect(user.nonchecked?).to eq nil
     end
   end
+
+  describe 'User.search' do
+    it 'nameの検索結果を最新順で返すこと' do
+      user1 = FactoryBot.create(:user, name: 'test uesr')
+      user2 = FactoryBot.create(:user, name: 'testing user')
+      user3 = FactoryBot.create(:user, name: 'foo')
+
+      expect(User.search('test')).to eq [user2, user1]
+    end
+  end
+
+  describe 'User.unique_name_search' do
+    it 'unique_nameの検索結果を最新順で返すこと' do
+      user1 = FactoryBot.create(:user, unique_name: 'test1')
+      user2 = FactoryBot.create(:user, unique_name: 'testing')
+      user3 = FactoryBot.create(:user, unique_name: 'foobar')
+
+      expect(User.unique_name_search('test')).to eq [user2, user1]
+    end
+  end
 end

@@ -63,4 +63,14 @@ RSpec.describe Micropost, type: :model do
       expect(Micropost.rank(1.month)).to eq [have_five_likes, have_three_likes, have_one_like]
     end
   end
+
+  describe 'Micropost.search' do
+    it '検索結果を最新順で返すこと' do
+      micropost1 = FactoryBot.create(:micropost, content: '@test1 hello')
+      micropost2 = FactoryBot.create(:micropost, content: 'posting test')
+      micropost3 = FactoryBot.create(:micropost, content: 'foo bar')
+
+      expect(Micropost.search('test')).to eq [micropost2, micropost1]
+    end
+  end
 end

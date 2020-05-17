@@ -4,18 +4,4 @@
   .offset-md-2.col-md-8.offset-lg-1.col-lg-6.followers-wrapper
     %h3.center #{@user.name}さんのフォロワー
     - @users.each do |user|
-      .follower-item
-
-        .follower-icon
-          -if user.icon.attached?
-            = image_tag user.icon, size: '50x50', class: 'user-icon'
-          -else
-            = image_tag 'default_icon.jpeg', size: '50x50', class: 'user-icon'
-
-        .follower-item-right
-          .follower-name
-            = link_to user.name, user, class: 'follower-name'
-            = link_to "@#{user.unique_name}", user, class: 'follower-name'
-
-          .follower-profile
-            = user.profile
+      = render 'users/index', user: user

@@ -21,4 +21,6 @@ Rails.application.routes.draw do
   resources :microposts
 
   resources :relationships, only: [:create, :destroy]
+
+  get '/search', to: 'static_pages#search'
 end

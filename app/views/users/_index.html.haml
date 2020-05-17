@@ -1,0 +1,15 @@
+.user-item
+
+  .user-icon
+    -if user.icon.attached?
+      = image_tag user.icon, size: '50x50', class: 'user-icon'
+    -else
+      = image_tag 'default_icon.jpeg', size: '50x50', class: 'user-icon'
+
+  .user-item-right
+    .user-name
+      = link_to user.name, user, class: 'follower-name'
+      = link_to "@#{user.unique_name}", user, class: 'follower-name'
+
+    .user-profile
+      = user.profile

@@ -68,4 +68,14 @@ RSpec.describe Article, type: :model do
       expect(Article.rank(1.month)).to eq [have_five_likes, have_three_likes, have_one_like]
     end
   end
+
+  describe 'Article.search' do
+    it 'タイトルの検索結果を最新順で返すこと' do
+      article1 = FactoryBot.create(:article, title: 'test1')
+      article2 = FactoryBot.create(:article, title: 'test2')
+      article3 = FactoryBot.create(:article, title: 'foo')
+
+      expect(Article.search('test')).to eq [article2, article1]
+    end
+  end
 end

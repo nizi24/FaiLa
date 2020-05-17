@@ -1,0 +1,29 @@
+.offset-lg-2.col-lg-8.search-results
+  %h2.h2.center#search-results 検索結果
+
+  %h2.h2.center ユーザー
+  - if @user_results.any?
+    - @user_results.each do |user|
+      = render 'users/index', user: user
+  - else
+    %p.center 検索結果はありません
+
+  %h2.h2.center 投稿
+  .posted-select.hold-selected
+    .col-6.select-left.btn-success 記事
+    .col-6.select-right.btn-light つぶやき
+
+  .feed-left
+    - if @article_results.any?
+      - @article_results.each do |article|
+        = render 'articles/article_index', article: article
+    - else
+      %p.center 検索結果はありません
+
+
+  .feed-right
+    - if @micropost_results.any?
+      - @micropost_results.each do |micropost|
+        = render 'microposts/microposts_index', micropost: micropost
+    - else
+      %p.center 検索結果はありません

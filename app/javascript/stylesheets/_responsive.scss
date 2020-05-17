@@ -57,11 +57,35 @@
 
 /* home */
 
-.posted-select {
-  font-size: 1.2em !important;
-}
+  .posted-select {
+    font-size: 1.2em !important;
+  }
 
   /* ヘッダー*/
+
+  nav {
+    input.mobile-only {
+      display: none;
+    }
+
+    input.mobile-only.open {
+      display: block;
+      position: fixed;
+      top: 80px;
+      width: 90%;
+      left: 20px;
+      border: 1px solid #e8e8e8;
+      border-radius: 4px;
+      padding: 5px 0 !important;
+      box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.4);
+    }
+  }
+
+  .fa-search {
+    position: fixed;
+    top: 37px;
+    right: 125px;
+  }
 
   .fa-bell {
     position: fixed;
@@ -276,7 +300,7 @@
 
 /* user#followers */
 
-  .follower-profile {
+  .user-profile {
     font-size: 0.8em;
   }
 
