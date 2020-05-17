@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-before_save { self.email = self.email.downcase }
+before_save :email_downcase, unless: :uid?
 before_save { self.unique_name = self.unique_name.downcase }
 attr_accessor :remember_token
 
@@ -32,7 +32,7 @@ validates :icon, content_type: { in: %w[image/jpeg image/gif image/png image/hei
                                 message: '有効な形式の画像を選択してください'},
                 size:          { less_than: 5.megabytes,
                                 message: '5MB以下の画像を選択してください'}
-has_secure_password
+has_secure_password validations: false
 
 has_one_attached :icon
 has_many :articles,   dependent: :destroy
@@ -82,6 +82,10 @@ has_many :notices,  class_name:  'Notification',
 
 scope :newest, -> { order(created_at: :desc) }
 
+  def email_downcase
+    self.email.downcase!
+  end
+
   #未読の通知があればtrue
   def nonchecked?
     self.notices.find_by(checked: false)
@@ -120,6 +124,18 @@ scope :newest, -> { order(created_at: :desc) }
 
   def already_liked?(object)
     self.likes.exists?(User.sort_object(object))
+  end
+
+  def self.find_or_create_from_auth(auth)
+   provider = auth[:provider]
+   uid = auth[:uid]
+   name = auth[:info][:name]
+   image = auth[:info][:image]
+
+   self.find_or_create_by(provider: provider, uid: uid) do |user|
+     user.name = name
+     user.image_url = image
+   end
   end
 
   def self.search(word)

@@ -44,6 +44,9 @@ gem 'rails-i18n'
 gem 'redcarpet'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
+gem 'dotenv-rails'
+gem 'omniauth-twitter'
+gem "omniauth-rails_csrf_protection"
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record

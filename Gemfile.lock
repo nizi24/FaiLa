@@ -117,6 +117,10 @@ GEM
     concurrent-ruby (1.1.6)
     crass (1.0.6)
     diff-lcs (1.3)
+    dotenv (2.7.5)
+    dotenv-rails (2.7.5)
+      dotenv (= 2.7.5)
+      railties (>= 3.2, < 6.1)
     erubi (1.9.0)
     erubis (2.7.0)
     execjs (2.7.0)
@@ -137,6 +141,7 @@ GEM
       haml (>= 4.0.6, < 6.0)
       html2haml (>= 1.0.1)
       railties (>= 5.1)
+    hashie (4.1.0)
     html2haml (2.2.0)
       erubis (~> 2.7.0)
       haml (>= 4.0, < 6)
@@ -166,6 +171,19 @@ GEM
     minitest (5.14.0)
     nio4r (2.5.2)
     nokogiri (1.11.0.rc2-x64-mingw32)
+    oauth (0.5.4)
+    omniauth (1.9.1)
+      hashie (>= 3.4.6)
+      rack (>= 1.6.2, < 3)
+    omniauth-oauth (1.1.0)
+      oauth
+      omniauth (~> 1.0)
+    omniauth-rails_csrf_protection (0.1.2)
+      actionpack (>= 4.2)
+      omniauth (>= 1.3.1)
+    omniauth-twitter (1.4.0)
+      omniauth-oauth (~> 1.1)
+      rack
     pg (1.2.3-x64-mingw32)
     popper_js (1.16.0)
     public_suffix (4.0.5)
@@ -299,12 +317,15 @@ DEPENDENCIES
   byebug
   capybara
   coffee-rails
+  dotenv-rails
   factory_bot_rails
   haml-rails
   jbuilder
   jquery-rails
   launchy
   nokogiri (~> 1.11.0.rc1)
+  omniauth-rails_csrf_protection
+  omniauth-twitter
   pg
   puma
   rails (~> 6.0)
