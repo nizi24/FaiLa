@@ -45,6 +45,7 @@ gem 'redcarpet'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'dotenv-rails'
+gem 'omniauth'
 gem 'omniauth-twitter'
 gem "omniauth-rails_csrf_protection"
 

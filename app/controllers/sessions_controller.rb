@@ -4,13 +4,16 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: params[:session][:email].downcase)
     auth = request.env['omniauth.auth']
     if auth.present?
       user = User.find_or_create_from_auth(request.env['omniauth.auth'])
       session[:user_id] = user.id
       redirect_to user
-    elsif user &&  user.authenticate(params[:session][:password])
+    else
+      user = User.find_by(email: params[:session][:email].downcase)
+    end
+
+    if user &&  user.authenticate(params[:session][:password])
       log_in(user)
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       flash[:success] = 'ログインに成功しました'
@@ -25,6 +28,10 @@ class SessionsController < ApplicationController
     log_out if logged_in? #二重ログアウトによるエラーを防止
     flash[:info] = 'ログアウトしました'
     redirect_to login_path
+  end
+
+  def failure
+    redirect_to root_url
   end
 
 end

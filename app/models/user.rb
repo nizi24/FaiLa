@@ -127,15 +127,15 @@ scope :newest, -> { order(created_at: :desc) }
   end
 
   def self.find_or_create_from_auth(auth)
-   provider = auth[:provider]
-   uid = auth[:uid]
-   name = auth[:info][:name]
-   image = auth[:info][:image]
+    provider = auth[:provider]
+    uid = auth[:uid]
+    name = auth[:info][:name]
+    image = auth[:info][:image]
 
-   self.find_or_create_by(provider: provider, uid: uid) do |user|
-     user.name = name
-     user.image_url = image
-   end
+    self.find_or_create_by(provider: provider, uid: uid) do |user|
+      user.name = name
+      user.image_url = image
+    end
   end
 
   def self.search(word)
