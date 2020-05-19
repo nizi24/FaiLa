@@ -143,7 +143,7 @@ scope :newest, -> { order(created_at: :desc) }
       user.unique_name = unique_name
 
       settings = user.build_setting
-      setting.save
+      settings.save
     end
   end
 
