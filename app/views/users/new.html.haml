@@ -2,7 +2,7 @@
 .row
   .col-xs-12.col-lg-6.form-group.offset-lg-3
     = form_with model: @user, local: true do |f|
-      = render 'shared/error_messages', object: f.object
+      = render 'shared/error_messages', object: @user
       = f.label :name
       = f.text_field :name, class: 'form-control'
 

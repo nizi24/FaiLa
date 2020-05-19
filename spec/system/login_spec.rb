@@ -17,7 +17,7 @@ RSpec.describe "Logins", type: :system do
       fill_in 'session[password]', with: user.password
       click_button 'ログイン'
 
-      expect(current_path).to eq user_path(user)
+      expect(current_path).to eq root_path
       expect(page).to have_css 'div.alert-success'
       expect(page).to have_content 'ログインに成功しました'
       expect(page).to have_content 'アカウント'

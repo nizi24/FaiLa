@@ -48,7 +48,6 @@ gem 'dotenv-rails'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2'
-gem "omniauth-rails_csrf_protection"
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record

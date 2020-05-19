@@ -37,10 +37,10 @@ RSpec.describe "Sessions", type: :request do
 
       context '二つのウィンドウでログアウトをクリックしたとき' do
         let(:user) { FactoryBot.create(:user) }
-        
+
         it "ログイン中のみログアウトすること" do
           log_in(user)
-          expect(response).to redirect_to user_path(user)
+          expect(response).to redirect_to root_path
 
           delete logout_path
           expect(response).to redirect_to login_path

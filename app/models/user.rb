@@ -25,6 +25,8 @@ validates :password,
           length:       { minimum: 6 },
           allow_nil:    true
 
+validates_confirmation_of :password
+
 validates :profile,
           length:       { maximum: 160 }
 
@@ -131,10 +133,17 @@ scope :newest, -> { order(created_at: :desc) }
     uid = auth[:uid]
     name = auth[:info][:name]
     image = auth[:info][:image]
+    email = auth[:info][:email]
+    unique_name = User.random_unique_name #被るとバリデーションエラーになる恐れあり
 
     self.find_or_create_by(provider: provider, uid: uid) do |user|
       user.name = name
       user.image_url = image
+      user.email = email
+      user.unique_name = unique_name
+
+      settings = user.build_setting
+      setting.save
     end
   end
 
@@ -184,5 +193,9 @@ scope :newest, -> { order(created_at: :desc) }
   #ランダムな文字列を返す
   def self.new_token
     SecureRandom.urlsafe_base64
+  end
+
+  def self.random_unique_name
+    SecureRandom.alphanumeric(12)
   end
 end

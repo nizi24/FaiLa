@@ -2,8 +2,13 @@
 
   .article-author-icon
     - if article.user.icon.attached?
-      = image_tag micropost.user.icon, size: '50x50', class: 'user-icon mobile-none'
-      = image_tag micropost.user.icon, size: '30x30', class: 'user-icon mobile-only'
+      = image_tag article.user.icon, size: '50x50', class: 'user-icon mobile-none'
+      = image_tag article.user.icon, size: '30x30', class: 'user-icon mobile-only'
+
+    - elsif article.user.image_url
+      = image_tag article.user.image_url, size: '50x50', class: 'user-icon mobile-none'
+      = image_tag article.user.image_url, size: '30x30', class: 'user-icon mobile-only'
+
     - else
       = image_tag 'default_icon.jpeg', size: '50x50', class: 'user-icon mobile-none'
       = image_tag 'default_icon.jpeg', size: '30x30', class: 'user-icon mobile-only'

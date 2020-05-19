@@ -8,19 +8,20 @@ class SessionsController < ApplicationController
     if auth.present?
       user = User.find_or_create_from_auth(request.env['omniauth.auth'])
       session[:user_id] = user.id
-      redirect_to user
+      redirect_to root_url
     else
       user = User.find_by(email: params[:session][:email].downcase)
-    end
 
-    if user &&  user.authenticate(params[:session][:password])
-      log_in(user)
-      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      flash[:success] = 'ログインに成功しました'
-      redirect_to user
-    else
-      flash[:danger] = 'ログインに失敗しました'
-      render 'new'
+      # SNS認証を使用しない場合
+      if user &&  user.authenticate(params[:session][:password])
+        log_in(user)
+        params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+        flash[:success] = 'ログインに成功しました'
+        redirect_to root_url
+      else
+        flash[:danger] = 'ログインに失敗しました'
+        render 'new'
+      end
     end
   end
 

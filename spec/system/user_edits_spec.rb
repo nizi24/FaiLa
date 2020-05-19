@@ -12,7 +12,7 @@ RSpec.describe "Edits", js: true, type: :system do
           unique_name: 'test1')
 
     log_in_as user
-    expect(current_path).to eq user_path(user)
+    visit user_path(user)
 
     click_link 'プロフィールを編集する'
 

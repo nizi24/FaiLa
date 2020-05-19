@@ -2,6 +2,10 @@
   .author-info-icon
     -if user.icon.attached?
       = image_tag user.icon, size: '50x50', class: 'user-icon'
+
+    - elsif user.image_url
+      = image_tag user.image_url, size: '80x80', class: 'user-icon'
+
     -else
       = image_tag 'default_icon.jpeg', size: '50x50', class: 'user-icon'
 

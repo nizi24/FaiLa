@@ -3,14 +3,17 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
+    "@rails/activestorage": "^6.0.3-1",
     "@rails/ujs": "^6.0.3",
-    "@rails/webpacker": "5.0.1",
+    "@rails/webpacker": "5.1.1",
     "bootstrap": "^4.4.1",
+    "channels": "^0.0.4",
     "jquery": "^3.5.0",
     "popper.js": "^1.16.1",
-    "rails-ujs": "^5.2.4-2"
+    "rails-ujs": "^5.2.4-2",
+    "turbolinks": "^5.2.0"
   },
   "devDependencies": {
-    "webpack-dev-server": "^3.10.3"
+    "webpack-dev-server": "^3.11.0"
   }
 }
