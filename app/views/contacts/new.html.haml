@@ -1,0 +1,18 @@
+%h1.h1.text-secondary お問い合わせ
+
+.row
+  .col-xs-12.col-lg-7.form-group.offset-lg-3
+    = form_with model: @contact, local: true do |f|
+      = render 'shared/error_messages', object: @contact
+
+      = f.label :name, '名前'
+      = f.text_field :name, class: 'form-control'
+
+      = f.label :email, '返信先のメールアドレス(任意)'
+      = f.email_field :email, class: 'form-control'
+
+      = f.label :message, 'お問い合わせ内容'
+      = f.text_area :message, class: 'form-control contact-message'
+
+      .submit
+        = f.submit '送信', class: 'btn btn-primary'

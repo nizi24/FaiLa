@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'contacts/new'
+  get 'contacts/create'
   root 'static_pages#home'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
@@ -23,6 +25,8 @@ Rails.application.routes.draw do
   resources :microposts
 
   resources :relationships, only: [:create, :destroy]
+
+  resources :contacts, only: [:new, :create]
 
   get '/search', to: 'static_pages#search'
 end

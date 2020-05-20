@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_17_134842) do
+ActiveRecord::Schema.define(version: 2020_05_20_122513) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -52,6 +52,14 @@ ActiveRecord::Schema.define(version: 2020_05_17_134842) do
     t.index ["article_id"], name: "index_comments_on_article_id"
     t.index ["created_at"], name: "index_comments_on_created_at"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.string "name"
+    t.text "message"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "email"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -102,7 +110,6 @@ ActiveRecord::Schema.define(version: 2020_05_17_134842) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "sended_micropost_id"
     t.integer "received_micropost_id"
-    t.index "\"microposts\"", name: "index_replies_on_microposts"
     t.index ["received_micropost_id"], name: "index_replies_on_received_micropost_id"
     t.index ["received_user_id"], name: "index_replies_on_received_user_id"
     t.index ["sended_micropost_id"], name: "index_replies_on_sended_micropost_id"
