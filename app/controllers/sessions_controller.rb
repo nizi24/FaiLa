@@ -6,8 +6,9 @@ class SessionsController < ApplicationController
   def create
     auth = request.env['omniauth.auth']
     if auth.present?
-      user = User.find_or_create_from_auth(request.env['omniauth.auth'])
-      session[:user_id] = user.id
+      @user = User.find_or_create_from_auth(request.env['omniauth.auth'])
+      find_or_create_setting
+      session[:user_id] = @user.id
       redirect_to root_url
     else
       user = User.find_by(email: params[:session][:email].downcase)
@@ -34,5 +35,14 @@ class SessionsController < ApplicationController
   def failure
     redirect_to root_url
   end
+
+  private
+
+    def find_or_create_setting
+      unless Setting.find_by(user_id: @user.id)
+        settings = @user.build_setting
+        settings.save
+      end
+    end
 
 end

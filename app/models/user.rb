@@ -141,9 +141,6 @@ scope :newest, -> { order(created_at: :desc) }
       user.image_url = image
       user.email = email
       user.unique_name = unique_name
-
-      settings = user.build_setting
-      settings.save
     end
   end
 
