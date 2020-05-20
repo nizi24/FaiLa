@@ -8,9 +8,9 @@ RSpec.describe "SignUps", type: :system do
   context 'ユーザーがアカウントを作成するとき' do
     it '有効な情報では成功すること' do
       visit root_path
+      click_link 'メールアドレスで登録'
 
       expect {
-      click_link "Sign Up Now!!"
       fill_in 'user[name]', with: 'テスト'
       fill_in 'user[unique_name]', with: 'abc123_'
       fill_in 'user[email]', with: 'tester@example.com'
@@ -26,7 +26,7 @@ RSpec.describe "SignUps", type: :system do
 
     it '無効な情報では登録に失敗すること' do
       visit root_path
-      click_link "Sign Up Now!!"
+      click_link 'メールアドレスで登録'
 
       expect {
       fill_in 'user[name]', with: ' '

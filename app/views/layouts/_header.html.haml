@@ -1,14 +1,13 @@
 = render 'layouts/post_form_modal'
 
 .fixed-top
-  %nav.navbar.navbar-expand.bg-info.text-secondary.header
+  %nav.navbar.navbar-expand.text-secondary.header.bg-info
     .container
-      = link_to 'Failearn', root_path, id: "logo"
+      = link_to 'FaiLa', root_path, id: "logo"
 
       %ul.navbar-nav.navbar-right
 
         -if !logged_in?
-          %li.nav-item.fix-margin.mobile-none= link_to 'ヘルプ',  '#'
           %li.nav-item.fix-margin.mobile-none= link_to '概要',    '#'
           %li.nav-item.fix-margin=             link_to 'ログイン', login_path
           %li.nav-item.fix-margin=             link_to '新規登録', new_user_path

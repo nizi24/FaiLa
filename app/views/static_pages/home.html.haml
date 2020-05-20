@@ -28,6 +28,72 @@
         = render 'shared/trend_feed'
 
 - else
-  .home.center
-    %h1.h1 Failearnへようこそ!
-    = link_to 'Sign Up Now!!', new_user_path, class: 'btn btn-primary active signup'
+  .introduction.bg-info
+  .introduction-headline
+    %h1.text-white Failure teaches success.
+  %p.center.text-white「失敗共有SNS」FaiLa をはじめよう。
+
+  .signup-or-login.center
+    .signup-select.select-left
+      %p.text-white 新規登録
+    .login-select.select-right
+      %p.text-white ログイン
+
+  .signup-buttons.feed-left.offset-lg-2
+    = link_to new_user_path, class: 'email-btn'  do
+      %i.far.fa-envelope
+      %span メールアドレスで登録
+    = link_to '/auth/twitter', class: 'twitter-btn' do
+      %i.fab.fa-twitter
+      %span Twitterで登録
+    = link_to '/auth/google_oauth2', class: 'google-btn' do
+      %i.fab.fa-google
+      %span Googleで登録
+
+  .login-buttons.feed-right.offset-lg-2
+    = link_to login_path, class: 'email-btn'  do
+      %i.far.fa-envelope
+      %span メールアドレスでログイン
+    = link_to '/auth/twitter', class: 'twitter-btn' do
+      %i.fab.fa-twitter
+      %span Twitterでログイン
+    = link_to '/auth/google_oauth2', class: 'google-btn' do
+      %i.fab.fa-google
+      %span Googleでログイン
+
+  .introduction-detail
+
+    .select-posting-explanation
+      %h2.center.text-info 投稿方法を選ぼう
+      %p.center.text-secondary 長さに応じて投稿方法を選ぶことができます。
+
+      .two-types-explanation
+        .left-explanation
+          %h3 記事
+          %i.far.fa-edit.fa-4x.mobile-none
+          %p.text-secondary マークダウン記法で書くことができます。
+          %p.text-secondary 他のユーザーの投稿にコメントをつけることができます。
+
+
+        .right-explanation
+          %h3 つぶやき
+          %i.far.fa-comment-dots.fa-4x.mobile-none
+          %p.text-secondary 280文字以内の投稿をすることができます。
+          %p.text-secondary 他のユーザーに返信することができます。
+
+      .ac-explanation
+        %h2.center.text-info 投稿を楽しもう
+        %p.center.text-secondary ユーザーをフォローしたり、いいねしたりできます。
+
+        .two-types-explanation
+          .left-explanation
+            %h3 フォロー
+            %i.fas.fa-user-plus.fa-4x.mobile-none
+            %p.text-secondary フォローするとタイムラインに投稿が表示されます。
+            %p.text-secondary 面白い投稿をしている人を見かけたら、積極的にフォローしてみましょう。
+
+          .right-explanation
+            %h3 いいね
+            %i.fas.fa-heart.fa-4x.mobile-none
+            %p.text-secondary 記事、つぶやき、コメントにはいいねをすることができます。
+            %p.text-secondary トレンドには、最近の投稿がいいねが多い順に表示されます。

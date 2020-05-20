@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.feature "SignUps", type: :feature do
   scenario 'ユーザーはアカウントを作成する' do
     visit root_path
+    click_link 'メールアドレスで登録'
 
     expect {
-    click_link "Sign Up Now!!"
     fill_in 'user[name]', with: 'テスト'
     fill_in 'user[unique_name]', with: 'abc123_'
     fill_in 'user[email]', with: 'tester@example.com'

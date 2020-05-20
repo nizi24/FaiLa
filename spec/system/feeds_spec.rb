@@ -13,7 +13,7 @@ RSpec.describe "Feeds", js: true, type: :system do
     micropost = FactoryBot.create(:micropost, user: other_user)
 
     visit root_url
-    expect(page).to_not have_content 'タイムライン'
+    expect(page).to have_content 'Failure teaches success.'
 
 
     #フォローする
