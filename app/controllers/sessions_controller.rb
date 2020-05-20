@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
       @user = User.find_or_create_from_auth(request.env['omniauth.auth'])
       find_or_create_setting
       session[:user_id] = @user.id
+      flash[:success] = 'ログインに成功しました'
       redirect_to root_url
     else
       user = User.find_by(email: params[:session][:email].downcase)
