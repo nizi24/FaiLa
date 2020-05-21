@@ -34,5 +34,7 @@ class StaticPagesController < ApplicationController
 
   def help
   end
-  
+
 end
+
+git filter-branch -f --env-filter "GIT_AUTHOR_NAME='nizi'; GIT_AUTHOR_EMAIL='failaforcontact@gmail.com'; GIT_COMMITTER_NAME='nizi'; GIT_COMMITTER_EMAIL='failaforcontact@gmail.com';" HEAD
