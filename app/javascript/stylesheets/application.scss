@@ -439,6 +439,18 @@ p.center.text-white {
   height: 200px !important;
 }
 
+/* about */
+
+.about-app {
+  h3 {
+    margin-top: 50px;
+    margin-bottom: 20px;
+  }
+  span, a {
+    font-size: 1.1em;
+  }
+}
+
 /* search */
 
 .search-results {
@@ -519,6 +531,7 @@ a#edit-user-info {
 
 h3#user-name {
   text-align: center;
+  margin-top: 10px;
 }
 
 p.user-unique-name {

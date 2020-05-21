@@ -1,5 +1,6 @@
+- provide(:title, "#{@search_kyeword}の検索結果")
 .offset-lg-2.col-lg-8.search-results
-  %h2.h2.center#search-results 検索結果
+  %h2.h2.center#search-results="#{@search_kyeword}の検索結果"
 
   %h2.h2.center ユーザー
   - if @user_results.any?

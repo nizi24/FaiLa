@@ -82,7 +82,8 @@ has_many :notices,  class_name:  'Notification',
                     foreign_key: 'received_user_id',
                     dependent:   :destroy
 
-scope :newest, -> { order(created_at: :desc) }
+scope :newest, ->                    { order(created_at: :desc) }
+scope :pages,  -> (params, per = 30) { paginate(page: params, per_page: per) }
 
   def email_downcase
     self.email.downcase!
@@ -192,6 +193,7 @@ scope :newest, -> { order(created_at: :desc) }
     SecureRandom.urlsafe_base64
   end
 
+  #ランダムにユーザー名を発行
   def self.random_unique_name
     SecureRandom.alphanumeric(12)
   end

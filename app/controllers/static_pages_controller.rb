@@ -20,6 +20,7 @@ class StaticPagesController < ApplicationController
   end
 
   def search
+    @search_kyeword = params[:search]
     @user_results = User.search(params[:search])
     @article_results = Article.search(params[:search])
     @micropost_results = Micropost.search(params[:search])
@@ -27,4 +28,11 @@ class StaticPagesController < ApplicationController
       @user_results += User.unique_name_search(params[:search])
     end
   end
+
+  def about
+  end
+
+  def help
+  end
+  
 end

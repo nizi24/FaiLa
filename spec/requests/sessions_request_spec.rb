@@ -40,7 +40,7 @@ RSpec.describe "Sessions", type: :request do
 
         it "ログイン中のみログアウトすること" do
           log_in(user)
-          expect(response).to redirect_to root_path
+          expect(response).to redirect_to user_path(user)
 
           delete logout_path
           expect(response).to redirect_to login_path

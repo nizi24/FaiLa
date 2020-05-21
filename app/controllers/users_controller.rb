@@ -6,7 +6,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @articles = Article.user_have_all(params[:id], params[:page])
     @microposts = Micropost.user_have_all(params[:id], params[:page])
-    @micropost_like = Like.micropost_like(current_user) if logged_in?
   end
 
   def new
@@ -15,6 +14,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.unique_name = User.random_unique_name
     if @user.save
       create_settings #ユーザーの設定を構築
       redirect_to @user

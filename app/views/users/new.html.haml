@@ -1,3 +1,4 @@
+- provide(:title, "新規登録")
 %h1.text-secondary.h1 ユーザー登録
 .row
   .col-xs-12.col-lg-6.form-group.offset-lg-3
@@ -5,9 +6,6 @@
       = render 'shared/error_messages', object: @user
       = f.label :name
       = f.text_field :name, class: 'form-control'
-
-      = f.label :unique_name
-      = f.text_field :unique_name, class: 'form-control'
 
       = f.label :email
       = f.email_field :email, class: 'form-control'

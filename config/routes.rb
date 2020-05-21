@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
-  get 'contacts/new'
-  get 'contacts/create'
   root 'static_pages#home'
+  get '/about', to: 'static_pages#about'
+  get '/help', to: 'static_pages#help'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
   delete '/logout', to: 'sessions#destroy'
+
   resources :users do
     member do
       get :followers

@@ -1,3 +1,8 @@
+- if @user == current_user
+  - provide(:title, "プロフィール")
+- else
+  - provide(:title, "#{@user.name}さんのプロフィール")
+
 .row
   = render 'users/user_info'
 

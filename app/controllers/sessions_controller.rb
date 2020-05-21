@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       find_or_create_setting
       session[:user_id] = @user.id
       flash[:success] = 'ログインに成功しました'
-      redirect_to root_url
+      redirect_to @user
     else
       user = User.find_by(email: params[:session][:email].downcase)
 
@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
         log_in(user)
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
         flash[:success] = 'ログインに成功しました'
-        redirect_to root_url
+        redirect_to user
       else
         flash[:danger] = 'ログインに失敗しました'
         render 'new'
@@ -30,7 +30,7 @@ class SessionsController < ApplicationController
   def destroy
     log_out if logged_in? #二重ログアウトによるエラーを防止
     flash[:info] = 'ログアウトしました'
-    redirect_to login_path
+    redirect_to login_url
   end
 
   def failure

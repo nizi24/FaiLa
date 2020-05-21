@@ -13,7 +13,7 @@ RSpec.feature "Logins", type: :feature do
     fill_in 'session[password]', with: user.password
     click_button 'ログイン'
 
-    expect(current_path).to eq root_path
+    expect(current_path).to eq user_path(user)
     expect(page).to have_content 'アカウント'
     expect(page).to_not have_content '新規登録'
   end
