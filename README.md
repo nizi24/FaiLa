@@ -6,7 +6,7 @@
 
 ## author
 
-### * Twitter **https://twitter.com/nizi_24a**
+- Twitter **https://twitter.com/nizi_24a**
 
 <!-- This README would normally document whatever steps are necessary to get the
 application up and running.
