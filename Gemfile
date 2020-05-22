@@ -15,6 +15,8 @@ gem 'sass-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'aws-sdk-s3', require: false
 gem 'active_storage_validations'
+gem 'image_processing'
+gem 'mini_magick'
 gem 'uglifier'
 gem 'bootstrap'
 gem 'bootstrap-sass'

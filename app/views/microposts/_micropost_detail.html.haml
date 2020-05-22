@@ -35,6 +35,10 @@
       - else
         = micropost.content
 
+      - if micropost.images.attached?
+        - micropost.images.each do |image|
+          = image_tag image.variant(resize: "300x300")
+
     .micropost-item-footer
       .micropost-item-reply
         %i.fas.fa-reply.fa-lg

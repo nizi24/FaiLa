@@ -42,6 +42,11 @@
   .google-btn {
     padding: 15px 25px !important;
   }
+
+  .fa-images {
+    margin-left: 70px !important;
+    margin-top: 70px !important;
+  }
 }
 
 @media (max-width: 896px) {
@@ -56,6 +61,11 @@
 
   .followers-wrapper {
     margin-top: 10px;
+  }
+
+  .fa-images {
+    margin-left: 70px !important;
+    margin-top: 40px !important;
   }
 }
 
@@ -179,6 +189,11 @@
     form {
       height: 70% !important;
     }
+  }
+
+  .fa-images {
+    margin-left: 30px !important;
+    margin-top: 10px !important;
   }
 
   /* home */

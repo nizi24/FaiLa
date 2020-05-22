@@ -8,7 +8,7 @@
     - elsif micropost.user.image_url
       = image_tag micropost.user.image_url, size: '50x50', class: 'user-icon mobile-none'
       = image_tag micropost.user.image_url, size: '30x30', class: 'user-icon mobile-only'
-      
+
     - else
       = image_tag 'default_icon.jpeg', size: '50x50', class: 'user-icon mobile-none'
       = image_tag 'default_icon.jpeg', size: '30x30', class: 'user-icon mobile-only'
@@ -36,6 +36,10 @@
 
       - else
         = micropost.content
+
+      - if micropost.images.attached?
+        - micropost.images.each do |image|
+          = image_tag image.variant(resize: "300x300")
 
     .micropost-item-footer
       .micropost-item-reply

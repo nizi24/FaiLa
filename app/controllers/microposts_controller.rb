@@ -12,6 +12,7 @@ class MicropostsController < ApplicationController
 
   def create
     @micropost = current_user.microposts.build(micropost_params)
+    @micropost.images.attach(params[:micropost][:images])
     if @micropost.save
 
       #リプライをする場合
@@ -41,7 +42,7 @@ class MicropostsController < ApplicationController
 
   private
     def micropost_params
-      params.require(:micropost).permit(:content)
+      params.require(:micropost).permit(:content, images: [])
     end
 
     def correct_user

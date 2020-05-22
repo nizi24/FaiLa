@@ -2,6 +2,7 @@ class Micropost < ApplicationRecord
   include Likeable
 
   belongs_to :user
+  has_many_attached :images
   has_many :send_replies,    class_name:  'Reply',
                              foreign_key: 'sended_micropost_id',
                              dependent:    :destroy
@@ -18,6 +19,12 @@ class Micropost < ApplicationRecord
 
   validates :content, presence: true,
                       length: { maximum: 280 }
+
+  validates :images, content_type:  { in: %w[image/jpeg image/gif image/png image/heic],
+                                    message: '有効な形式の画像を選択してください'},
+                     size:          { less_than: 5.megabytes,
+                                    message: '5MB以下の画像を選択してください'},
+                     limit:         { max: 4 }
 
   scope :user_have,     -> (params)                 { where(user_id: params) }
   scope :newest,        ->                          { order(created_at: :desc) }

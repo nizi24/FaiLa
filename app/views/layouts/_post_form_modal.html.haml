@@ -23,4 +23,7 @@
       = form_with model: current_user.microposts.build, local: true do |f|
 
         = f.text_area :content, class: 'micropost-textarea'
+        %label
+          = f.file_field :images, multiple: true, accept: "image/jpeg,image/gif,image/png,image/heic", class: 'iamges-form'
+          %i.far.fa-images.fa-2x
         =f.submit '投稿', class: 'btn btn-info micropost-submit'
