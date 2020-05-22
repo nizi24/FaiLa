@@ -28,8 +28,8 @@ class MicropostsController < ApplicationController
       redirect_back(fallback_location: root_path)
     else
       flash[:danger] = ''
-      @micropost.errors.full_messages.each do |e|
-        flash[:danger] = e
+      @micropost.errors.full_messages.each do |error|
+        flash[:danger] = error
       end
       redirect_back(fallback_location: root_path)
     end

@@ -22,8 +22,8 @@ class Micropost < ApplicationRecord
 
   validates :images, content_type:  { in: %w[image/jpeg image/gif image/png image/heic],
                                     message: '有効な形式の画像を選択してください'},
-                     size:          { less_than: 10.megabytes,
-                                    message: '10MB以下の画像を選択してください'},
+                     size:          { less_than: 5.megabytes,
+                                    message: '5MB以下の画像を選択してください' },
                      limit:         { max: 4 }
 
   scope :user_have,     -> (params)                 { where(user_id: params) }
