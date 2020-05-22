@@ -12,7 +12,6 @@ class MicropostsController < ApplicationController
 
   def create
     @micropost = current_user.microposts.build(micropost_params)
-    @micropost.images.attach(params[:micropost][:images])
     if @micropost.save
 
       #リプライをする場合
@@ -28,7 +27,11 @@ class MicropostsController < ApplicationController
       flash[:success] = '投稿しました'
       redirect_back(fallback_location: root_path)
     else
-      redirect_to root_url
+      flash[:danger] = ''
+      @micropost.errors.full_messages.each do |e|
+        flash[:danger] = e
+      end
+      redirect_back(fallback_location: root_path)
     end
   end
 

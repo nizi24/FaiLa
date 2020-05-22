@@ -18,7 +18,7 @@ class Micropost < ApplicationRecord
                               source:  :sended_micropost
 
   validates :content, presence: true,
-                      length: { maximum: 280 }
+                      length: { maximum: 280, message: '1文字以上入力してください'}
 
   validates :images, content_type:  { in: %w[image/jpeg image/gif image/png image/heic],
                                     message: '有効な形式の画像を選択してください'},
