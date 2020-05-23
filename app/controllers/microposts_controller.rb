@@ -99,6 +99,9 @@ class MicropostsController < ApplicationController
                                      action_user_id: current_user.id,
                                      message: "@#{@micropost.user.unique_name}さんが返信しました。\r#{@micropost.content}",
                                      link: "/microposts/#{@micropost.id}")
+          if @micropost.images.attached?
+            @notice.message += '(画像)'
+          end
           @notice.save
         end
       end

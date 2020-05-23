@@ -63,4 +63,8 @@
 
           = f.text_area :content, class: 'comment-textarea rounded'
 
-          = f.submit '投稿', class: 'btn btn-info btn-block'
+          .micropost-item-footer
+            %label
+              = f.file_field :images, multiple: true, accept: "image/jpeg,image/gif,image/png,image/heic", class: 'images-form'
+              %i.far.fa-images.fa-2x
+            = f.submit '投稿', class: 'btn btn-info btn-block'

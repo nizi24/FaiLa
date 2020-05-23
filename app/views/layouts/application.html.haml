@@ -3,6 +3,13 @@
   %head
     %meta{charset: "utf-8"}
     %meta{:content => "width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}/
+    %meta{name: "twitter:card", content: "summary_large_image"}
+    %meta{name: "twitter:site", content: "@nizi_24a"}
+    %meta{property: "og:url", content: "https://faila.herokuapp.com"}
+    %meta{property: "og:title", content: "FaiLa –失敗共有SNS"}
+    %meta{property: "og:description", content: "記事やつぶやきを投稿しよう"}
+    %meta{property: "og:image", content: "https://d.kuku.lu/9d8c3f4f93"}
+
     %title=full_title(yield(:title))
     = csrf_meta_tags
 

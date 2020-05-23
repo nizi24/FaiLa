@@ -3,8 +3,10 @@ $(function() {
   $('.reply-form').on('click', function(e) {
     if ($(e.target).is('input')) {
       return true;
+    } else if($(e.target).is('.fa-images')) {
+      return true;
     } else {
-      return false;
+      return false
     }
   });
 
