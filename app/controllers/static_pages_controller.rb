@@ -35,4 +35,7 @@ class StaticPagesController < ApplicationController
   def help
   end
 
+  #twittercard用画像
+  def image
+  end
 end
