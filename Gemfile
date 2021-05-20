@@ -40,7 +40,7 @@ gem 'jbuilder'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem 'nokogiri', '~> 1.11.0.rc1'
+gem 'nokogiri', '~> 1.11.4'
 gem 'bcrypt'
 gem 'rails-i18n'
 gem 'redcarpet'
